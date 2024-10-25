@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4A261">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:gravity="center_horizontal">
+
+        <!-- Sección de encabezado con botón de volver y título -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="start">
+
+            <!-- Botón Volver -->
+            <LinearLayout
+                android:id="@+id/btnVolver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="5dp">
+
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:background="#F4A261"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/back" />
+
+            </LinearLayout>
+
+            <!-- Título de la aplicación -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mis entrenamientos"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="15dp"/>
+        </LinearLayout>
+
+        <!-- Botón de ver entrenamientos -->
+        <Button
+            android:id="@+id/btnVerMisEntrenamientos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ver mis entrenamientos"
+            android:backgroundTint="#333333"
+            android:textColor="#FFFFFF"
+            android:padding="15dp"
+            android:textSize="16sp"
+            android:layout_marginTop="20dp"/>
+
+        <!-- Botón de registrar nuevo entrenamiento -->
+        <Button
+            android:id="@+id/btnRegistrarNuevoEntrenamiento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registrar nuevo entrenamiento"
+            android:backgroundTint="#333333"
+            android:textColor="#FFFFFF"
+            android:padding="15dp"
+            android:textSize="16sp"
+            android:layout_marginTop="20dp"/>
+
+    </LinearLayout>
+</ScrollView>
