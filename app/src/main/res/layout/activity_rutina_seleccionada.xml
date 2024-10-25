@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F4A261">
@@ -13,7 +12,7 @@
         android:padding="20dp"
         android:gravity="center_horizontal">
 
-        <!-- Encabezado -->
+        <!-- Sección de encabezado con botón de volver y título -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,58 +31,56 @@
                 android:padding="5dp">
 
                 <ImageButton
-                    android:id="@+id/imageButton"
+                    android:id="@+id/btnVolverRutina"
                     android:background="#F4A261"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/back" />
+                    android:layout_weight="1"
+                    android:src="@drawable/back" />
+
             </LinearLayout>
 
-            <!-- Título de la pantalla -->
+            <!-- Título de la aplicación -->
             <TextView
+                android:id="@+id/txtNombreRutina"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Seleccione rutina"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="#000000"
                 android:layout_gravity="center_vertical"
-                android:paddingLeft="15dp"/>
+                android:paddingLeft="15dp"
+                android:text="Nombre rutina"
+                android:textColor="#000000"
+                android:textSize="24sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- Botones de las rutinas -->
+        <!-- Más entrenamientos pueden añadirse aquí -->
+        <ListView
+            android:id="@+id/ejerciciosRutina"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/custom_edittext"/>
+
+        <!-- Botón de ver entrenamientos -->
         <Button
-            android:id="@+id/btnRutina1"
-            android:layout_width="wrap_content"
+            android:id="@+id/btnEditarRutina"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Rutina 1"
+            android:layout_marginTop="20dp"
             android:backgroundTint="#333333"
-            android:textColor="#FFFFFF"
             android:padding="15dp"
-            android:textSize="16sp"
-            android:layout_marginTop="20dp" />
+            android:text="Editar rutina"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
 
         <Button
-            android:id="@+id/btnRutina2"
-            android:layout_width="wrap_content"
+            android:id="@+id/btnBajaRutina"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Rutina 2"
+            android:layout_marginTop="20dp"
             android:backgroundTint="#333333"
-            android:textColor="#FFFFFF"
             android:padding="15dp"
-            android:textSize="16sp"
-            android:layout_marginTop="10dp" />
-
-        <Button
-            android:id="@+id/btnRutina3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rutina 3"
-            android:backgroundTint="#333333"
+            android:text="Dar de baja rutina"
             android:textColor="#FFFFFF"
-            android:padding="15dp"
-            android:textSize="16sp"
-            android:layout_marginTop="10dp" />
-
+            android:textSize="16sp" />
     </LinearLayout>
 </ScrollView>
