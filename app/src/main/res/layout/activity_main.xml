@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4A261">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:gravity="center">
+
+        <!-- Logo circular -->
+        <ImageView
+            android:id="@+id/logoImageView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:background="@drawable/circle_background"
+            android:contentDescription="@string/logo_desc" />
+
+        <!-- Espacio -->
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"/>
+
+        <!-- Campo Nombre de usuario -->
+        <EditText
+            android:id="@+id/usernameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre de usuario"
+            android:backgroundTint="#FFFFFF"
+            android:textColorHint="#000000"
+            android:padding="10dp"
+            android:inputType="text"
+            android:background="@drawable/custom_edittext"/>
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"/>
+        <!-- Campo Contraseña -->
+        <EditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Contraseña"
+            android:backgroundTint="#FFFFFF"
+            android:textColorHint="#000000"
+            android:padding="10dp"
+            android:inputType="textPassword"
+            android:background="@drawable/custom_edittext"/>
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"/>
+        <!-- Botón Continuar -->
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Continuar"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#333333"
+            android:layout_gravity="center"
+            android:padding="10dp"/>
+
+        <!-- Enlaces para Registrarse y Recuperar Contraseña -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/registerTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="REGISTRARSE"
+                android:textColor="#0077CC"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:padding="5dp"/>
+
+            <TextView
+                android:id="@+id/forgotPasswordTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recuperar contraseña"
+                android:textColor="#0077CC"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:padding="5dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
