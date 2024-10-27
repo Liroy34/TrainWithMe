@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="#F4A261">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="start|center_vertical"
+            android:paddingBottom="20dp">
+
+            <ImageButton
+                android:id="@+id/btnVolverMiPerfil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@drawable/back"
+                android:contentDescription="Volver" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Mi perfil"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <!-- Nombre -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre"
+            android:textSize="16sp"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/tvNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#888888"
+            android:background="@drawable/custom_edittext"
+            android:padding="10dp"
+            android:layout_marginBottom="20dp" />
+
+        <!-- Apellido -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Apellido"
+            android:textSize="16sp"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/tvApellido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#888888"
+            android:background="@drawable/custom_edittext"
+            android:padding="10dp"
+            android:layout_marginBottom="20dp" />
+
+        <!-- Email -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textSize="16sp"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#888888"
+            android:background="@drawable/custom_edittext"
+            android:padding="10dp"
+            android:layout_marginBottom="20dp" />
+
+        <!-- Género -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Género"
+            android:textSize="16sp"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/tvGenero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#888888"
+            android:background="@drawable/custom_edittext"
+            android:padding="10dp"
+            android:layout_marginBottom="30dp" />
+
+        <!-- Botón Editar Perfil -->
+        <Button
+            android:id="@+id/btnEditarPerfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Editar Perfil"
+            android:backgroundTint="#264653"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="15dp" />
+
+        <!-- Botón Dar de Baja Perfil -->
+        <Button
+            android:id="@+id/btnDarDeBaja"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dar de Baja Perfil"
+            android:backgroundTint="#E76F51"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+</ScrollView>

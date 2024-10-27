@@ -43,7 +43,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Seleccione rutina"
+                android:text="Rutinas propias"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="#000000"
@@ -57,7 +57,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp">
 
-
             <!-- Más entrenamientos pueden añadirse aquí -->
             <ListView
                 android:id="@+id/rutinasList"
@@ -65,6 +64,16 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/custom_edittext"/>
         </LinearLayout>
+
+        <!-- Botón Crear Rutina -->
+        <Button
+            android:id="@+id/btnCrearRutina"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#264653"
+            android:text="Crear Rutina"
+            android:textColor="#FFFFFF" />
 
     </LinearLayout>
 </ScrollView>

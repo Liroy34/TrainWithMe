@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4A261">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:gravity="center_horizontal">
+
+        <!-- Encabezado con botón de volver y título -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="start|center_vertical"
+            android:paddingBottom="20dp">
+
+            <ImageButton
+                android:id="@+id/btnVolver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@drawable/back"
+                android:contentDescription="Volver" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Agregar ejercicios"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <!-- Lista de Ejercicios -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp">
+
+            <!-- Ejercicio individual -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:id="@+id/txtEj1"
+                    android:layout_width="317dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ejercicio 1"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txtTS1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="tiempo / series"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#888888" />
+            <!-- Ejercicio individual -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:id="@+id/txtEj2"
+                    android:layout_width="317dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ejercicio 2"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txtTS2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="tiempo / series"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#888888" />
+            <!-- Ejercicio individual -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:id="@+id/txtEj3"
+                    android:layout_width="317dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ejercicio 3"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txtTS3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="tiempo / series"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#888888" />
+            <!-- Ejercicio individual -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:id="@+id/txtEj4"
+                    android:layout_width="317dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ejercicio 4"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txtTS4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="tiempo / series"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#888888" />
+            <!-- Ejercicio individual -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:id="@+id/txtEj5"
+                    android:layout_width="317dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ejercicio 5"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txtTS5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="tiempo / series"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#888888" />
+            <!-- Ejercicio individual -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:id="@+id/txtEj6"
+                    android:layout_width="317dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ejercicio 6"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txtTS6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="tiempo / series"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#888888" />
+
+            <!-- Ejercicio individual -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:id="@+id/txtEj7"
+                    android:layout_width="317dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ejercicio 7"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txtTS7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="tiempo / series"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#888888" />
+            <!-- Ejercicio individual -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:id="@+id/txtEj8"
+                    android:layout_width="317dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ejercicio 8"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txtTS8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="tiempo / series"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#888888" />
+
+        </LinearLayout>
+
+        <!-- Botón Finalizar Elección -->
+        <Button
+            android:id="@+id/btnAgregarEjercicios"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#264653"
+            android:text="Agregar ejercicios"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+</ScrollView>

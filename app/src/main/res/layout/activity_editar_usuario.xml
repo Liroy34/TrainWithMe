@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4A261">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:gravity="center_horizontal">
+
+        <!-- Encabezado -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingBottom="20dp">
+
+            <ImageButton
+                android:id="@+id/btnVolverEditarUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@drawable/back"
+                android:contentDescription="Volver" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Editar usuario"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <!-- Campos de entrada -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre"
+            android:textSize="16sp"
+            android:textColor="#000000" />
+
+        <EditText
+            android:id="@+id/etNombreEditar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_edittext"
+            android:hint="Nombre"
+            android:textColorHint="#999999"
+            android:padding="10dp"
+            android:layout_marginBottom="15dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Apellido"
+            android:textSize="16sp"
+            android:textColor="#000000" />
+
+        <EditText
+            android:id="@+id/etApellidoEditar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_edittext"
+            android:hint="Apellido"
+            android:textColorHint="#999999"
+            android:padding="10dp"
+            android:layout_marginBottom="15dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Género"
+            android:textSize="16sp"
+            android:textColor="#000000" />
+
+        <Spinner
+            android:id="@+id/spinnerGeneroEditar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_spinner"
+            android:padding="10dp"
+            android:layout_marginBottom="15dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textSize="16sp"
+            android:textColor="#000000" />
+
+        <EditText
+            android:id="@+id/etEmailEditar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_edittext"
+            android:hint="Email"
+            android:textColorHint="#999999"
+            android:inputType="textEmailAddress"
+            android:padding="10dp"
+            android:layout_marginBottom="15dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Celular"
+            android:textSize="16sp"
+            android:textColor="#000000" />
+
+        <EditText
+            android:id="@+id/etCelularEditar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_edittext"
+            android:hint="Celular"
+            android:textColorHint="#999999"
+            android:inputType="phone"
+            android:padding="10dp"
+            android:layout_marginBottom="15dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Usuario"
+            android:textSize="16sp"
+            android:textColor="#000000" />
+
+        <EditText
+            android:id="@+id/etUsuarioEditar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_edittext"
+            android:hint="Usuario"
+            android:textColorHint="#999999"
+            android:padding="10dp"
+            android:layout_marginBottom="15dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contraseña"
+            android:textSize="16sp"
+            android:textColor="#000000" />
+
+        <EditText
+            android:id="@+id/etContrasenaEditar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_edittext"
+            android:hint="Contraseña"
+            android:textColorHint="#999999"
+            android:inputType="textPassword"
+            android:padding="10dp"
+            android:layout_marginBottom="30dp" />
+
+        <!-- Botón Editar -->
+        <Button
+            android:id="@+id/btnEditarUsuario"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Editar"
+            android:backgroundTint="#333333"
+            android:textColor="#FFFFFF"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp" />
+    </LinearLayout>
+
+</ScrollView>
