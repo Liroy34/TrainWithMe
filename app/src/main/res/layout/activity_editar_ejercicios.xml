@@ -291,7 +291,7 @@
 
         <!-- Botón Finalizar Elección -->
         <Button
-            android:id="@+id/btnAgregarEjercicios"
+            android:id="@+id/btnEditarEjercicios"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
