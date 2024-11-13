@@ -55,7 +55,7 @@
 
         <!-- Más entrenamientos pueden añadirse aquí -->
         <ListView
-            android:id="@+id/ejerciciosRutina"
+            android:id="@+id/ejerciciosRutinaList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/custom_edittext"/>

@@ -83,7 +83,7 @@ public class ConexionRutinas {
 
     }
 
-    public void getEjerciciosConfiguracionPropios(String idRutina, RutinaCallback callback) {
+    public void getEjerciciosConfiguracionPropios(String idRutina, RutinaCallback<List<ConfiguracionEjercicio>> callback) {
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
@@ -93,19 +93,24 @@ public class ConexionRutinas {
                 Class.forName(DataBD.driver);
                 Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
 
-                String sql = "SELECT ce.* FROM ConfiguracionEjercicio ce JOIN RutinaXEjercicio rxe ON ce.ID = rxe.ID_ConfigEjercicio WHERE rxe.ID_Rutina = ?";
+                String sql = "SELECT ce.*, e.Nombre AS NombreEjercicio FROM ConfiguracionEjercicio ce " +
+                        "JOIN Ejercicios e ON ce.ID_Ejercicio = e.ID " +
+                        "JOIN RutinaXEjercicio rxe ON ce.ID = rxe.ID_ConfigEjercicio " +
+                        "JOIN Rutinas r ON rxe.ID_Rutina = r.ID " +
+                        "WHERE r.ID = ?";
+
                 PreparedStatement preparedStatement = con.prepareStatement(sql);
                 preparedStatement.setString(1, idRutina);
                 ResultSet rs = preparedStatement.executeQuery();
 
-                if (rs.next()) {
+                while (rs.next()) {
                     ConfiguracionEjercicio configuracionEjercicio = new ConfiguracionEjercicio();
 
                     configuracionEjercicio.setId(rs.getInt("id"));
                     configuracionEjercicio.setRepeticiones(rs.getInt("repeticiones"));
                     configuracionEjercicio.setSeries(rs.getInt("series"));
                     configuracionEjercicio.setTiempo(rs.getString("tiempo"));
-                    configuracionEjercicio.setEjercicio(new Ejercicio(rs.getInt("idEjercicio"),rs.getString("nombreEjercicio")));
+                    configuracionEjercicio.setEjercicio(new Ejercicio(rs.getInt("idEjercicio"), rs.getString("NombreEjercicio")));
 
                     configuracionEjercicioList.add(configuracionEjercicio);
                 }
@@ -117,13 +122,13 @@ public class ConexionRutinas {
                 e.printStackTrace();
             }
 
-            // CREAR ADAPTER DE CONFIGURACION DE EJERCICIOS
-            new android.os.Handler(android.os.Looper.getMainLooper()).post(() -> {
-                //ConfiguracionAdapter adapter = new ConfiguracionAdapter(context, configuracionEjercicioList);
-                //lvEntrenamiento.setAdapter(adapter);
-            });
+            // Llama al callback en el hilo principal
+            new android.os.Handler(android.os.Looper.getMainLooper()).post(() -> callback.onComplete(configuracionEjercicioList));
         });
+    }
 
+    public interface RutinaCallback<T> {
+        void onComplete(T result);
     }
 
     public void getEjerciciosConfiguracionPredefinidos(String tipo, RutinaCallback callback) {
@@ -136,8 +141,10 @@ public class ConexionRutinas {
                 Class.forName(DataBD.driver);
                 Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
 
-                String sql = "SELECT e.* FROM Ejercicios e JOIN ConfiguracionEjercicio ce ON e.ID = ce.ID_Ejercicio JOIN RutinaXEjercicio rxe ON ce.ID = rxe.ID_ConfigEjercicio WHERE rxe.ID_Rutina = ?";
-                //HACER QUERY QUE TRAIGA LOS EJERCICIOS DE LA RUTINA CON SU CONFIGURACION POR TIPO (DIFICULTAD)
+                String sql = "SELECT ce.*, e.Nombre AS NombreEjercicio FROM ConfiguracionEjercicio ce " +
+                        "JOIN Ejercicios e ON ce.ID_Ejercicio = e.ID " +
+                        "JOIN RutinaXEjercicio rxe ON ce.ID = rxe.ID_ConfigEjercicio " +
+                        "JOIN Rutinas r ON rxe.ID_Rutina = r.ID WHERE r.Tipo = ?";
 
                 PreparedStatement preparedStatement = con.prepareStatement(sql);
                 preparedStatement.setString(1, tipo);
@@ -169,10 +176,6 @@ public class ConexionRutinas {
             });
         });
 
-    }
-
-    public interface RutinaCallback {
-        void onRutinaRecived(Rutina rutina);
     }
 
 }

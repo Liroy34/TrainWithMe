@@ -1,8 +1,13 @@
 package com.example.tpfinal.Entidades;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import java.util.Objects;
 
-public class ConfiguracionEjercicio {
+public class ConfiguracionEjercicio implements Parcelable {
 
     private int id;
     private Ejercicio ejercicio;
@@ -20,6 +25,25 @@ public class ConfiguracionEjercicio {
         this.repeticiones = repeticiones;
         this.tiempo = tiempo;
     }
+
+    protected ConfiguracionEjercicio(Parcel in) {
+        id = in.readInt();
+        series = in.readInt();
+        repeticiones = in.readInt();
+        tiempo = in.readString();
+    }
+
+    public static final Creator<ConfiguracionEjercicio> CREATOR = new Creator<ConfiguracionEjercicio>() {
+        @Override
+        public ConfiguracionEjercicio createFromParcel(Parcel in) {
+            return new ConfiguracionEjercicio(in);
+        }
+
+        @Override
+        public ConfiguracionEjercicio[] newArray(int size) {
+            return new ConfiguracionEjercicio[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -83,5 +107,18 @@ public class ConfiguracionEjercicio {
     @Override
     public int hashCode() {
         return Objects.hash(id, ejercicio, series, repeticiones, tiempo);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeInt(series);
+        dest.writeInt(repeticiones);
+        dest.writeString(tiempo);
     }
 }

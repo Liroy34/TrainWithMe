@@ -19,14 +19,14 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/txtEjercicio"
+                android:id="@+id/txtEjercicioRutinaPropia"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/txtRepes"
+                android:id="@+id/txtRepesRutinaPropia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
