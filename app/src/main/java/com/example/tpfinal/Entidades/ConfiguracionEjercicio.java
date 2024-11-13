@@ -10,6 +10,9 @@ public class ConfiguracionEjercicio {
     private int repeticiones;
     private String tiempo;
 
+    public ConfiguracionEjercicio() {
+    }
+
     public ConfiguracionEjercicio(String id, Ejercicio ejercicio, int series, int repeticiones, String tiempo) {
         this.id = id;
         this.ejercicio = ejercicio;
