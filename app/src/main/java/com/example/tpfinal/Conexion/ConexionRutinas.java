@@ -61,7 +61,7 @@ public class ConexionRutinas {
 
                     rutina.setTipo(rs.getString("tipo"));
                     rutina.setDescripcion(rs.getString("descripcion"));
-                    rutina.setId(rs.getString("id"));
+                    rutina.setId(rs.getInt("id"));
                     rutina.setNombre(rs.getString("nombre"));
 
                     rutinaList.add(rutina);
@@ -93,9 +93,7 @@ public class ConexionRutinas {
                 Class.forName(DataBD.driver);
                 Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
 
-                String sql = "SELECT r.* FROM Rutinas r JOIN RutinaXUsuario rxu ON r.ID = rxu.ID_Rutina WHERE rxu.ID_Usuario = ?";
-                //HACER QUERY QUE TRAIGA LOS EJERCICIOS DE LA RUTINA CON SU CONFIGURACION POR ID DE RUINA
-
+                String sql = "SELECT ce.* FROM ConfiguracionEjercicio ce JOIN RutinaXEjercicio rxe ON ce.ID = rxe.ID_ConfigEjercicio WHERE rxe.ID_Rutina = ?";
                 PreparedStatement preparedStatement = con.prepareStatement(sql);
                 preparedStatement.setString(1, idRutina);
                 ResultSet rs = preparedStatement.executeQuery();
@@ -103,11 +101,11 @@ public class ConexionRutinas {
                 if (rs.next()) {
                     ConfiguracionEjercicio configuracionEjercicio = new ConfiguracionEjercicio();
 
-                    configuracionEjercicio.setId(rs.getString("id"));
+                    configuracionEjercicio.setId(rs.getInt("id"));
                     configuracionEjercicio.setRepeticiones(rs.getInt("repeticiones"));
                     configuracionEjercicio.setSeries(rs.getInt("series"));
                     configuracionEjercicio.setTiempo(rs.getString("tiempo"));
-                    configuracionEjercicio.setEjercicio(new Ejercicio(null,rs.getString("nombreEjercicio")));
+                    configuracionEjercicio.setEjercicio(new Ejercicio(rs.getInt("idEjercicio"),rs.getString("nombreEjercicio")));
 
                     configuracionEjercicioList.add(configuracionEjercicio);
                 }
@@ -138,7 +136,7 @@ public class ConexionRutinas {
                 Class.forName(DataBD.driver);
                 Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
 
-                String sql = "SELECT r.* FROM Rutinas r JOIN RutinaXUsuario rxu ON r.ID = rxu.ID_Rutina WHERE rxu.ID_Usuario = ?";
+                String sql = "SELECT e.* FROM Ejercicios e JOIN ConfiguracionEjercicio ce ON e.ID = ce.ID_Ejercicio JOIN RutinaXEjercicio rxe ON ce.ID = rxe.ID_ConfigEjercicio WHERE rxe.ID_Rutina = ?";
                 //HACER QUERY QUE TRAIGA LOS EJERCICIOS DE LA RUTINA CON SU CONFIGURACION POR TIPO (DIFICULTAD)
 
                 PreparedStatement preparedStatement = con.prepareStatement(sql);
@@ -148,11 +146,11 @@ public class ConexionRutinas {
                 if (rs.next()) {
                     ConfiguracionEjercicio configuracionEjercicio = new ConfiguracionEjercicio();
 
-                    configuracionEjercicio.setId(rs.getString("id"));
+                    configuracionEjercicio.setId(rs.getInt("id"));
                     configuracionEjercicio.setRepeticiones(rs.getInt("repeticiones"));
                     configuracionEjercicio.setSeries(rs.getInt("series"));
                     configuracionEjercicio.setTiempo(rs.getString("tiempo"));
-                    configuracionEjercicio.setEjercicio(new Ejercicio(null,rs.getString("nombreEjercicio")));
+                    configuracionEjercicio.setEjercicio(new Ejercicio(rs.getInt("idEjercicio"),rs.getString("nombreEjercicio")));
 
                     configuracionEjercicioList.add(configuracionEjercicio);
                 }

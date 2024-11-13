@@ -4,23 +4,23 @@ import java.util.Objects;
 
 public class Entrenamiento {
 
-    private String id;
+    private int id;
     private String idUsuario;
     private String duracion;
     private String fecha;
 
-    public Entrenamiento(String id, String idUsuario, String duracion, String fecha) {
+    public Entrenamiento(int id, String idUsuario, String duracion, String fecha) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.duracion = duracion;
         this.fecha = fecha;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

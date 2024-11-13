@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Usuario {
 
-    private String id;
+    private int id;
     private String nombre;
     private String apellido;
     private String genero;
@@ -13,7 +13,7 @@ public class Usuario {
     private String nombreUsuario;
     private String password;
 
-    public Usuario(String id, String nombre, String apellido, String genero, String mail, String cel, String nombreUsuario, String password) {
+    public Usuario(int id, String nombre, String apellido, String genero, String mail, String cel, String nombreUsuario, String password) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -24,11 +24,11 @@ public class Usuario {
         this.password = password;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

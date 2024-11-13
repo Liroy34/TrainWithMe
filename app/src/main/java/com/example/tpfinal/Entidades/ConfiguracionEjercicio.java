@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class ConfiguracionEjercicio {
 
-    private String id;
+    private int id;
     private Ejercicio ejercicio;
     private int series;
     private int repeticiones;
@@ -13,7 +13,7 @@ public class ConfiguracionEjercicio {
     public ConfiguracionEjercicio() {
     }
 
-    public ConfiguracionEjercicio(String id, Ejercicio ejercicio, int series, int repeticiones, String tiempo) {
+    public ConfiguracionEjercicio(int id, Ejercicio ejercicio, int series, int repeticiones, String tiempo) {
         this.id = id;
         this.ejercicio = ejercicio;
         this.series = series;
@@ -21,11 +21,11 @@ public class ConfiguracionEjercicio {
         this.tiempo = tiempo;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
