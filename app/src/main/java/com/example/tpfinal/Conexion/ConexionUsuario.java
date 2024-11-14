@@ -28,6 +28,7 @@ public class ConexionUsuario {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
             boolean autenticado = false;
+            int idUsuario = -1;
 
             try {
                 Class.forName(DataBD.driver);
@@ -40,7 +41,10 @@ public class ConexionUsuario {
                 preparedStatement.setString(2, password);
                 ResultSet rs = preparedStatement.executeQuery();
 
-                autenticado = rs.next();
+                if (rs.next()) {
+                    autenticado = true;
+                    idUsuario = rs.getInt("ID");
+                }
 
                 rs.close();
                 preparedStatement.close();
@@ -50,15 +54,17 @@ public class ConexionUsuario {
             }
 
             boolean finalAutenticado = autenticado;
+            int finalId= idUsuario;
             new Handler(Looper.getMainLooper()).post(() -> {
                 if (finalAutenticado) {
                     Toast.makeText(context, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(context, MainActivity.class);
+                    intent.putExtra("idUsuario", finalId);
                     context.startActivity(intent);
                 } else {
                     Toast.makeText(context, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
                 }
-                callback.onIniciarSesion(finalAutenticado);
+                callback.onIniciarSesion(finalAutenticado,finalId);
             });
         });
     }
@@ -178,7 +184,7 @@ public class ConexionUsuario {
     }
 
     public interface IniciarSesionCallback {
-        void onIniciarSesion(boolean autenticado);
+        void onIniciarSesion(boolean autenticado, int idUsuario);
     }
 
     public interface UsuarioExistenteCallback {
