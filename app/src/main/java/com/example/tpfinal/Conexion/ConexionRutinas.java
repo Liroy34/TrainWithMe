@@ -8,6 +8,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.tpfinal.Adapters.ConfiguracionEjercicioAdapter;
+import com.example.tpfinal.Adapters.RutinasAdapter;
 import com.example.tpfinal.Entidades.ConfiguracionEjercicio;
 import com.example.tpfinal.Entidades.Ejercicio;
 import com.example.tpfinal.Entidades.Rutina;
@@ -43,7 +44,7 @@ public class ConexionRutinas {
     }
 
     // ESTE ES PARA CARGAR LA LISTA DE RUTINAS, UNICAMENTE CON NOMBRE DE LA RUTINA
-    public void getRutinasPropias(String idUsuario, RutinaCallback callback) {
+    public void getRutinasPropias(int idUsuario) {
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
@@ -54,7 +55,7 @@ public class ConexionRutinas {
                 Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
                 String sql = "SELECT r.* FROM Rutinas r JOIN RutinaXUsuario rxu ON r.ID = rxu.ID_Rutina WHERE rxu.ID_Usuario = ?";
                 PreparedStatement preparedStatement = con.prepareStatement(sql);
-                preparedStatement.setString(1, idUsuario);
+                preparedStatement.setInt(1, idUsuario);
                 ResultSet rs = preparedStatement.executeQuery();
 
                 if (rs.next()) {
@@ -77,8 +78,8 @@ public class ConexionRutinas {
 
             // CREAR ADAPTER DE RUTINAS
             new android.os.Handler(android.os.Looper.getMainLooper()).post(() -> {
-                //RutinasAdapter adapter = new RutinasAdapter(context, rutinaList);
-                //gvRutinas.setAdapter(adapter);
+                RutinasAdapter adapter = new RutinasAdapter(context, rutinaList);
+                lvRutinas.setAdapter(adapter);
             });
         });
 

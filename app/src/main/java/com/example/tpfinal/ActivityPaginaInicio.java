@@ -10,8 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class ActivityPaginaInicio extends AppCompatActivity {
 
-    ImageButton btnCerrarSesion;
-    Button btnEntrenamientos, btnRutinasPropias, btnRutinasPredefinidas, btnVerPerfil;
+    private ImageButton btnCerrarSesion;
+    private Button btnEntrenamientos, btnRutinasPropias, btnRutinasPredefinidas, btnVerPerfil;
 
     private Context context;
 

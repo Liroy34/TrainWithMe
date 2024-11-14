@@ -14,10 +14,10 @@ import com.example.tpfinal.Conexion.ConexionRutinas;
 public class ActivityRutinasPredefinidaSeleccionada extends AppCompatActivity {
 
     private String tipo;
-    ConexionRutinas conRutinas;
-    ImageButton btnVolverRutinaPredefSelect;
+    private ConexionRutinas conRutinas;
+    private ImageButton btnVolverRutinaPredefSelect;
     private ListView ejerciciosLV;
-    Context context;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

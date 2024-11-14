@@ -14,9 +14,9 @@ import com.example.tpfinal.Conexion.ConexionUsuario;
 
 public class ActivityRutinasPredefinida extends AppCompatActivity {
 
-    Button btnPrincipiante, btnMedio, btnAvanzado;
-    ImageButton btnVolverRutinaPredefinida;
-    Context context;
+    private Button btnPrincipiante, btnMedio, btnAvanzado;
+    private ImageButton btnVolverRutinaPredefinida;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
