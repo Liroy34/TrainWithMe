@@ -27,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent intentAnterior = getIntent();
+        int idUsuario = intentAnterior.getIntExtra("idUsuario", -1);
+
         nombreUsuario = findViewById(R.id.etUsuarioMain);
         password = findViewById(R.id.etPasswordMain);
         btnLogin = findViewById(R.id.loginButton);
@@ -43,8 +46,9 @@ public class MainActivity extends AppCompatActivity {
                 String pass = password.toString();
                 conUsuario.iniciarSesion(usuario, pass, new ConexionUsuario.IniciarSesionCallback() {
                     @Override
-                    public void onIniciarSesion(boolean autenticado) {
+                    public void onIniciarSesion(boolean autenticado, int idUsuario) {
                         Intent intent = new Intent(context, ActivityPaginaInicio.class);
+                        intent.putExtra("idUsuario", idUsuario );
                         context.startActivity(intent);
                     }
                 });
