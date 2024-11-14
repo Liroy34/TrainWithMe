@@ -7,6 +7,7 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.tpfinal.Adapters.ConfiguracionEjercicioAdapter;
 import com.example.tpfinal.Entidades.ConfiguracionEjercicio;
 import com.example.tpfinal.Entidades.Ejercicio;
 import com.example.tpfinal.Entidades.Rutina;
@@ -131,7 +132,7 @@ public class ConexionRutinas {
         void onComplete(T result);
     }
 
-    public void getEjerciciosConfiguracionPredefinidos(String tipo, RutinaCallback callback) {
+    public void getEjerciciosConfiguracionPredefinidos(String tipo) {
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
@@ -169,10 +170,9 @@ public class ConexionRutinas {
                 e.printStackTrace();
             }
 
-            // CREAR ADAPTER DE CONFIGURACION DE EJERCICIOS
             new android.os.Handler(android.os.Looper.getMainLooper()).post(() -> {
-                //ConfiguracionAdapter adapter = new ConfiguracionAdapter(context, configuracionEjercicioList);
-                //lvEntrenamiento.setAdapter(adapter);
+                ConfiguracionEjercicioAdapter adapter = new ConfiguracionEjercicioAdapter(context, configuracionEjercicioList);
+                lvEntrenamiento.setAdapter(adapter);
             });
         });
 
