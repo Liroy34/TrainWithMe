@@ -69,6 +69,40 @@ public class ConexionUsuario {
         });
     }
 
+    public void deleteUsuario(int idUsuario) {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
+            try {
+                Class.forName(DataBD.driver);
+                Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
+
+                String sql = "DELETE FROM Usuarios WHERE ID = ?";
+                PreparedStatement preparedStatement = con.prepareStatement(sql);
+                preparedStatement.setInt(1, idUsuario);
+
+                int rowsAffected = preparedStatement.executeUpdate();
+
+                preparedStatement.close();
+                con.close();
+
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    if (rowsAffected > 0) {
+                        Toast.makeText(context, "Usuario eliminado correctamente", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(context, "Error al eliminar el usuario", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                new Handler(Looper.getMainLooper()).post(() ->
+                        Toast.makeText(context, "Error en la base de datos", Toast.LENGTH_SHORT).show()
+                );
+            }
+        });
+    }
+
+
     public void updateUsuario(Usuario usuario) {
         usuarioExiste(usuario.getNombreUsuario(), existe -> {
 
