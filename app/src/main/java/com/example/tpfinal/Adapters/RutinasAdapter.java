@@ -50,6 +50,7 @@ public class RutinasAdapter extends ArrayAdapter<Rutina> {
 
                             Intent intent = new Intent(getContext(), ActivityRutinaSeleccionada.class);
                             intent.putParcelableArrayListExtra("configuracionEjercicioList", new ArrayList<>(configuracionEjercicioList));
+                            intent.putExtra("idRutina", rutinaId);
                             getContext().startActivity(intent);
                         }
                     });

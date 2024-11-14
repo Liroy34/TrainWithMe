@@ -179,4 +179,43 @@ public class ConexionRutinas {
 
     }
 
+
+    public void eliminarRutina(int idRutina) {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
+            boolean eliminado = false;
+
+            try {
+                Class.forName(DataBD.driver);
+                Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
+
+
+                String sql = "DELETE FROM Rutinas WHERE ID = ?";
+                PreparedStatement preparedStatement = con.prepareStatement(sql);
+                preparedStatement.setInt(1, idRutina);
+                int filasAfectadas = preparedStatement.executeUpdate();
+
+                // Verificar si se eliminó alguna fila
+                eliminado = filasAfectadas > 0;
+
+                preparedStatement.close();
+                con.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            boolean finalEliminado = eliminado;
+            new android.os.Handler(android.os.Looper.getMainLooper()).post(() -> {
+                if (finalEliminado) {
+                    Toast.makeText(context, "Rutina eliminada correctamente", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    Toast.makeText(context, "Error al eliminar la rutina", Toast.LENGTH_SHORT).show();
+                }
+            });
+        });
+    }
+
+
+
 }
