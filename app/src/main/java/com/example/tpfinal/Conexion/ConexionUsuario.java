@@ -69,6 +69,49 @@ public class ConexionUsuario {
         });
     }
 
+    public void updateUsuario(Usuario usuario) {
+        usuarioExiste(usuario.getNombreUsuario(), existe -> {
+
+            ExecutorService executor = Executors.newSingleThreadExecutor();
+            executor.execute(() -> {
+                try {
+                    Class.forName(DataBD.driver);
+                    Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
+
+                    // MODIFICAR ESTO PARA USUARIO
+                    String sql = ("UPDATE Usuarios SET nombrepassword = ?, apellidopassword = ?, generopassword = ?, mailpassword = ?, celpassword = ?, nombre_usuariopassword = ?, password = ? WHERE ID = ?");
+                    PreparedStatement preparedStatement = con.prepareStatement(sql);
+                    preparedStatement.setString(1, usuario.getNombre());
+                    preparedStatement.setString(2, usuario.getApellido());
+                    preparedStatement.setString(3, usuario.getGenero());
+                    preparedStatement.setString(4, usuario.getMail());
+                    preparedStatement.setString(5, usuario.getCel());
+                    preparedStatement.setString(6, usuario.getNombreUsuario());
+                    preparedStatement.setString(7, usuario.getPassword());
+                    preparedStatement.setInt(8, usuario.getId());
+
+                    int rowsAffected = preparedStatement.executeUpdate();
+
+                    preparedStatement.close();
+                    con.close();
+
+                    new Handler(Looper.getMainLooper()).post(() -> {
+                        if (rowsAffected > 0) {
+                            Toast.makeText(context, "Usuario editado correctamente", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(context, "Error al editar el usuario", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+
+        });
+    }
+
+
     public void insertUsuario(Usuario usuario) {
         usuarioExiste(usuario.getNombreUsuario(), existe -> {
             if (existe) {
