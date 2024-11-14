@@ -27,12 +27,14 @@ public class ConfiguracionEjercicioAdapter extends ArrayAdapter<ConfiguracionEje
         ConfiguracionEjercicio configuracionEjercicio = getItem(position);
 
         TextView nombreEjercicio = convertView.findViewById(R.id.txtEjercicioRutinaPropia);
-        TextView series = convertView.findViewById(R.id.txtRepesRutinaPropia);
+        TextView series = convertView.findViewById(R.id.txtSeriesRutinaPropia);
+        TextView repes = convertView.findViewById(R.id.txtRepesRutinaPropia);
 
 
         if (configuracionEjercicio != null) {
             nombreEjercicio.setText(configuracionEjercicio.getEjercicio().getNombre());
             series.setText("Series: " + configuracionEjercicio.getSeries());
+            repes.setText("Repeticiones: " + configuracionEjercicio.getRepeticiones());
 
         }
 

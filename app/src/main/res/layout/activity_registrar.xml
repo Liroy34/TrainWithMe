@@ -22,12 +22,13 @@
             android:layout_marginTop="20dp" />
 
         <EditText
-            android:id="@+id/etNombre"
+            android:id="@+id/etNombreRegistrarse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_edittext"
             android:hint="Nombre"
             android:textColorHint="#999999"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:padding="10dp" />
 
         <!-- Campo Apellido -->
@@ -40,12 +41,13 @@
             android:layout_marginTop="20dp" />
 
         <EditText
-            android:id="@+id/etApellido"
+            android:id="@+id/etApellidoRegistrarse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_edittext"
             android:hint="Apellido"
             android:textColorHint="#999999"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:padding="10dp" />
 
         <!-- Campo Género con Spinner -->
@@ -58,7 +60,7 @@
             android:layout_marginTop="20dp" />
 
         <Spinner
-            android:id="@+id/spinnerGenero"
+            android:id="@+id/spinnerGeneroRegistrarse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_spinner"
@@ -75,7 +77,7 @@
             android:layout_marginTop="20dp" />
 
         <EditText
-            android:id="@+id/etEmail"
+            android:id="@+id/etEmailRegistrarse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_edittext"
@@ -94,13 +96,14 @@
             android:layout_marginTop="20dp" />
 
         <EditText
-            android:id="@+id/etCelular"
+            android:id="@+id/etCelularRegistrarse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_edittext"
             android:hint="Celular"
             android:textColorHint="#999999"
             android:inputType="phone"
+            android:digits="0123456789"
             android:padding="10dp" />
 
         <!-- Campo Usuario -->
@@ -113,12 +116,13 @@
             android:layout_marginTop="20dp" />
 
         <EditText
-            android:id="@+id/etUsuario"
+            android:id="@+id/etUsuarioRegistrarse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_edittext"
             android:hint="Usuario"
             android:textColorHint="#999999"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:padding="10dp" />
 
         <!-- Campo Contraseña -->
@@ -131,7 +135,7 @@
             android:layout_marginTop="20dp" />
 
         <EditText
-            android:id="@+id/etContrasena"
+            android:id="@+id/etContrasenaRegistrarse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_edittext"
@@ -142,7 +146,7 @@
 
         <!-- Botón Registrarse -->
         <Button
-            android:id="@+id/btnRegistrarse"
+            android:id="@+id/btnRegistrarseRegistrarse"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="Registrarse"

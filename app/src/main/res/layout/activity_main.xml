@@ -28,7 +28,7 @@
 
         <!-- Campo Nombre de usuario -->
         <EditText
-            android:id="@+id/usernameEditText"
+            android:id="@+id/etUsuarioMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nombre de usuario"
@@ -42,7 +42,7 @@
             android:layout_height="20dp"/>
         <!-- Campo Contraseña -->
         <EditText
-            android:id="@+id/passwordEditText"
+            android:id="@+id/etPasswordMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Contraseña"
@@ -73,26 +73,30 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp">
 
-            <TextView
-                android:id="@+id/registerTextView"
+            <Button
+                android:id="@+id/btnRegistrarseRegistrarse"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="#FFFFFF"
+                android:gravity="center"
+                android:padding="5dp"
                 android:text="REGISTRARSE"
                 android:textColor="#0077CC"
-                android:textStyle="bold"
-                android:gravity="center"
                 android:textSize="14sp"
-                android:padding="5dp"/>
+                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/forgotPasswordTextView"
+            <Button
+                android:id="@+id/btnForgotPass"
+                style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:backgroundTint="#FFFFFF"
+                android:gravity="center"
+                android:padding="5dp"
                 android:text="Recuperar contraseña"
                 android:textColor="#0077CC"
-                android:gravity="center"
-                android:textSize="12sp"
-                android:padding="5dp"/>
+                android:textSize="12sp" />
         </LinearLayout>
 
     </LinearLayout>

@@ -7,6 +7,7 @@ import android.os.Looper;
 import android.widget.Toast;
 
 import com.example.tpfinal.Entidades.Usuario;
+import com.example.tpfinal.MainActivity;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -52,7 +53,7 @@ public class ConexionUsuario {
             new Handler(Looper.getMainLooper()).post(() -> {
                 if (finalAutenticado) {
                     Toast.makeText(context, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(context, /*activity_paginaprincipal.class*/null); // ACOMODAR CUANDO SE CREE EL ANTIVITY
+                    Intent intent = new Intent(context, MainActivity.class);
                     context.startActivity(intent);
                 } else {
                     Toast.makeText(context, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
