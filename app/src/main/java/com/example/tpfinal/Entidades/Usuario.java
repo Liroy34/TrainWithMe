@@ -13,6 +13,10 @@ public class Usuario {
     private String nombreUsuario;
     private String password;
 
+    public Usuario(){
+
+    }
+
     public Usuario(String nombre, String apellido, String genero, String mail, String cel, String nombreUsuario, String password) {
         this.nombre = nombre;
         this.apellido = apellido;

@@ -34,7 +34,7 @@ public class ConexionUsuario {
                 Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
 
 
-                String sql = "SELECT * FROM usuarios WHERE nombre_usuario = ? AND password = ?";
+                String sql = ("SELECT * FROM usuarios WHERE nombre_usuario = ? AND password = ?");
                 PreparedStatement preparedStatement = con.prepareStatement(sql);
                 preparedStatement.setString(1, nombreUsuario);
                 preparedStatement.setString(2, password);
@@ -77,7 +77,7 @@ public class ConexionUsuario {
                         Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
 
                         // MODIFICAR ESTO PARA USUARIO
-                        String sql = "INSERT INTO usuarios (nombre, apellido, genero, mail, cel, nombre_usuario, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                        String sql = ("INSERT INTO usuarios (nombre, apellido, genero, mail, cel, nombre_usuario, password) VALUES (?, ?, ?, ?, ?, ?, ?)");
                         PreparedStatement preparedStatement = con.prepareStatement(sql);
                         preparedStatement.setString(1, usuario.getNombre());
                         preparedStatement.setString(2, usuario.getApellido());
@@ -108,6 +108,42 @@ public class ConexionUsuario {
         });
     }
 
+    public void fetchRecuperarPass(String mail, UsuarioCallback callback) {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
+            Usuario usuario = null;
+
+            try {
+                Class.forName(DataBD.driver);
+                Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
+
+                String query = ("Select * FROM Usuarios WHERE mail = ?");
+                PreparedStatement ps = con.prepareStatement(query);
+                ps.setString(1, mail);
+
+                ResultSet rs = ps.executeQuery();
+
+                if (rs.next()) {
+                    usuario = new Usuario();
+                    usuario.setPassword(rs.getString("Password"));
+
+                }
+
+                rs.close();
+                ps.close();
+                con.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            Usuario usuarioFinal = usuario;
+            new android.os.Handler(android.os.Looper.getMainLooper()).post(() -> {
+                callback.onUsuarioReceived(usuarioFinal);
+            });
+        });
+    }
+
+
     private void usuarioExiste(String nombreUsuario, UsuarioExistenteCallback callback) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
@@ -116,7 +152,7 @@ public class ConexionUsuario {
             try {
                 Class.forName(DataBD.driver);
                 Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
-                String sql = "SELECT * FROM usuarios WHERE nombre_usuario = ?";
+                String sql = ("SELECT * FROM usuarios WHERE nombre_usuario = ?");
                 PreparedStatement preparedStatement = con.prepareStatement(sql);
                 preparedStatement.setString(1, nombreUsuario);
                 ResultSet rs = preparedStatement.executeQuery();
@@ -135,6 +171,10 @@ public class ConexionUsuario {
                 callback.onUsuarioExistente(finalExiste);
             });
         });
+    }
+
+    public interface UsuarioCallback {
+        void onUsuarioReceived(Usuario usuario);
     }
 
     public interface IniciarSesionCallback {

@@ -46,7 +46,7 @@ public class ActivityRegistrarse extends AppCompatActivity{
                 Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
             }
             else{
-                if(isValidEmail(mail.toString())){
+                if(!isValidEmail(mail.toString())){
                     Toast.makeText(this, "Formato de mail incorrecto", Toast.LENGTH_SHORT).show();
                 }
                 else {
