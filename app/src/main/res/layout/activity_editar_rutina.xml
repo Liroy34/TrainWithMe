@@ -47,11 +47,11 @@
             android:paddingBottom="5dp"/>
 
         <EditText
-            android:id="@+id/etNombreRutina"
+            android:id="@+id/etNombreRutinaEditar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
-            android:padding="10dp"
+            android:padding="5dp"
             android:layout_marginBottom="15dp"/>
 
         <!-- Campo Descripción -->
@@ -63,11 +63,11 @@
             android:paddingBottom="5dp"/>
 
         <EditText
-            android:id="@+id/etDescripcionRutina"
+            android:id="@+id/etDescripcionRutinaEditar"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="50dp"
             android:background="@android:color/white"
-            android:padding="10dp"
+            android:padding="5dp"
             android:layout_marginBottom="15dp"
             android:gravity="top"
             android:inputType="textMultiLine"/>
@@ -80,14 +80,255 @@
             android:textColor="#000000"
             android:paddingBottom="5dp"/>
 
-        <Button
-            android:id="@+id/btnEditarEjercicios"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Editar ejercicios"
-            android:backgroundTint="#264653"
-            android:textColor="#FFFFFF"
-            android:layout_marginBottom="15dp"/>
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp">
+
+            <!-- Ejercicio individual -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:id="@+id/txtEj1Editar"
+                    android:layout_width="317dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ejercicio 1"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txtTS1Editar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="series"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#888888" />
+            <!-- Ejercicio individual -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:id="@+id/txtEj2Editar"
+                    android:layout_width="317dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ejercicio 2"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txtTS2Editar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="series"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#888888" />
+            <!-- Ejercicio individual -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:id="@+id/txtEj3Editar"
+                    android:layout_width="317dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ejercicio 3"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txtTS3Editar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="series"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#888888" />
+            <!-- Ejercicio individual -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:id="@+id/txtEj4Editar"
+                    android:layout_width="317dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ejercicio 4"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txtTS4Editar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="series"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#888888" />
+            <!-- Ejercicio individual -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:id="@+id/txtEj5Editar"
+                    android:layout_width="317dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ejercicio 5"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txtTS5Editar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="series"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#888888" />
+            <!-- Ejercicio individual -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:id="@+id/txtEj6Editar"
+                    android:layout_width="317dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ejercicio 6"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txtTS6Editar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="series"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#888888" />
+
+            <!-- Ejercicio individual -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:id="@+id/txtEj7Editar"
+                    android:layout_width="317dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ejercicio 7"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txtTS7Editar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="series"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#888888" />
+            <!-- Ejercicio individual -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:id="@+id/txtEj8Editar"
+                    android:layout_width="317dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ejercicio 8"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txtTS8Editar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="series"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#888888" />
+
+        </LinearLayout>
 
         <!-- Campo Frecuencia -->
         <TextView
@@ -98,16 +339,16 @@
             android:paddingBottom="5dp"/>
 
         <EditText
-            android:id="@+id/etFrecuencia"
+            android:id="@+id/etFrecuenciaEditar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
-            android:padding="10dp"
-            android:layout_marginBottom="15dp"/>
+            android:padding="5dp"
+            android:layout_marginBottom="10dp"/>
 
         <!-- Botón Crear Rutina -->
         <Button
-            android:id="@+id/btnEditarRutina"
+            android:id="@+id/btnFinEditarRutina"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Editar Rutina"
