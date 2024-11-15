@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tpfinal.Conexion.ConexionUsuario;
@@ -19,6 +20,7 @@ public class ActivityPerfil extends AppCompatActivity {
     private TextView tvNombre, tvApellido, tvEmail, tvGenero;
     private Button btnEditarPerfil, btnDarDeBaja;
     private ImageButton btnVolverMiPerfil;
+    private int idUsuario;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,6 +35,14 @@ public class ActivityPerfil extends AppCompatActivity {
         btnDarDeBaja = findViewById(R.id.btnDarDeBaja);
         btnVolverMiPerfil = findViewById(R.id.btnVolverMiPerfil);
 
+         idUsuario = getIntent().getIntExtra("idUsuario", -1);
+
+        if (idUsuario == -1) {
+            // Manejo de errores si no se recibió el idUsuario
+            finish();
+            return;
+        }
+
         btnVolverMiPerfil.setOnClickListener(v -> {
             Intent intent = new Intent(ActivityPerfil.this, ActivityPaginaInicio.class); // Asegúrate de que PaginaPrincipal es el nombre correcto
             startActivity(intent);
@@ -40,6 +50,9 @@ public class ActivityPerfil extends AppCompatActivity {
         });
 
         cargarDatosUsuario();
+
+        configurarBotonDarDeBaja();
+
 
         btnEditarPerfil.setOnClickListener(v -> {
             editarPerfil();
@@ -65,17 +78,41 @@ public class ActivityPerfil extends AppCompatActivity {
         String email = tvEmail.getText().toString();
         String genero = tvGenero.getText().toString();
 
-        // Crear objeto Usuario y enviarlo a la base de datos en el futuro
         Usuario usuario = new Usuario();
+        usuario.setId(idUsuario);
         usuario.setNombre(nombre);
         usuario.setApellido(apellido);
         usuario.setMail(email);
         usuario.setGenero(genero);
 
         ConexionUsuario conexionUsuario = new ConexionUsuario(this);
-        conexionUsuario.insertUsuario(usuario);
+        conexionUsuario.updateUsuario(usuario);
 
-        // Mostrar mensaje temporal
         Toast.makeText(this, "Datos guardados correctamente (pendiente conexión BD)", Toast.LENGTH_SHORT).show();
+    }
+
+    private void configurarBotonDarDeBaja() {
+        btnDarDeBaja.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Confirmar acción");
+            builder.setMessage("¿Estás seguro de que deseas dar de baja este usuario? Esta acción no se puede deshacer.");
+
+            builder.setPositiveButton("Sí, dar de baja", (dialog, which) -> {
+                darDeBajaUsuario();
+            });
+
+            builder.setNegativeButton("Cancelar", (dialog, which) -> {
+                dialog.dismiss(); // Cierra el modal sin realizar ninguna acción
+            });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        });
+    }
+
+    private void darDeBajaUsuario() {
+        // Implementar la lógica para dar de baja al usuario
+        ConexionUsuario conexionUsuario = new ConexionUsuario(this);
+        conexionUsuario.deleteUsuario(idUsuario); // Asegúrate de tener este método en tu clase de conexión
     }
 }

@@ -1,5 +1,6 @@
 package com.example.tpfinal.Entidades;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Entrenamiento {
@@ -8,14 +9,17 @@ public class Entrenamiento {
     private String idUsuario;
     private String duracion;
     private String fecha;
+    private List<ConfiguracionEjercicio> configuracionesEjercicio; // Lista de configuraciones de ejercicios
 
-    public Entrenamiento(int id, String idUsuario, String duracion, String fecha) {
+    public Entrenamiento(int id, String idUsuario, String duracion, String fecha, List<ConfiguracionEjercicio> configuracionesEjercicio) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.duracion = duracion;
         this.fecha = fecha;
+        this.configuracionesEjercicio = configuracionesEjercicio;
     }
 
+    // Getters y setters
     public int getId() {
         return id;
     }
@@ -48,6 +52,14 @@ public class Entrenamiento {
         this.fecha = fecha;
     }
 
+    public List<ConfiguracionEjercicio> getConfiguracionesEjercicio() {
+        return configuracionesEjercicio;
+    }
+
+    public void setConfiguracionesEjercicio(List<ConfiguracionEjercicio> configuracionesEjercicio) {
+        this.configuracionesEjercicio = configuracionesEjercicio;
+    }
+
     @Override
     public String toString() {
         return "Entrenamiento{" +
@@ -55,6 +67,7 @@ public class Entrenamiento {
                 ", idUsuario='" + idUsuario + '\'' +
                 ", duracion='" + duracion + '\'' +
                 ", fecha='" + fecha + '\'' +
+                ", configuracionesEjercicio=" + configuracionesEjercicio +
                 '}';
     }
 
@@ -63,11 +76,15 @@ public class Entrenamiento {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Entrenamiento that = (Entrenamiento) o;
-        return Objects.equals(id, that.id) && Objects.equals(idUsuario, that.idUsuario) && Objects.equals(duracion, that.duracion) && Objects.equals(fecha, that.fecha);
+        return id == that.id &&
+                Objects.equals(idUsuario, that.idUsuario) &&
+                Objects.equals(duracion, that.duracion) &&
+                Objects.equals(fecha, that.fecha) &&
+                Objects.equals(configuracionesEjercicio, that.configuracionesEjercicio);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, idUsuario, duracion, fecha);
+        return Objects.hash(id, idUsuario, duracion, fecha, configuracionesEjercicio);
     }
 }
