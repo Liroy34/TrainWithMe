@@ -21,7 +21,6 @@ public class ActivityRutinasPropias extends AppCompatActivity {
 
     private Button btnCrearRutinaPropia;
     private ImageButton btnVolverRutinaPropia;
-    private Context context;
     private ConexionRutinas conRutinas;
     public ListView lvRutinas;
     public List<Rutina> rutinasList = new ArrayList<>();
@@ -37,9 +36,11 @@ public class ActivityRutinasPropias extends AppCompatActivity {
         Intent intentAnterior = getIntent();
         int id = intentAnterior.getIntExtra("idUsuario",-1);
 
+
+
         lvRutinas = findViewById(R.id.rutinasList);
 
-        conRutinas = new ConexionRutinas(lvRutinas, context);
+        conRutinas = new ConexionRutinas(lvRutinas, ActivityRutinasPropias.this);
         conRutinas.getRutinasPropias(id);
 
 
@@ -59,8 +60,8 @@ public class ActivityRutinasPropias extends AppCompatActivity {
 
         btnCrearRutinaPropia.setOnClickListener(v -> {
 
-            Intent intent = new Intent(context, ActivityCrearRutina.class);
-            context.startActivity(intent);
+            Intent intent = new Intent(ActivityRutinasPropias.this, ActivityCrearRutina.class);
+            ActivityRutinasPropias.this.startActivity(intent);
 
         });
 
