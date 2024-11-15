@@ -3,6 +3,8 @@ package com.example.tpfinal;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -10,6 +12,10 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tpfinal.Conexion.ConexionRutinas;
+import com.example.tpfinal.Entidades.Rutina;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ActivityRutinasPropias extends AppCompatActivity {
 
@@ -17,7 +23,8 @@ public class ActivityRutinasPropias extends AppCompatActivity {
     private ImageButton btnVolverRutinaPropia;
     private Context context;
     private ConexionRutinas conRutinas;
-    private ListView lvRutinas;
+    public ListView lvRutinas;
+    public List<Rutina> rutinasList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +41,20 @@ public class ActivityRutinasPropias extends AppCompatActivity {
 
         conRutinas = new ConexionRutinas(lvRutinas, context);
         conRutinas.getRutinasPropias(id);
+
+
+        lvRutinas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Rutina selectedRutina = rutinasList.get(position);
+
+                Intent intent = new Intent(ActivityRutinasPropias.this, ActivityRutinaSeleccionada.class);
+                intent.putExtra("idRutina", selectedRutina.getId());
+                startActivity(intent);
+            }
+        });
+
 
 
         btnCrearRutinaPropia.setOnClickListener(v -> {

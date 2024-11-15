@@ -31,32 +31,11 @@ public class RutinasAdapter extends ArrayAdapter<Rutina> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.rutinas_propias_list, parent, false);
         }
 
-        Button btnSelectRutina = (Button) convertView.findViewById(R.id.btnMostrarRutinaPropiaLista);
+        TextView txtId = convertView.findViewById(R.id.tvRutinasPropiasEnListaID);
+        TextView txtNombre = convertView.findViewById(R.id.tvRutinasPropiasEnListaNombre);
 
-        Rutina rutina = getItem(position);
-
-        if (rutina != null) {
-            btnSelectRutina.setText(rutina.getNombre());
-
-            btnSelectRutina.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String rutinaId = String.valueOf(rutina.getId());
-
-                    ConexionRutinas conexionRutinas = new ConexionRutinas(getContext());
-                    conexionRutinas.getEjerciciosConfiguracionPropios(rutinaId, new ConexionRutinas.RutinaCallback<List<ConfiguracionEjercicio>>() {
-                        @Override
-                        public void onComplete(List<ConfiguracionEjercicio> configuracionEjercicioList) {
-
-                            Intent intent = new Intent(getContext(), ActivityRutinaSeleccionada.class);
-                            intent.putParcelableArrayListExtra("configuracionEjercicioList", new ArrayList<>(configuracionEjercicioList));
-                            intent.putExtra("idRutina", rutinaId);
-                            getContext().startActivity(intent);
-                        }
-                    });
-                }
-            });
-        }
+        txtId.setText(String.valueOf(getItem(position).getId()));
+        txtNombre.setText(getItem(position).getNombre());
 
         return convertView;
     }

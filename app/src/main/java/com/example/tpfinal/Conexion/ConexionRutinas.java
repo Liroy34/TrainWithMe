@@ -7,6 +7,8 @@ import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.tpfinal.ActivityRutinaSeleccionada;
+import com.example.tpfinal.ActivityRutinasPropias;
 import com.example.tpfinal.Adapters.ConfiguracionEjercicioAdapter;
 import com.example.tpfinal.Adapters.RutinasAdapter;
 import com.example.tpfinal.Entidades.ConfiguracionEjercicio;
@@ -78,14 +80,18 @@ public class ConexionRutinas {
 
             // CREAR ADAPTER DE RUTINAS
             new android.os.Handler(android.os.Looper.getMainLooper()).post(() -> {
+                ((ActivityRutinasPropias) context).rutinasList.clear(); // Limpiar lista existente
+                ((ActivityRutinasPropias) context).rutinasList.addAll(rutinaList); // Actualizar lista global
+
+                // Crear y configurar el adaptador
                 RutinasAdapter adapter = new RutinasAdapter(context, rutinaList);
-                lvRutinas.setAdapter(adapter);
+                ((ActivityRutinasPropias) context).lvRutinas.setAdapter(adapter);
             });
         });
 
     }
 
-    public void getEjerciciosConfiguracionPropios(String idRutina, RutinaCallback<List<ConfiguracionEjercicio>> callback) {
+    public void getEjerciciosConfiguracionPropios(int idRutina) {
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
@@ -102,7 +108,7 @@ public class ConexionRutinas {
                         "WHERE r.ID = ?";
 
                 PreparedStatement preparedStatement = con.prepareStatement(sql);
-                preparedStatement.setString(1, idRutina);
+                preparedStatement.setInt(1, idRutina);
                 ResultSet rs = preparedStatement.executeQuery();
 
                 while (rs.next()) {
@@ -124,8 +130,19 @@ public class ConexionRutinas {
                 e.printStackTrace();
             }
 
-            // Llama al callback en el hilo principal
-            new android.os.Handler(android.os.Looper.getMainLooper()).post(() -> callback.onComplete(configuracionEjercicioList));
+
+
+            new android.os.Handler(android.os.Looper.getMainLooper()).post(() -> {
+                ((ActivityRutinaSeleccionada) context).configuracionEjercicioList.clear(); // Limpiar lista existente
+                ((ActivityRutinaSeleccionada) context).configuracionEjercicioList.addAll(configuracionEjercicioList); // Actualizar lista global
+
+                // Crear y configurar el adaptador
+                ConfiguracionEjercicioAdapter adapter = new ConfiguracionEjercicioAdapter(context, configuracionEjercicioList);
+                ((ActivityRutinaSeleccionada) context).lvEjerciciosRutina.setAdapter(adapter);
+            });
+
+
+
         });
     }
 

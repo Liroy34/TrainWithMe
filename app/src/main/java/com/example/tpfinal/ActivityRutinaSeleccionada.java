@@ -18,8 +18,8 @@ import java.util.ArrayList;
 
 public class ActivityRutinaSeleccionada extends AppCompatActivity {
 
-    private ListView ejerciciosRutinaList;
-    private ArrayList<ConfiguracionEjercicio> configuracionEjercicioList;
+    public ListView lvEjerciciosRutina;
+    public ArrayList<ConfiguracionEjercicio> configuracionEjercicioList;
     private ConfiguracionEjercicioAdapter adapter;
 
     private ImageButton btnVolverRutinaPropiaSeleccionada;
@@ -33,12 +33,12 @@ public class ActivityRutinaSeleccionada extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rutina_seleccionada);
 
-        ejerciciosRutinaList = findViewById(R.id.ejerciciosRutinaList);
+        int idRutina = getIntent().getIntExtra("idRutina", -1);
 
-        configuracionEjercicioList = getIntent().getParcelableArrayListExtra("configuracionEjercicioList");
+        lvEjerciciosRutina = findViewById(R.id.ejerciciosRutinaList);
 
-        adapter = new ConfiguracionEjercicioAdapter(this, configuracionEjercicioList);
-        ejerciciosRutinaList.setAdapter(adapter);
+        conRutinas = new ConexionRutinas(ActivityRutinaSeleccionada.this, lvEjerciciosRutina);
+        conRutinas.getEjerciciosConfiguracionPropios(idRutina);
 
         btnVolverRutinaPropiaSeleccionada = findViewById(R.id.btnVolverRutinaSeleccionada);
         btnEditarRutinaPropiaseleccionada = findViewById(R.id.btnEditarRutina);
