@@ -39,10 +39,9 @@ public class ActivityCrearRutina extends AppCompatActivity {
 
         btnCrear.setOnClickListener(v -> {
 
-            if(!checkValues()){
+            if (!checkValues()) {
                 Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
-            }
-            else{
+            } else {
 
                 // hacer logica de carga a base de datos
                 RutinaCargaDatos rutina = crearRutina();
@@ -121,80 +120,4 @@ public class ActivityCrearRutina extends AppCompatActivity {
 
         return new RutinaCargaDatos(nombre, descripcion, frecuencia, ejercicios);
     }
-
-/*
-    private void setElementos(){
-
-        etNombre = findViewById(R.id.etNombreRutinaCrear);
-        valores.add(etNombre.toString());
-        etDescripcion = findViewById(R.id.etDescripcionRutinaCrear);
-        valores.add(etDescripcion.toString());
-        etFrecuencia = findViewById(R.id.etFrecuenciaCrear);
-        valores.add(etFrecuencia.toString());
-
-        etEj1 = findViewById(R.id.txtEj1);
-        valores.add(etEj1.toString());
-        etEj2 = findViewById(R.id.txtEj2);
-        valores.add(etEj2.toString());
-        etEj3 = findViewById(R.id.txtEj3);
-        valores.add(etEj3.toString());
-        etEj4 = findViewById(R.id.txtEj4);
-        valores.add(etEj4.toString());
-        etEj5 = findViewById(R.id.txtEj5);
-        valores.add(etEj5.toString());
-        etEj6 = findViewById(R.id.txtEj6);
-        valores.add(etEj6.toString());
-        etEj7 = findViewById(R.id.txtEj7);
-        valores.add(etEj7.toString());
-        etEj8 = findViewById(R.id.txtEj8);
-        valores.add(etEj8.toString());
-
-        etSeries1 = findViewById(R.id.txtTS1);
-        valores.add(etSeries1.toString());
-        etSeries2 = findViewById(R.id.txtTS2);
-        valores.add(etSeries2.toString());
-        etSeries3 = findViewById(R.id.txtTS3);
-        valores.add(etSeries3.toString());
-        etSeries4 = findViewById(R.id.txtTS4);
-        valores.add(etSeries4.toString());
-        etSeries5 = findViewById(R.id.txtTS5);
-        valores.add(etSeries5.toString());
-        etSeries6 = findViewById(R.id.txtTS6);
-        valores.add(etSeries6.toString());
-        etSeries7 = findViewById(R.id.txtTS7);
-        valores.add(etSeries7.toString());
-        etSeries8 = findViewById(R.id.txtTS8);
-        valores.add(etSeries8.toString());
-
-        etRep1 = findViewById(R.id.txtTR1);
-        valores.add(etRep1.toString());
-        etRep2 = findViewById(R.id.txtTR2);
-        valores.add(etRep2.toString());
-        etRep3 = findViewById(R.id.txtTR3);
-        valores.add(etRep3.toString());
-        etRep4 = findViewById(R.id.txtTR4);
-        valores.add(etRep4.toString());
-        etRep5 = findViewById(R.id.txtTR5);
-        valores.add(etRep5.toString());
-        etRep6 = findViewById(R.id.txtTR6);
-        valores.add(etRep6.toString());
-        etRep7 = findViewById(R.id.txtTR7);
-        valores.add(etRep7.toString());
-        etRep8 = findViewById(R.id.txtTR8);
-        valores.add(etRep8.toString());
-
-
-    }
-
-    private boolean checkValues(){
-
-        for(String st : valores){
-            if(st.isEmpty()){
-                return false;
-            }
-        }
-
-        return true;
-    }
-*/
 }
