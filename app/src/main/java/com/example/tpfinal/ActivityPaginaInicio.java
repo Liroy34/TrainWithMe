@@ -31,32 +31,32 @@ public class ActivityPaginaInicio extends AppCompatActivity {
 
         btnRutinasPropias.setOnClickListener(v -> {
 
-            Intent intent = new Intent(context, ActivityRutinasPropias.class);
+            Intent intent = new Intent(ActivityPaginaInicio.this, ActivityRutinasPropias.class);
             intent.putExtra("idUsuario", idUsuario);
-            context.startActivity(intent);
+            startActivity(intent);
 
         });
 
         btnRutinasPredefinidas.setOnClickListener(v -> {
 
-            Intent intent = new Intent(context, ActivityRutinasPredefinida.class);
-            context.startActivity(intent);
+            Intent intent = new Intent(ActivityPaginaInicio.this, ActivityRutinasPredefinida.class);
+            startActivity(intent);
 
         });
 
         btnVerPerfil.setOnClickListener(v -> { //agregar logica para cargar los datos en ver perfil
 
-            Intent intent = new Intent(context, ActivityPerfil.class);
+            Intent intent = new Intent(ActivityPaginaInicio.this, ActivityPerfil.class);
             intent.putExtra("idUsuario", idUsuario);
-            context.startActivity(intent);
+            startActivity(intent);
 
         });
 
         btnEntrenamientos.setOnClickListener(v -> { //agregar logica para cargar los datos en ver perfil
 
-            Intent intent = new Intent(context, ActivityEntrenamientos.class);
+            Intent intent = new Intent(ActivityPaginaInicio.this, ActivityEntrenamientos.class);
             intent.putExtra("idUsuario", idUsuario);
-            context.startActivity(intent);
+            startActivity(intent);
 
         });
 

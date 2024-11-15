@@ -3,6 +3,7 @@ package com.example.tpfinal;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -47,9 +48,9 @@ public class MainActivity extends AppCompatActivity {
                 conUsuario.iniciarSesion(usuario, pass, new ConexionUsuario.IniciarSesionCallback() {
                     @Override
                     public void onIniciarSesion(boolean autenticado, int idUsuario) {
-                        Intent intent = new Intent(context, ActivityPaginaInicio.class);
+                        Intent intent = new Intent(MainActivity.this, ActivityPaginaInicio.class);
                         intent.putExtra("idUsuario", idUsuario );
-                        context.startActivity(intent);
+                        startActivity(intent);
                     }
                 });
             }
@@ -58,15 +59,17 @@ public class MainActivity extends AppCompatActivity {
 
         btnRegistrar.setOnClickListener(v -> {
 
-            Intent intent = new Intent(context, ActivityRegistrarse.class);
-            context.startActivity(intent);
+            Log.d("MainActivity", "Context: " + MainActivity.this);
+            Intent intent = new Intent(MainActivity.this, ActivityRegistrarse.class);
+            Log.d("MainActivity", "Intent: " + intent);
+            startActivity(intent);
 
         });
 
         btnRecuperar.setOnClickListener(v -> {
 
-            Intent intent = new Intent(context, ActivityRecuperarPass.class);
-            context.startActivity(intent);
+            Intent intent = new Intent(MainActivity.this, ActivityRecuperarPass.class);
+            startActivity(intent);
 
         });
 

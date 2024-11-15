@@ -2,6 +2,7 @@ package com.example.tpfinal;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -38,6 +39,8 @@ public class ActivityPerfil extends AppCompatActivity {
          idUsuario = getIntent().getIntExtra("idUsuario", -1);
 
         if (idUsuario == -1) {
+
+            Toast.makeText(this, "Error el idusuario es -1", Toast.LENGTH_SHORT).show();
             // Manejo de errores si no se recibió el idUsuario
             finish();
             return;
