@@ -14,7 +14,9 @@ import com.example.tpfinal.Adapters.RutinasAdapter;
 import com.example.tpfinal.Entidades.ConfiguracionEjercicio;
 import com.example.tpfinal.Entidades.Ejercicio;
 import com.example.tpfinal.Entidades.Rutina;
+import com.example.tpfinal.Entidades.RutinaCargaDatos;
 import com.example.tpfinal.Entidades.Usuario;
+import com.mysql.jdbc.Statement;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -44,6 +46,82 @@ public class ConexionRutinas {
         this.context = context;
         this.lvEntrenamiento = lvEntrenamiento;
     }
+
+    public void insertRutina(RutinaCargaDatos rutina) {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
+            try {
+                Class.forName(DataBD.driver);
+                Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
+
+                // Insertar la rutina en la tabla Rutinas
+                String sqlRutina = "INSERT INTO rutinas (nombre, descripcion, tipo) VALUES (?, ?, ?)";
+                PreparedStatement psRutina = con.prepareStatement(sqlRutina, Statement.RETURN_GENERATED_KEYS);
+                psRutina.setString(1, rutina.getNombre());
+                psRutina.setString(2, rutina.getDescripcion());
+                psRutina.setString(3, rutina.getFrecuencia());
+
+                int rowsAffectedRutina = psRutina.executeUpdate();
+
+                if (rowsAffectedRutina > 0) {
+                    // Obtener el ID autogenerado de la rutina insertada
+                    ResultSet generatedKeys = psRutina.getGeneratedKeys();
+                    if (generatedKeys.next()) {
+                        int rutinaId = generatedKeys.getInt(1);
+
+                        // Insertar cada ConfiguracionEjercicio en la tabla ConfiguracionEjercicio y en la relación RutinaXEjercicio
+                        for (ConfiguracionEjercicio ejercicio : rutina.getEjercicios()) {
+                            // Insertar configuración de ejercicio en ConfiguracionEjercicio
+                            String sqlConfigEjercicio = "INSERT INTO configuracionejercicio (id_ejercicio, series, repeticiones, tiempo) VALUES (?, ?, ?, ?)";
+                            PreparedStatement psConfigEjercicio = con.prepareStatement(sqlConfigEjercicio, Statement.RETURN_GENERATED_KEYS);
+                            psConfigEjercicio.setString(1, ejercicio.getEjercicio());
+                            psConfigEjercicio.setInt(2, ejercicio.getSeries());
+                            psConfigEjercicio.setInt(3, ejercicio.getRepeticiones());
+
+
+                            int rowsAffectedConfigEjercicio = psConfigEjercicio.executeUpdate();
+
+                            if (rowsAffectedConfigEjercicio > 0) {
+                                ResultSet generatedKeysConfig = psConfigEjercicio.getGeneratedKeys();
+                                if (generatedKeysConfig.next()) {
+                                    int configEjercicioId = generatedKeysConfig.getInt(1);
+
+                                    // Insertar la relación entre la rutina y la configuración de ejercicio en RutinaXEjercicio
+                                    String sqlRutinaXEjercicio = "INSERT INTO rutinaxejercicio (id_rutina, id_configejercicio) VALUES (?, ?)";
+                                    PreparedStatement psRutinaXEjercicio = con.prepareStatement(sqlRutinaXEjercicio);
+                                    psRutinaXEjercicio.setInt(1, rutinaId);
+                                    psRutinaXEjercicio.setInt(2, configEjercicioId);
+
+                                    psRutinaXEjercicio.executeUpdate();
+                                    psRutinaXEjercicio.close();
+                                }
+                                generatedKeysConfig.close();
+                            }
+                            psConfigEjercicio.close();
+                        }
+                    }
+                    generatedKeys.close();
+                }
+
+                psRutina.close();
+                con.close();
+
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    if (rowsAffectedRutina > 0) {
+                        Toast.makeText(context, "Rutina creada correctamente", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(context, "Error al crear la rutina", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+
+
 
     // ESTE ES PARA CARGAR LA LISTA DE RUTINAS, UNICAMENTE CON NOMBRE DE LA RUTINA
     public void getRutinasPropias(int idUsuario) {
@@ -117,8 +195,7 @@ public class ConexionRutinas {
                     configuracionEjercicio.setId(rs.getInt("id"));
                     configuracionEjercicio.setRepeticiones(rs.getInt("repeticiones"));
                     configuracionEjercicio.setSeries(rs.getInt("series"));
-                    configuracionEjercicio.setTiempo(rs.getString("tiempo"));
-                    configuracionEjercicio.setEjercicio(new Ejercicio(rs.getInt("idEjercicio"), rs.getString("NombreEjercicio")));
+                    configuracionEjercicio.setEjercicio(rs.getString("NombreEjercicio"));
 
                     configuracionEjercicioList.add(configuracionEjercicio);
                 }
@@ -175,8 +252,7 @@ public class ConexionRutinas {
                     configuracionEjercicio.setId(rs.getInt("id"));
                     configuracionEjercicio.setRepeticiones(rs.getInt("repeticiones"));
                     configuracionEjercicio.setSeries(rs.getInt("series"));
-                    configuracionEjercicio.setTiempo(rs.getString("tiempo"));
-                    configuracionEjercicio.setEjercicio(new Ejercicio(rs.getInt("idEjercicio"),rs.getString("nombreEjercicio")));
+                    configuracionEjercicio.setEjercicio(rs.getString("NombreEjercicio"));
 
                     configuracionEjercicioList.add(configuracionEjercicio);
                 }

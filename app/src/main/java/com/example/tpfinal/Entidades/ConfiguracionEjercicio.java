@@ -10,27 +10,26 @@ import java.util.Objects;
 public class ConfiguracionEjercicio implements Parcelable {
 
     private int id;
-    private Ejercicio ejercicio;
+    private String ejercicio;
     private int series;
     private int repeticiones;
-    private String tiempo;
 
     public ConfiguracionEjercicio() {
     }
 
-    public ConfiguracionEjercicio(int id, Ejercicio ejercicio, int series, int repeticiones, String tiempo) {
-        this.id = id;
+    public ConfiguracionEjercicio( String ejercicio, int series, int repeticiones) {
+
         this.ejercicio = ejercicio;
         this.series = series;
         this.repeticiones = repeticiones;
-        this.tiempo = tiempo;
+
     }
 
     protected ConfiguracionEjercicio(Parcel in) {
         id = in.readInt();
         series = in.readInt();
         repeticiones = in.readInt();
-        tiempo = in.readString();
+
     }
 
     public static final Creator<ConfiguracionEjercicio> CREATOR = new Creator<ConfiguracionEjercicio>() {
@@ -53,11 +52,11 @@ public class ConfiguracionEjercicio implements Parcelable {
         this.id = id;
     }
 
-    public Ejercicio getEjercicio() {
+    public String getEjercicio() {
         return ejercicio;
     }
 
-    public void setEjercicio(Ejercicio ejercicio) {
+    public void setEjercicio(String ejercicio) {
         this.ejercicio = ejercicio;
     }
 
@@ -77,13 +76,7 @@ public class ConfiguracionEjercicio implements Parcelable {
         this.repeticiones = repeticiones;
     }
 
-    public String getTiempo() {
-        return tiempo;
-    }
 
-    public void setTiempo(String tiempo) {
-        this.tiempo = tiempo;
-    }
 
     @Override
     public String toString() {
@@ -92,7 +85,6 @@ public class ConfiguracionEjercicio implements Parcelable {
                 ", ejercicio=" + ejercicio +
                 ", series=" + series +
                 ", repeticiones=" + repeticiones +
-                ", tiempo='" + tiempo + '\'' +
                 '}';
     }
 
@@ -101,12 +93,12 @@ public class ConfiguracionEjercicio implements Parcelable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ConfiguracionEjercicio that = (ConfiguracionEjercicio) o;
-        return series == that.series && repeticiones == that.repeticiones && Objects.equals(id, that.id) && Objects.equals(ejercicio, that.ejercicio) && Objects.equals(tiempo, that.tiempo);
+        return series == that.series && repeticiones == that.repeticiones && Objects.equals(id, that.id) && Objects.equals(ejercicio, that.ejercicio);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, ejercicio, series, repeticiones, tiempo);
+        return Objects.hash(id, ejercicio, series, repeticiones);
     }
 
     @Override
@@ -119,6 +111,6 @@ public class ConfiguracionEjercicio implements Parcelable {
         dest.writeInt(id);
         dest.writeInt(series);
         dest.writeInt(repeticiones);
-        dest.writeString(tiempo);
+
     }
 }

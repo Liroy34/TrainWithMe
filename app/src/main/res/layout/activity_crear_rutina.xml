@@ -46,10 +46,11 @@
             android:paddingBottom="5dp"/>
 
         <EditText
-            android:id="@+id/etNombreRutina"
+            android:id="@+id/etNombreRutinaCrear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:padding="5dp"
             android:layout_marginBottom="15dp"/>
 
@@ -62,13 +63,14 @@
             android:paddingBottom="5dp"/>
 
         <EditText
-            android:id="@+id/etDescripcionRutina"
+            android:id="@+id/etDescripcionRutinaCrear"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@android:color/white"
             android:padding="5dp"
             android:layout_marginBottom="15dp"
             android:gravity="top"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:inputType="textMultiLine"/>
 
         <!-- Botón Elegir Ejercicios -->
@@ -93,7 +95,7 @@
                 android:padding="5dp"
                 android:layout_marginBottom="5dp">
 
-                <TextView
+                <EditText
                     android:id="@+id/txtEj1"
                     android:layout_width="317dp"
                     android:layout_height="wrap_content"
@@ -102,11 +104,21 @@
                     android:textColor="#888888"
                     android:textSize="16sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/txtTS1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="series"
+                    android:digits="0123456789"
+                    android:textColor="#888888"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/txtTR1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="repes"
+                    android:digits="0123456789"
                     android:textColor="#888888"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -123,7 +135,7 @@
                 android:padding="5dp"
                 android:layout_marginBottom="5dp">
 
-                <TextView
+                <EditText
                     android:id="@+id/txtEj2"
                     android:layout_width="317dp"
                     android:layout_height="wrap_content"
@@ -132,12 +144,22 @@
                     android:textColor="#888888"
                     android:textSize="16sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/txtTS2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="series"
                     android:textColor="#888888"
+                    android:digits="0123456789"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/txtTR2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="repes"
+                    android:textColor="#888888"
+                    android:digits="0123456789"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -153,7 +175,7 @@
                 android:padding="5dp"
                 android:layout_marginBottom="5dp">
 
-                <TextView
+                <EditText
                     android:id="@+id/txtEj3"
                     android:layout_width="317dp"
                     android:layout_height="wrap_content"
@@ -162,12 +184,22 @@
                     android:textColor="#888888"
                     android:textSize="16sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/txtTS3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="series"
                     android:textColor="#888888"
+                    android:digits="0123456789"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/txtTR3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="repes"
+                    android:textColor="#888888"
+                    android:digits="0123456789"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -183,7 +215,7 @@
                 android:padding="5dp"
                 android:layout_marginBottom="5dp">
 
-                <TextView
+                <EditText
                     android:id="@+id/txtEj4"
                     android:layout_width="317dp"
                     android:layout_height="wrap_content"
@@ -192,12 +224,22 @@
                     android:textColor="#888888"
                     android:textSize="16sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/txtTS4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="series"
                     android:textColor="#888888"
+                    android:digits="0123456789"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/txtTR4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="repes"
+                    android:textColor="#888888"
+                    android:digits="0123456789"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -213,7 +255,7 @@
                 android:padding="5dp"
                 android:layout_marginBottom="5dp">
 
-                <TextView
+                <EditText
                     android:id="@+id/txtEj5"
                     android:layout_width="317dp"
                     android:layout_height="wrap_content"
@@ -222,12 +264,22 @@
                     android:textColor="#888888"
                     android:textSize="16sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/txtTS5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="series"
                     android:textColor="#888888"
+                    android:digits="0123456789"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/txtTR5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="repes"
+                    android:textColor="#888888"
+                    android:digits="0123456789"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -243,7 +295,7 @@
                 android:padding="5dp"
                 android:layout_marginBottom="5dp">
 
-                <TextView
+                <EditText
                     android:id="@+id/txtEj6"
                     android:layout_width="317dp"
                     android:layout_height="wrap_content"
@@ -252,12 +304,22 @@
                     android:textColor="#888888"
                     android:textSize="16sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/txtTS6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="series"
                     android:textColor="#888888"
+                    android:digits="0123456789"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/txtTR6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="repes"
+                    android:textColor="#888888"
+                    android:digits="0123456789"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -274,7 +336,7 @@
                 android:padding="5dp"
                 android:layout_marginBottom="5dp">
 
-                <TextView
+                <EditText
                     android:id="@+id/txtEj7"
                     android:layout_width="317dp"
                     android:layout_height="wrap_content"
@@ -283,12 +345,22 @@
                     android:textColor="#888888"
                     android:textSize="16sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/txtTS7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="series"
                     android:textColor="#888888"
+                    android:digits="0123456789"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/txtTR7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="repes"
+                    android:textColor="#888888"
+                    android:digits="0123456789"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -304,7 +376,7 @@
                 android:padding="5dp"
                 android:layout_marginBottom="5dp">
 
-                <TextView
+                <EditText
                     android:id="@+id/txtEj8"
                     android:layout_width="317dp"
                     android:layout_height="wrap_content"
@@ -313,12 +385,22 @@
                     android:textColor="#888888"
                     android:textSize="16sp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/txtTS8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="series"
                     android:textColor="#888888"
+                    android:digits="0123456789"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/txtTR8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="repes"
+                    android:textColor="#888888"
+                    android:digits="0123456789"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -338,11 +420,12 @@
             android:paddingBottom="5dp"/>
 
         <EditText
-            android:id="@+id/etFrecuencia"
+            android:id="@+id/etFrecuenciaCrear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
             android:padding="5dp"
+            android:digits="0123456789"
             android:layout_marginBottom="10dp"/>
 
         <!-- Botón Crear Rutina -->
