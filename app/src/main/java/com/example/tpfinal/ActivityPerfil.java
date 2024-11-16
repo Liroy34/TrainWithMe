@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,20 +21,29 @@ import com.example.tpfinal.Entidades.Usuario;
 
 public class ActivityPerfil extends AppCompatActivity {
 
-    private TextView tvNombre, tvApellido, tvEmail, tvGenero;
+    private EditText tvNombre, tvApellido, tvEmail;
+    private Spinner generos;
     private Button btnEditarPerfil, btnDarDeBaja;
     private ImageButton btnVolverMiPerfil;
     private int idUsuario;
+    private ConexionUsuario conUsuario;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
 
+        conUsuario = new ConexionUsuario(ActivityPerfil.this);
+
+        generos = findViewById(R.id.spinnerGeneroEditarPerfil);
+        String[] opciones = {"Masculino", "Femenino", "Otro"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, opciones);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        generos.setAdapter(adapter);
+
         tvNombre = findViewById(R.id.tvNombre);
         tvApellido = findViewById(R.id.tvApellido);
         tvEmail = findViewById(R.id.tvEmail);
-        tvGenero = findViewById(R.id.tvGenero);
         btnEditarPerfil = findViewById(R.id.btnEditarPerfil);
         btnDarDeBaja = findViewById(R.id.btnDarDeBaja);
         btnVolverMiPerfil = findViewById(R.id.btnVolverMiPerfil);
@@ -48,8 +60,8 @@ public class ActivityPerfil extends AppCompatActivity {
 
         btnVolverMiPerfil.setOnClickListener(v -> {
             Intent intent = new Intent(ActivityPerfil.this, ActivityPaginaInicio.class); // Asegúrate de que PaginaPrincipal es el nombre correcto
+            intent.putExtra("idUsuario", idUsuario );
             startActivity(intent);
-            finish();
         });
 
         cargarDatosUsuario();
@@ -61,17 +73,31 @@ public class ActivityPerfil extends AppCompatActivity {
             editarPerfil();
         });
 
-        btnDarDeBaja.setOnClickListener(v -> {
-            Toast.makeText(ActivityPerfil.this, "Funcionalidad para dar de baja pendiente de implementación", Toast.LENGTH_SHORT).show();
-        });
     }
 
     private void cargarDatosUsuario() {
 
-        tvNombre.setText("Juan");
-        tvApellido.setText("Pérez");
-        tvEmail.setText("juan.perez@example.com");
-        tvGenero.setText("Masculino");
+        conUsuario.traerUsuario(idUsuario, usuario -> {
+            if(usuario!= null){
+                tvNombre.setText(usuario.getNombre());
+                tvApellido.setText(usuario.getApellido());
+                tvEmail.setText(usuario.getMail());
+                setSpinnerSelection(generos, usuario.getGenero());
+            }
+        });
+
+    }
+
+    private void setSpinnerSelection(Spinner spinner, String value) {
+        ArrayAdapter<String> adapter = (ArrayAdapter<String>) spinner.getAdapter();
+        for (int position = 0; position < adapter.getCount(); position++) {
+            if(adapter.getItem(position).equals(value)) {
+                spinner.setSelection(position);
+                return;
+            }
+        }
+        // Opcional: Añadir un log o alguna acción si el valor no está en el spinner
+        Log.e("ActivityPerfil", "Valor '" + value + "' no encontrado en el spinner.");
     }
 
     private void editarPerfil() {
@@ -79,7 +105,7 @@ public class ActivityPerfil extends AppCompatActivity {
         String nombre = tvNombre.getText().toString();
         String apellido = tvApellido.getText().toString();
         String email = tvEmail.getText().toString();
-        String genero = tvGenero.getText().toString();
+        String genero = generos.getSelectedItem().toString();
 
         Usuario usuario = new Usuario();
         usuario.setId(idUsuario);
@@ -91,7 +117,9 @@ public class ActivityPerfil extends AppCompatActivity {
         ConexionUsuario conexionUsuario = new ConexionUsuario(this);
         conexionUsuario.updateUsuario(usuario);
 
-        Toast.makeText(this, "Datos guardados correctamente (pendiente conexión BD)", Toast.LENGTH_SHORT).show();
+
+        finish();
+        Toast.makeText(this, "Datos guardados correctamente", Toast.LENGTH_SHORT).show();
     }
 
     private void configurarBotonDarDeBaja() {
@@ -117,5 +145,8 @@ public class ActivityPerfil extends AppCompatActivity {
         // Implementar la lógica para dar de baja al usuario
         ConexionUsuario conexionUsuario = new ConexionUsuario(this);
         conexionUsuario.deleteUsuario(idUsuario); // Asegúrate de tener este método en tu clase de conexión
+
+        Intent intent = new Intent(ActivityPerfil.this, MainActivity.class); // Asegúrate de que PaginaPrincipal es el nombre correcto
+        startActivity(intent);
     }
 }

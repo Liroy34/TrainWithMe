@@ -28,8 +28,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent intentAnterior = getIntent();
-        int idUsuario = intentAnterior.getIntExtra("idUsuario", -1);
+        conUsuario = new ConexionUsuario(MainActivity.this);
 
         nombreUsuario = findViewById(R.id.etUsuarioMain);
         password = findViewById(R.id.etPasswordMain);
@@ -43,14 +42,20 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
             }
             else{
-                String usuario =nombreUsuario.toString();
-                String pass = password.toString();
+                String usuario =nombreUsuario.getText().toString();
+                String pass = password.getText().toString();
                 conUsuario.iniciarSesion(usuario, pass, new ConexionUsuario.IniciarSesionCallback() {
                     @Override
                     public void onIniciarSesion(boolean autenticado, int idUsuario) {
-                        Intent intent = new Intent(MainActivity.this, ActivityPaginaInicio.class);
-                        intent.putExtra("idUsuario", idUsuario );
-                        startActivity(intent);
+                        if(autenticado){
+                            Intent intent = new Intent(MainActivity.this, ActivityPaginaInicio.class);
+                            intent.putExtra("idUsuario", idUsuario );
+                            startActivity(intent);
+                        }else {
+                            Toast.makeText(MainActivity.this, "Error al iniciar sesion", Toast.LENGTH_SHORT).show();
+
+                        }
+
                     }
                 });
             }

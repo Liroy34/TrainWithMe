@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.tpfinal.Entidades.Usuario;
@@ -35,7 +36,7 @@ public class ConexionUsuario {
                 Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
 
 
-                String sql = ("SELECT * FROM usuarios WHERE nombre_usuario = ? AND password = ?");
+                String sql = ("SELECT * FROM Usuarios WHERE NombreUsuario = ? AND Contrasena = ?");
                 PreparedStatement preparedStatement = con.prepareStatement(sql);
                 preparedStatement.setString(1, nombreUsuario);
                 preparedStatement.setString(2, password);
@@ -113,16 +114,13 @@ public class ConexionUsuario {
                     Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
 
                     // MODIFICAR ESTO PARA USUARIO
-                    String sql = ("UPDATE Usuarios SET nombrepassword = ?, apellidopassword = ?, generopassword = ?, mailpassword = ?, celpassword = ?, nombre_usuariopassword = ?, password = ? WHERE ID = ?");
+                    String sql = ("UPDATE Usuarios SET Nombre = ?, Apellido = ?, Genero = ?, Email = ? WHERE ID = ?");
                     PreparedStatement preparedStatement = con.prepareStatement(sql);
                     preparedStatement.setString(1, usuario.getNombre());
                     preparedStatement.setString(2, usuario.getApellido());
                     preparedStatement.setString(3, usuario.getGenero());
                     preparedStatement.setString(4, usuario.getMail());
-                    preparedStatement.setString(5, usuario.getCel());
-                    preparedStatement.setString(6, usuario.getNombreUsuario());
-                    preparedStatement.setString(7, usuario.getPassword());
-                    preparedStatement.setInt(8, usuario.getId());
+                    preparedStatement.setInt(5, usuario.getId());
 
                     int rowsAffected = preparedStatement.executeUpdate();
 
@@ -160,7 +158,7 @@ public class ConexionUsuario {
                         Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
 
                         // MODIFICAR ESTO PARA USUARIO
-                        String sql = ("INSERT INTO usuarios (nombre, apellido, genero, mail, cel, nombre_usuario, password) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                        String sql = ("INSERT INTO Usuarios (Nombre, Apellido, Genero, Email, Celular, NombreUsuario, Contrasena) VALUES (?, ?, ?, ?, ?, ?, ?)");
                         PreparedStatement preparedStatement = con.prepareStatement(sql);
                         preparedStatement.setString(1, usuario.getNombre());
                         preparedStatement.setString(2, usuario.getApellido());
@@ -184,6 +182,7 @@ public class ConexionUsuario {
                         });
 
                     } catch (Exception e) {
+                        Log.e("ActivityRegistrarse", "Error al insertar usuario", e);
                         e.printStackTrace();
                     }
                 });
@@ -200,7 +199,7 @@ public class ConexionUsuario {
                 Class.forName(DataBD.driver);
                 Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
 
-                String query = ("Select * FROM Usuarios WHERE mail = ?");
+                String query = ("Select * FROM Usuarios WHERE Email = ?");
                 PreparedStatement ps = con.prepareStatement(query);
                 ps.setString(1, mail);
 
@@ -208,7 +207,7 @@ public class ConexionUsuario {
 
                 if (rs.next()) {
                     usuario = new Usuario();
-                    usuario.setPassword(rs.getString("Password"));
+                    usuario.setPassword(rs.getString("Contrasena"));
 
                 }
 
@@ -252,6 +251,45 @@ public class ConexionUsuario {
             boolean finalExiste = existe;
             new Handler(Looper.getMainLooper()).post(() -> {
                 callback.onUsuarioExistente(finalExiste);
+            });
+        });
+    }
+
+    public void traerUsuario (int idUsuario, UsuarioCallback usuarioCallback){
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+
+
+        executor.execute(() -> {
+            boolean existe = false;
+            Usuario usuario = new Usuario();
+
+            try {
+                Class.forName(DataBD.driver);
+                Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
+                String sql = ("SELECT * FROM Usuarios WHERE ID = ?");
+                PreparedStatement preparedStatement = con.prepareStatement(sql);
+                preparedStatement.setInt(1, idUsuario);
+                ResultSet rs = preparedStatement.executeQuery();
+
+                if (rs.next()) {
+
+                    usuario.setId(rs.getInt("ID"));
+                    usuario.setNombre(rs.getString("Nombre"));
+                    usuario.setApellido(rs.getString("Apellido"));
+                    usuario.setMail(rs.getString("Email"));
+                    usuario.setGenero(rs.getString("Genero"));
+                }
+
+                rs.close();
+                preparedStatement.close();
+                con.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            Usuario usuarioFinal = usuario;
+            new android.os.Handler(android.os.Looper.getMainLooper()).post(() -> {
+                usuarioCallback.onUsuarioReceived(usuarioFinal);
             });
         });
     }

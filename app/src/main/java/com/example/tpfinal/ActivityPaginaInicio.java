@@ -52,17 +52,18 @@ public class ActivityPaginaInicio extends AppCompatActivity {
 
         });
 
-        btnEntrenamientos.setOnClickListener(v -> { //agregar logica para cargar los datos en ver perfil
-
-            Intent intent = new Intent(ActivityPaginaInicio.this, ActivityEntrenamientos.class);
-            intent.putExtra("idUsuario", idUsuario);
-            startActivity(intent);
-
-        });
+//        btnEntrenamientos.setOnClickListener(v -> { //agregar logica para cargar los datos en ver perfil
+//
+//            Intent intent = new Intent(ActivityPaginaInicio.this, ActivityEntrenamientos.class);
+//            intent.putExtra("idUsuario", idUsuario);
+//            startActivity(intent);
+//
+//        });
 
         btnCerrarSesion.setOnClickListener(v -> {
 
-            finish();
+            Intent intent = new Intent(ActivityPaginaInicio.this, MainActivity.class);
+            startActivity(intent);
 
         });
 

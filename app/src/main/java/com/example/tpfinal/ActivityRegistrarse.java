@@ -25,6 +25,8 @@ public class ActivityRegistrarse extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrar);
 
+        conUsuario = new ConexionUsuario(ActivityRegistrarse.this);
+
         generos = findViewById(R.id.spinnerGeneroRegistrarse);
         String[] opciones = {"Masculino", "Femenino", "Otro"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, opciones);
@@ -46,7 +48,7 @@ public class ActivityRegistrarse extends AppCompatActivity{
                 Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
             }
             else{
-                if(!isValidEmail(mail.toString())){
+                if(!isValidEmail(mail.getText().toString())){
                     Toast.makeText(this, "Formato de mail incorrecto", Toast.LENGTH_SHORT).show();
                 }
                 else {
@@ -62,6 +64,8 @@ public class ActivityRegistrarse extends AppCompatActivity{
                     Usuario usuario = new Usuario(nombreString, apellidoString, generoString, mailString, celString, usuarioString, passwordString);
 
                     conUsuario.insertUsuario(usuario);
+
+                    finish();
                 }
 
             }
@@ -72,7 +76,7 @@ public class ActivityRegistrarse extends AppCompatActivity{
     }
 
     private boolean isValidEmail(String email) {
-        String emailPattern = "^[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+$";
+        String emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
         return email.matches(emailPattern);
     }
 

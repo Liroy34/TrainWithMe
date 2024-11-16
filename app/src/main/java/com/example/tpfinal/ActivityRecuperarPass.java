@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,28 +18,40 @@ public class ActivityRecuperarPass extends AppCompatActivity {
     private EditText mail;
     private Button btnRecuperarPass;
     private ConexionUsuario conUsuario;
-
+    private ImageButton btnVolverRecuperarPass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recuperar_con);
 
+        conUsuario = new ConexionUsuario(ActivityRecuperarPass.this);
+
         mail = findViewById(R.id.etEmailRecuperar);
         btnRecuperarPass = findViewById(R.id.btnRecuperarContrasena);
+        btnVolverRecuperarPass = findViewById(R.id.btnVolverRecuperarPass);
 
+        btnVolverRecuperarPass.setOnClickListener(v -> {
+          finish();
+        });
         btnRecuperarPass.setOnClickListener(v -> {
 
-            if(!isValidEmail(mail.toString())) {
+            if(!isValidEmail(mail.getText().toString())) {
                 Toast.makeText(this, "Formato de mail incorrecto", Toast.LENGTH_SHORT).show();
             }
             else{
 
-                conUsuario.fetchRecuperarPass(mail.toString(), new ConexionUsuario.UsuarioCallback() {
+                conUsuario.fetchRecuperarPass(mail.getText().toString(), new ConexionUsuario.UsuarioCallback() {
 
                     @Override
                     public void onUsuarioReceived(Usuario usuario) {
 
-                        enviarCorreoConPassword(mail.toString(), usuario.getPassword());
+                        if(usuario != null){
+                            enviarCorreoConPassword(mail.getText().toString(), usuario.getPassword());
+
+                        }else{
+                            Toast.makeText(ActivityRecuperarPass.this, "El usuario no existe", Toast.LENGTH_SHORT).show();
+
+                        }
 
                     }
                 });
@@ -64,7 +77,7 @@ public class ActivityRecuperarPass extends AppCompatActivity {
 
 
     private boolean isValidEmail(String email) {
-        String emailPattern = "^[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+$";
+        String emailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
         return email.matches(emailPattern);
     }
 }
