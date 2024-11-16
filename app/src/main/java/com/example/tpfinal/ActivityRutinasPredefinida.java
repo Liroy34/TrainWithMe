@@ -30,19 +30,19 @@ public class ActivityRutinasPredefinida extends AppCompatActivity {
 
         btnPrincipiante.setOnClickListener(v -> {
             Intent intent = new Intent(ActivityRutinasPredefinida.this, ActivityRutinasPredefinidaSeleccionada.class);
-            intent.putExtra("tipo", "principiante");
+            intent.putExtra("tipo", "Principiante");
             ActivityRutinasPredefinida.this.startActivity(intent);
         });
 
         btnMedio.setOnClickListener(v -> {
             Intent intent = new Intent(ActivityRutinasPredefinida.this, ActivityRutinasPredefinidaSeleccionada.class);
-            intent.putExtra("tipo", "medio");
+            intent.putExtra("tipo", "Medio");
             ActivityRutinasPredefinida.this.startActivity(intent);
         });
 
         btnAvanzado.setOnClickListener(v -> {
             Intent intent = new Intent(ActivityRutinasPredefinida.this, ActivityRutinasPredefinidaSeleccionada.class);
-            intent.putExtra("tipo", "avanzado");
+            intent.putExtra("tipo", "Avanzado");
             ActivityRutinasPredefinida.this.startActivity(intent);
         });
 
