@@ -25,6 +25,7 @@ public class ActivityRutinasPropias extends AppCompatActivity {
     public ListView lvRutinas;
     public List<Rutina> rutinasList = new ArrayList<>();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +36,6 @@ public class ActivityRutinasPropias extends AppCompatActivity {
 
         Intent intentAnterior = getIntent();
         int id = intentAnterior.getIntExtra("idUsuario",-1);
-
-
 
         lvRutinas = findViewById(R.id.rutinasList);
 
@@ -52,6 +51,7 @@ public class ActivityRutinasPropias extends AppCompatActivity {
 
                 Intent intent = new Intent(ActivityRutinasPropias.this, ActivityRutinaSeleccionada.class);
                 intent.putExtra("idRutina", selectedRutina.getId());
+                intent.putExtra("idUsuario", id);
                 startActivity(intent);
             }
         });
@@ -61,6 +61,7 @@ public class ActivityRutinasPropias extends AppCompatActivity {
         btnCrearRutinaPropia.setOnClickListener(v -> {
 
             Intent intent = new Intent(ActivityRutinasPropias.this, ActivityCrearRutina.class);
+            intent.putExtra("idUsuario",id );
             ActivityRutinasPropias.this.startActivity(intent);
 
         });
@@ -73,4 +74,12 @@ public class ActivityRutinasPropias extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Intent intentAnterior = getIntent();
+        int id = intentAnterior.getIntExtra("idUsuario",-1);
+        conRutinas.getRutinasPropias(id);
+
+    }
 }

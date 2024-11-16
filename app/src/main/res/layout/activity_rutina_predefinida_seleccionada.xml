@@ -56,9 +56,8 @@
         <ListView
             android:id="@+id/ejerciciosRutinaPredefinidaSeleccionadaList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/custom_edittext"/>
-
+            android:layout_height="584dp"
+            android:background="@drawable/custom_edittext" />
 
     </LinearLayout>
 </ScrollView>

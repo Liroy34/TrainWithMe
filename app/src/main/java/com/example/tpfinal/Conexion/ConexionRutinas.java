@@ -3,6 +3,7 @@ package com.example.tpfinal.Conexion;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -124,8 +125,89 @@ public class ConexionRutinas {
         });
     }
 
+//    public void insertRutina(RutinaCargaDatos rutina, int userId) {
+//        ExecutorService executor = Executors.newSingleThreadExecutor();
+//        executor.execute(() -> {
+//            try {
+//                Class.forName(DataBD.driver);
+//                Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
+//
+//                // Insertar la rutina en la tabla Rutinas
+//                String sqlRutina = "INSERT INTO Rutinas (Nombre, Descripcion, Tipo) VALUES (?, ?, ?)";
+//                PreparedStatement psRutina = con.prepareStatement(sqlRutina, Statement.RETURN_GENERATED_KEYS);
+//                psRutina.setString(1, rutina.getNombre());
+//                psRutina.setString(2, rutina.getDescripcion());
+//                psRutina.setString(3, "Propia");
+//
+//                int rowsAffectedRutina = psRutina.executeUpdate();
+//
+//                if (rowsAffectedRutina > 0) {
+//                    // Obtener el ID autogenerado de la rutina insertada
+//                    ResultSet generatedKeys = psRutina.getGeneratedKeys();
+//                    if (generatedKeys.next()) {
+//                        int rutinaId = generatedKeys.getInt("ID");
+//
+//                        // Guardar la relación entre el usuario y la rutina en RutinaXUsuario
+//                        String sqlRutinaXUsuario = "INSERT INTO RutinaXUsuario (ID_Usuario, ID_Rutina) VALUES (?, ?)";
+//                        PreparedStatement psRutinaXUsuario = con.prepareStatement(sqlRutinaXUsuario);
+//                        psRutinaXUsuario.setInt(1, userId);
+//                        psRutinaXUsuario.setInt(2, rutinaId);
+//                        psRutinaXUsuario.executeUpdate();
+//                        psRutinaXUsuario.close();
+//
+//                        // Insertar cada ConfiguracionEjercicio en ConfiguracionEjercicio y RutinaXEjercicio
+//                        for (ConfiguracionEjercicio ejercicio : rutina.getEjercicios()) {
+//                            // Insertar configuración de ejercicio en ConfiguracionEjercicio
+//                            String sqlConfigEjercicio = "INSERT INTO ConfiguracionEjercicio (NombreEjercicio, Series, Repeticiones, Tiempo) VALUES (?, ?, ?, ?)";
+//                            PreparedStatement psConfigEjercicio = con.prepareStatement(sqlConfigEjercicio, Statement.RETURN_GENERATED_KEYS);
+//                            psConfigEjercicio.setString(1, ejercicio.getEjercicio());
+//                            psConfigEjercicio.setInt(2, ejercicio.getSeries());
+//                            psConfigEjercicio.setInt(3, ejercicio.getRepeticiones());
+//                            psConfigEjercicio.setString(4, "0");
+//
+//                            int rowsAffectedConfigEjercicio = psConfigEjercicio.executeUpdate();
+//
+//                            if (rowsAffectedConfigEjercicio > 0) {
+//                                ResultSet generatedKeysConfig = psConfigEjercicio.getGeneratedKeys();
+//                                if (generatedKeysConfig.next()) {
+//                                    int configEjercicioId = generatedKeysConfig.getInt("ID");
+//
+//                                    // Insertar la relación entre la rutina y la configuración de ejercicio en RutinaXEjercicio
+//                                    String sqlRutinaXEjercicio = "INSERT INTO RutinaXEjercicio (ID_Rutina, ID_ConfigEjercicio) VALUES (?, ?)";
+//                                    PreparedStatement psRutinaXEjercicio = con.prepareStatement(sqlRutinaXEjercicio);
+//                                    psRutinaXEjercicio.setInt(1, rutinaId);
+//                                    psRutinaXEjercicio.setInt(2, configEjercicioId);
+//                                    psRutinaXEjercicio.executeUpdate();
+//                                    psRutinaXEjercicio.close();
+//                                }
+//                                generatedKeysConfig.close();
+//                            }
+//                            psConfigEjercicio.close();
+//                        }
+//                    }
+//                    generatedKeys.close();
+//                }
+//
+//                psRutina.close();
+//                con.close();
+//
+//                new Handler(Looper.getMainLooper()).post(() -> {
+//                    if (rowsAffectedRutina > 0) {
+//                        Toast.makeText(context, "Rutina creada correctamente", Toast.LENGTH_SHORT).show();
+//                    } else {
+//                        Toast.makeText(context, "Error al crear la rutina", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        });
+//    }
 
-    public void insertRutina(RutinaCargaDatos rutina) {
+
+
+    public void insertRutina(RutinaCargaDatos rutina, int userId) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
             try {
@@ -147,10 +229,17 @@ public class ConexionRutinas {
                     if (generatedKeys.next()) {
                         int rutinaId = generatedKeys.getInt(1);
 
+                        String sqlRutinaXUsuario = "INSERT INTO RutinaXUsuario (ID_Usuario, ID_Rutina) VALUES (?, ?)";
+                        PreparedStatement psRutinaXUsuario = con.prepareStatement(sqlRutinaXUsuario);
+                        psRutinaXUsuario.setInt(1, userId);
+                        psRutinaXUsuario.setInt(2, rutinaId);
+                        psRutinaXUsuario.executeUpdate();
+                        psRutinaXUsuario.close();
+
                         // Insertar cada ConfiguracionEjercicio en la tabla ConfiguracionEjercicio y en la relación RutinaXEjercicio
                         for (ConfiguracionEjercicio ejercicio : rutina.getEjercicios()) {
                             // Insertar configuración de ejercicio en ConfiguracionEjercicio
-                            String sqlConfigEjercicio = "INSERT INTO ConfiguracionEjercicio (ID_Ejercicio, Series, Repeticiones, Tiempo) VALUES (?, ?, ?, ?)";
+                            String sqlConfigEjercicio = "INSERT INTO ConfiguracionEjercicio (NombreEjercicio, Series, Repeticiones, Tiempo) VALUES (?, ?, ?, ?)";
                             PreparedStatement psConfigEjercicio = con.prepareStatement(sqlConfigEjercicio, Statement.RETURN_GENERATED_KEYS);
                             psConfigEjercicio.setString(1, ejercicio.getEjercicio());
                             psConfigEjercicio.setInt(2, ejercicio.getSeries());
@@ -217,7 +306,7 @@ public class ConexionRutinas {
                 preparedStatement.setInt(1, idUsuario);
                 ResultSet rs = preparedStatement.executeQuery();
 
-                if (rs.next()) {
+                while (rs.next()) {
                     Rutina rutina = new Rutina();
 
                     rutina.setTipo(rs.getString("tipo"));
@@ -315,15 +404,15 @@ public class ConexionRutinas {
                 Class.forName(DataBD.driver);
                 Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
 
-                String sql = "SELECT ce.* FROM ConfiguracionEjercicio ce " +
-                        "JOIN RutinaXEjercicio rxe ON ce.ID = rxe.ID_ConfigEjercicio " +
-                        "JOIN Rutinas r ON rxe.ID_Rutina = r.ID WHERE r.Tipo = ?";
+                String sql = "SELECT ce.* FROM ConfiguracionEjercicio ce JOIN RutinaXEjercicio rxe ON ce.ID = rxe.ID_ConfigEjercicio JOIN Rutinas r ON rxe.ID_Rutina = r.ID WHERE r.Tipo = ?";
 
                 PreparedStatement preparedStatement = con.prepareStatement(sql);
                 preparedStatement.setString(1, tipo);
                 ResultSet rs = preparedStatement.executeQuery();
 
-                if (rs.next()) {
+                Log.e("Resultado get", rs.toString());
+
+                while (rs.next()) {
                     ConfiguracionEjercicio configuracionEjercicio = new ConfiguracionEjercicio();
 
                     configuracionEjercicio.setId(rs.getInt("id"));
@@ -349,43 +438,83 @@ public class ConexionRutinas {
 
     }
 
-
     public void eliminarRutina(int idRutina) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
             boolean eliminado = false;
 
             try {
+                // Cargar el controlador y establecer la conexión con la base de datos
                 Class.forName(DataBD.driver);
                 Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
 
+                // 1. Eliminar las filas en RutinaXEjercicio donde ID_Rutina coincida
+                String deleteRutinaXEjercicio = "DELETE FROM RutinaXEjercicio WHERE ID_Rutina = ?";
+                PreparedStatement stmt2 = con.prepareStatement(deleteRutinaXEjercicio);
+                stmt2.setInt(1, idRutina);
+                int filasEliminadas2 = stmt2.executeUpdate();
 
-                String sql = "DELETE FROM Rutinas WHERE ID = ?";
-                PreparedStatement preparedStatement = con.prepareStatement(sql);
-                preparedStatement.setInt(1, idRutina);
-                int filasAfectadas = preparedStatement.executeUpdate();
+                // 2. Eliminar las filas en ConfiguracionEjercicio que dependen de los ID_ConfigEjercicio de RutinaXEjercicio
+                // Primero necesitamos obtener los ID_ConfigEjercicio relacionados con esta rutina.
+                String obtenerIDConfigEjercicio = "SELECT DISTINCT ID_ConfigEjercicio FROM RutinaXEjercicio WHERE ID_Rutina = ?";
+                PreparedStatement stmtObtenerConfigEjercicio = con.prepareStatement(obtenerIDConfigEjercicio);
+                stmtObtenerConfigEjercicio.setInt(1, idRutina);
+                ResultSet rs = stmtObtenerConfigEjercicio.executeQuery();
 
-                // Verificar si se eliminó alguna fila
-                eliminado = filasAfectadas > 0;
+                // Recolectamos los ID_ConfigEjercicio para eliminar los registros correspondientes de ConfiguracionEjercicio
+                List<Integer> idsConfigEjercicio = new ArrayList<>();
+                while (rs.next()) {
+                    idsConfigEjercicio.add(rs.getInt("ID_ConfigEjercicio"));
+                }
 
-                preparedStatement.close();
+                // Ahora, eliminamos los registros de ConfiguracionEjercicio con los ID_ConfigEjercicio obtenidos
+                if (!idsConfigEjercicio.isEmpty()) {
+                    String deleteConfiguracionEjercicio = "DELETE FROM ConfiguracionEjercicio WHERE ID_ConfigEjercicio = ?";
+                    PreparedStatement stmt1 = con.prepareStatement(deleteConfiguracionEjercicio);
+                    for (int idConfig : idsConfigEjercicio) {
+                        stmt1.setInt(1, idConfig);
+                        stmt1.addBatch();
+                    }
+                    stmt1.executeBatch();
+                    stmt1.close();
+                }
+
+                // 3. Eliminar las filas en RutinaXUsuario donde ID_Rutina coincida
+                String deleteRutinaXUsuario = "DELETE FROM RutinaXUsuario WHERE ID_Rutina = ?";
+                PreparedStatement stmt3 = con.prepareStatement(deleteRutinaXUsuario);
+                stmt3.setInt(1, idRutina);
+                int filasEliminadas3 = stmt3.executeUpdate();
+
+                // 4. Ahora, eliminamos la rutina en la tabla Rutinas
+                String deleteRutina = "DELETE FROM Rutinas WHERE ID = ?";
+                PreparedStatement stmt4 = con.prepareStatement(deleteRutina);
+                stmt4.setInt(1, idRutina);
+                int filasEliminadas4 = stmt4.executeUpdate();
+
+                // Verificar si se eliminaron filas en alguna de las tablas
+                eliminado = (filasEliminadas2 > 0 || filasEliminadas3 > 0 || filasEliminadas4 > 0);
+
+                // Cerrar las conexiones
+                stmtObtenerConfigEjercicio.close();
+                stmt2.close();
+                stmt3.close();
+                stmt4.close();
                 con.close();
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
+            // Notificar el resultado en el hilo principal
             boolean finalEliminado = eliminado;
             new android.os.Handler(android.os.Looper.getMainLooper()).post(() -> {
                 if (finalEliminado) {
                     Toast.makeText(context, "Rutina eliminada correctamente", Toast.LENGTH_SHORT).show();
-
                 } else {
                     Toast.makeText(context, "Error al eliminar la rutina", Toast.LENGTH_SHORT).show();
                 }
             });
         });
     }
-
-
 
 }

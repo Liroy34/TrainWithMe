@@ -57,8 +57,8 @@
         <ListView
             android:id="@+id/ejerciciosRutinaList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/custom_edittext"/>
+            android:layout_height="319dp"
+            android:background="@drawable/custom_edittext" />
 
         <!-- Botón de ver entrenamientos -->
         <Button

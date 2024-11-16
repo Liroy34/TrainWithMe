@@ -32,6 +32,10 @@ public class ActivityCrearRutina extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crear_rutina);
 
+        int idUsuario = getIntent().getIntExtra("idUsuario",-1);
+
+        conRutinas = new ConexionRutinas(ActivityCrearRutina.this);
+
         btnVolver = findViewById(R.id.btnVolverCrearRutina);
         btnCrear = findViewById(R.id.btnCrearRutina);
 
@@ -45,7 +49,7 @@ public class ActivityCrearRutina extends AppCompatActivity {
 
                 // hacer logica de carga a base de datos
                 RutinaCargaDatos rutina = crearRutina();
-                conRutinas.insertRutina(rutina);
+                conRutinas.insertRutina(rutina, idUsuario);
                 finish();
 
             }

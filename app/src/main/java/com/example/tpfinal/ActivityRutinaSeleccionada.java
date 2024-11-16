@@ -7,8 +7,10 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tpfinal.Adapters.ConfiguracionEjercicioAdapter;
@@ -20,7 +22,7 @@ import java.util.ArrayList;
 public class ActivityRutinaSeleccionada extends AppCompatActivity {
 
     public ListView lvEjerciciosRutina;
-    public ArrayList<ConfiguracionEjercicio> configuracionEjercicioList;
+    public ArrayList<ConfiguracionEjercicio> configuracionEjercicioList = new ArrayList<>();
     private ConfiguracionEjercicioAdapter adapter;
 
     private ImageButton btnVolverRutinaPropiaSeleccionada;
@@ -57,9 +59,11 @@ public class ActivityRutinaSeleccionada extends AppCompatActivity {
 
         btnEditarRutinaPropiaseleccionada.setOnClickListener(v -> {
 
-            Intent intent = new Intent(ActivityRutinaSeleccionada.this, ActivityEditarRutina.class);
-            intent.putExtra("idRutina", getIntent().getIntExtra("idRutina",-1));
-            ActivityRutinaSeleccionada.this.startActivity(intent);
+//            Intent intent = new Intent(ActivityRutinaSeleccionada.this, ActivityEditarRutina.class);
+//            intent.putExtra("idRutina", getIntent().getIntExtra("idRutina",-1));
+//            ActivityRutinaSeleccionada.this.startActivity(intent);
+
+            Toast.makeText(ActivityRutinaSeleccionada.this, "Editar rutina no implementada", Toast.LENGTH_SHORT).show();
 
         });
 
@@ -67,9 +71,22 @@ public class ActivityRutinaSeleccionada extends AppCompatActivity {
 
             conRutinas = new ConexionRutinas(ActivityRutinaSeleccionada.this);
 
-            conRutinas.eliminarRutina(getIntent().getIntExtra("idRutina" , -1));
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Confirmar acción");
+            builder.setMessage("¿Estás seguro de que deseas dar de baja esta rutina? Esta acción no se puede deshacer.");
 
-            finish();
+            builder.setPositiveButton("Sí, dar de baja", (dialog, which) -> {
+                conRutinas.eliminarRutina(getIntent().getIntExtra("idRutina" , -1));
+                finish();
+            });
+
+            builder.setNegativeButton("Cancelar", (dialog, which) -> {
+                dialog.dismiss(); // Cierra el modal sin realizar ninguna acción
+            });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
 
         });
     }
