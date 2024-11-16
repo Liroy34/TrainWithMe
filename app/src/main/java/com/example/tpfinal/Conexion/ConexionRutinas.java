@@ -55,7 +55,7 @@ public class ConexionRutinas {
                 Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
 
                 // Actualizar la información básica de la rutina en la tabla Rutinas
-                String sqlUpdateRutina = "UPDATE rutinas SET nombre = ?, descripcion = ?, tipo = ? WHERE id = ?";
+                String sqlUpdateRutina = "UPDATE Rutinas SET Nombre = ?, Descripcion = ?, Tipo = ? WHERE ID = ?";
                 PreparedStatement psUpdateRutina = con.prepareStatement(sqlUpdateRutina);
                 psUpdateRutina.setString(1, rutina.getNombre());
                 psUpdateRutina.setString(2, rutina.getDescripcion());
@@ -65,13 +65,13 @@ public class ConexionRutinas {
                 int rowsAffectedRutina = psUpdateRutina.executeUpdate();
 
                 // Eliminar las configuraciones de ejercicios previas asociadas a la rutina en ConfiguracionEjercicio y RutinaXEjercicio
-                String sqlDeleteRutinaXEjercicio = "DELETE FROM rutinaxejercicio WHERE id_rutina = ?";
+                String sqlDeleteRutinaXEjercicio = "DELETE FROM RutinaXEjercicio WHERE ID_Rutina = ?";
                 PreparedStatement psDeleteRutinaXEjercicio = con.prepareStatement(sqlDeleteRutinaXEjercicio);
                 psDeleteRutinaXEjercicio.setInt(1, rutinaId);
                 psDeleteRutinaXEjercicio.executeUpdate();
                 psDeleteRutinaXEjercicio.close();
 
-                String sqlDeleteConfigEjercicio = "DELETE FROM configuracionejercicio WHERE id IN (SELECT id_configejercicio FROM rutinaxejercicio WHERE id_rutina = ?)";
+                String sqlDeleteConfigEjercicio = "DELETE FROM ConfiguracionEjercicio WHERE ID IN (SELECT ID_ConfigEjercicio FROM RutinaXEjercicio WHERE ID_Rutina = ?)";
                 PreparedStatement psDeleteConfigEjercicio = con.prepareStatement(sqlDeleteConfigEjercicio);
                 psDeleteConfigEjercicio.setInt(1, rutinaId);
                 psDeleteConfigEjercicio.executeUpdate();
@@ -80,7 +80,7 @@ public class ConexionRutinas {
                 // Insertar las nuevas configuraciones de ejercicios en ConfiguracionEjercicio y en RutinaXEjercicio
                 for (ConfiguracionEjercicio ejercicio : rutina.getEjercicios()) {
                     // Insertar configuración de ejercicio en ConfiguracionEjercicio
-                    String sqlConfigEjercicio = "INSERT INTO configuracionejercicio (id_ejercicio, series, repeticiones) VALUES (?, ?, ?)";
+                    String sqlConfigEjercicio = "INSERT INTO ConfiguracionEjercicio (NombreEjercicio, Series, Repeticiones) VALUES (?, ?, ?)";
                     PreparedStatement psConfigEjercicio = con.prepareStatement(sqlConfigEjercicio, Statement.RETURN_GENERATED_KEYS);
                     psConfigEjercicio.setString(1, ejercicio.getEjercicio());
                     psConfigEjercicio.setInt(2, ejercicio.getSeries());
@@ -94,7 +94,7 @@ public class ConexionRutinas {
                             int configEjercicioId = generatedKeysConfig.getInt(1);
 
                             // Insertar la relación entre la rutina y la configuración de ejercicio en RutinaXEjercicio
-                            String sqlRutinaXEjercicio = "INSERT INTO rutinaxejercicio (id_rutina, id_configejercicio) VALUES (?, ?)";
+                            String sqlRutinaXEjercicio = "INSERT INTO RutinaXEjercicio (ID_Rutina, ID_ConfigEjercicio) VALUES (?, ?)";
                             PreparedStatement psRutinaXEjercicio = con.prepareStatement(sqlRutinaXEjercicio);
                             psRutinaXEjercicio.setInt(1, rutinaId);
                             psRutinaXEjercicio.setInt(2, configEjercicioId);
@@ -133,11 +133,11 @@ public class ConexionRutinas {
                 Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
 
                 // Insertar la rutina en la tabla Rutinas
-                String sqlRutina = "INSERT INTO rutinas (nombre, descripcion, tipo) VALUES (?, ?, ?)";
+                String sqlRutina = "INSERT INTO Rutinas (Nombre, Descripcion, Tipo) VALUES (?, ?, ?)";
                 PreparedStatement psRutina = con.prepareStatement(sqlRutina, Statement.RETURN_GENERATED_KEYS);
                 psRutina.setString(1, rutina.getNombre());
                 psRutina.setString(2, rutina.getDescripcion());
-                psRutina.setString(3, rutina.getFrecuencia());
+                psRutina.setString(3, "Propia");
 
                 int rowsAffectedRutina = psRutina.executeUpdate();
 
@@ -150,11 +150,12 @@ public class ConexionRutinas {
                         // Insertar cada ConfiguracionEjercicio en la tabla ConfiguracionEjercicio y en la relación RutinaXEjercicio
                         for (ConfiguracionEjercicio ejercicio : rutina.getEjercicios()) {
                             // Insertar configuración de ejercicio en ConfiguracionEjercicio
-                            String sqlConfigEjercicio = "INSERT INTO configuracionejercicio (id_ejercicio, series, repeticiones, tiempo) VALUES (?, ?, ?, ?)";
+                            String sqlConfigEjercicio = "INSERT INTO ConfiguracionEjercicio (ID_Ejercicio, Series, Repeticiones, Tiempo) VALUES (?, ?, ?, ?)";
                             PreparedStatement psConfigEjercicio = con.prepareStatement(sqlConfigEjercicio, Statement.RETURN_GENERATED_KEYS);
                             psConfigEjercicio.setString(1, ejercicio.getEjercicio());
                             psConfigEjercicio.setInt(2, ejercicio.getSeries());
                             psConfigEjercicio.setInt(3, ejercicio.getRepeticiones());
+                            psConfigEjercicio.setString(4, "0");
 
 
                             int rowsAffectedConfigEjercicio = psConfigEjercicio.executeUpdate();
@@ -165,7 +166,7 @@ public class ConexionRutinas {
                                     int configEjercicioId = generatedKeysConfig.getInt(1);
 
                                     // Insertar la relación entre la rutina y la configuración de ejercicio en RutinaXEjercicio
-                                    String sqlRutinaXEjercicio = "INSERT INTO rutinaxejercicio (id_rutina, id_configejercicio) VALUES (?, ?)";
+                                    String sqlRutinaXEjercicio = "INSERT INTO RutinaXEjercicio (ID_Rutina, ID_ConfigEjercicio) VALUES (?, ?)";
                                     PreparedStatement psRutinaXEjercicio = con.prepareStatement(sqlRutinaXEjercicio);
                                     psRutinaXEjercicio.setInt(1, rutinaId);
                                     psRutinaXEjercicio.setInt(2, configEjercicioId);
@@ -257,8 +258,7 @@ public class ConexionRutinas {
                 Class.forName(DataBD.driver);
                 Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
 
-                String sql = "SELECT ce.*, e.Nombre AS NombreEjercicio FROM ConfiguracionEjercicio ce " +
-                        "JOIN Ejercicios e ON ce.ID_Ejercicio = e.ID " +
+                String sql = "SELECT ce.* FROM ConfiguracionEjercicio ce " +
                         "JOIN RutinaXEjercicio rxe ON ce.ID = rxe.ID_ConfigEjercicio " +
                         "JOIN Rutinas r ON rxe.ID_Rutina = r.ID " +
                         "WHERE r.ID = ?";
@@ -315,8 +315,7 @@ public class ConexionRutinas {
                 Class.forName(DataBD.driver);
                 Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
 
-                String sql = "SELECT ce.*, e.Nombre AS NombreEjercicio FROM ConfiguracionEjercicio ce " +
-                        "JOIN Ejercicios e ON ce.ID_Ejercicio = e.ID " +
+                String sql = "SELECT ce.* FROM ConfiguracionEjercicio ce " +
                         "JOIN RutinaXEjercicio rxe ON ce.ID = rxe.ID_ConfigEjercicio " +
                         "JOIN Rutinas r ON rxe.ID_Rutina = r.ID WHERE r.Tipo = ?";
 
