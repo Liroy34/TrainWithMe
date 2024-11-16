@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,7 +18,7 @@ public class ActivityRutinasPredefinidaSeleccionada extends AppCompatActivity {
     private ConexionRutinas conRutinas;
     private ImageButton btnVolverRutinaPredefSelect;
     private ListView ejerciciosLV;
-    private Context context;
+    private TextView rutinaName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +29,13 @@ public class ActivityRutinasPredefinidaSeleccionada extends AppCompatActivity {
 
         Intent intentAnterior = getIntent();
         tipo = intentAnterior.getStringExtra("tipo");
+        rutinaName = findViewById(R.id.txtNombreRutinaPredefinidaSeleccionada);
+
 
         ejerciciosLV = findViewById(R.id.ejerciciosRutinaPredefinidaSeleccionadaList);
-        conRutinas = new ConexionRutinas(context, ejerciciosLV);
+
+        rutinaName.setText(tipo);
+        conRutinas = new ConexionRutinas(ActivityRutinasPredefinidaSeleccionada.this, ejerciciosLV);
         conRutinas.getEjerciciosConfiguracionPredefinidos(tipo);
 
         btnVolverRutinaPredefSelect.setOnClickListener(v -> {

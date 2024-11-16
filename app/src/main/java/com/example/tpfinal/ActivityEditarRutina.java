@@ -20,7 +20,6 @@ public class ActivityEditarRutina extends AppCompatActivity {
     private List<EditText> etEjerciciosEdit, etSeriesEdit, etRepeticionesEdit;
     private Button btnEditar;
     private ImageButton btnVolver;
-    private Context context;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {

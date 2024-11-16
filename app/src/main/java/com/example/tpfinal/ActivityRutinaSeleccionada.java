@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,8 +26,8 @@ public class ActivityRutinaSeleccionada extends AppCompatActivity {
     private ImageButton btnVolverRutinaPropiaSeleccionada;
     private Button btnEditarRutinaPropiaseleccionada;
     private Button btnBajaRutinaSeleccionada;
-    private Context context;
     private ConexionRutinas conRutinas;
+    private TextView nombreRutina;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +35,12 @@ public class ActivityRutinaSeleccionada extends AppCompatActivity {
         setContentView(R.layout.activity_rutina_seleccionada);
 
         int idRutina = getIntent().getIntExtra("idRutina", -1);
+        String rutinaname = getIntent().getStringExtra("nombreRutina");
 
+        nombreRutina = findViewById(R.id.txtNombreRutinaSeleccionada);
         lvEjerciciosRutina = findViewById(R.id.ejerciciosRutinaList);
+
+        nombreRutina.setText(rutinaname);
 
         conRutinas = new ConexionRutinas(ActivityRutinaSeleccionada.this, lvEjerciciosRutina);
         conRutinas.getEjerciciosConfiguracionPropios(idRutina);
@@ -52,15 +57,15 @@ public class ActivityRutinaSeleccionada extends AppCompatActivity {
 
         btnEditarRutinaPropiaseleccionada.setOnClickListener(v -> {
 
-            Intent intent = new Intent(context, ActivityEditarRutina.class);
+            Intent intent = new Intent(ActivityRutinaSeleccionada.this, ActivityEditarRutina.class);
             intent.putExtra("idRutina", getIntent().getIntExtra("idRutina",-1));
-            context.startActivity(intent);
+            ActivityRutinaSeleccionada.this.startActivity(intent);
 
         });
 
         btnBajaRutinaSeleccionada.setOnClickListener(v -> {
 
-            conRutinas = new ConexionRutinas(context);
+            conRutinas = new ConexionRutinas(ActivityRutinaSeleccionada.this);
 
             conRutinas.eliminarRutina(getIntent().getIntExtra("idRutina" , -1));
 

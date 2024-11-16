@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
     private Button btnRegistrar;
     private Button btnRecuperar;
     private ConexionUsuario conUsuario;
-    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

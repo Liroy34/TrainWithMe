@@ -1,6 +1,6 @@
 package com.example.tpfinal;
 
-import android.content.Context;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -16,7 +16,7 @@ public class ActivityRutinasPredefinida extends AppCompatActivity {
 
     private Button btnPrincipiante, btnMedio, btnAvanzado;
     private ImageButton btnVolverRutinaPredefinida;
-    private Context context;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,21 +29,21 @@ public class ActivityRutinasPredefinida extends AppCompatActivity {
         btnVolverRutinaPredefinida = findViewById(R.id.btnVolverRutinaPredefinida);
 
         btnPrincipiante.setOnClickListener(v -> {
-            Intent intent = new Intent(context, ActivityRutinasPredefinidaSeleccionada.class);
+            Intent intent = new Intent(ActivityRutinasPredefinida.this, ActivityRutinasPredefinidaSeleccionada.class);
             intent.putExtra("tipo", "principiante");
-            context.startActivity(intent);
+            ActivityRutinasPredefinida.this.startActivity(intent);
         });
 
         btnMedio.setOnClickListener(v -> {
-            Intent intent = new Intent(context, ActivityRutinasPredefinidaSeleccionada.class);
+            Intent intent = new Intent(ActivityRutinasPredefinida.this, ActivityRutinasPredefinidaSeleccionada.class);
             intent.putExtra("tipo", "medio");
-            context.startActivity(intent);
+            ActivityRutinasPredefinida.this.startActivity(intent);
         });
 
         btnAvanzado.setOnClickListener(v -> {
-            Intent intent = new Intent(context, ActivityRutinasPredefinidaSeleccionada.class);
+            Intent intent = new Intent(ActivityRutinasPredefinida.this, ActivityRutinasPredefinidaSeleccionada.class);
             intent.putExtra("tipo", "avanzado");
-            context.startActivity(intent);
+            ActivityRutinasPredefinida.this.startActivity(intent);
         });
 
 
