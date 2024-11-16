@@ -234,7 +234,7 @@ public class ConexionUsuario {
             try {
                 Class.forName(DataBD.driver);
                 Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
-                String sql = ("SELECT * FROM usuarios WHERE nombre_usuario = ?");
+                String sql = ("SELECT * FROM Usuarios WHERE NombreUsuario = ?");
                 PreparedStatement preparedStatement = con.prepareStatement(sql);
                 preparedStatement.setString(1, nombreUsuario);
                 ResultSet rs = preparedStatement.executeQuery();
