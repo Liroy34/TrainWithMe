@@ -30,6 +30,7 @@ public class ActivityRutinaSeleccionada extends AppCompatActivity {
     private Button btnBajaRutinaSeleccionada;
     private ConexionRutinas conRutinas;
     private TextView nombreRutina;
+    private TextView frecuenciaRutina;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +39,15 @@ public class ActivityRutinaSeleccionada extends AppCompatActivity {
 
         int idRutina = getIntent().getIntExtra("idRutina", -1);
         String rutinaname = getIntent().getStringExtra("nombreRutina");
-
+        int rutinaFrecuencia = getIntent().getIntExtra("rutinaFrecuencia", -1);
         nombreRutina = findViewById(R.id.txtNombreRutinaSeleccionada);
+        frecuenciaRutina = findViewById(R.id.txtFrecuenciaRutinaSeleccionada);
+
         lvEjerciciosRutina = findViewById(R.id.ejerciciosRutinaList);
 
         nombreRutina.setText(rutinaname);
+        frecuenciaRutina.setText("Frecuencia: " + rutinaFrecuencia);
+
 
         conRutinas = new ConexionRutinas(ActivityRutinaSeleccionada.this, lvEjerciciosRutina);
         conRutinas.getEjerciciosConfiguracionPropios(idRutina);

@@ -215,11 +215,12 @@ public class ConexionRutinas {
                 Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
 
                 // Insertar la rutina en la tabla Rutinas
-                String sqlRutina = "INSERT INTO Rutinas (Nombre, Descripcion, Tipo) VALUES (?, ?, ?)";
+                String sqlRutina = "INSERT INTO Rutinas (Nombre, Descripcion, Tipo, Frecuencia) VALUES (?, ?, ?, ?)";
                 PreparedStatement psRutina = con.prepareStatement(sqlRutina, Statement.RETURN_GENERATED_KEYS);
                 psRutina.setString(1, rutina.getNombre());
                 psRutina.setString(2, rutina.getDescripcion());
                 psRutina.setString(3, "Propia");
+                psRutina.setString(4, rutina.getFrecuencia());
 
                 int rowsAffectedRutina = psRutina.executeUpdate();
 
@@ -309,10 +310,11 @@ public class ConexionRutinas {
                 while (rs.next()) {
                     Rutina rutina = new Rutina();
 
-                    rutina.setTipo(rs.getString("tipo"));
-                    rutina.setDescripcion(rs.getString("descripcion"));
-                    rutina.setId(rs.getInt("id"));
-                    rutina.setNombre(rs.getString("nombre"));
+                    rutina.setTipo(rs.getString("Tipo"));
+                    rutina.setDescripcion(rs.getString("Descripcion"));
+                    rutina.setId(rs.getInt("ID"));
+                    rutina.setNombre(rs.getString("Nombre"));
+                    rutina.setFrecuencia(rs.getInt("Frecuencia"));
 
                     rutinaList.add(rutina);
                 }

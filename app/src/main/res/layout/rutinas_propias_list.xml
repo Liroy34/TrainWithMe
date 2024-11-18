@@ -13,16 +13,17 @@
         android:gravity="center_horizontal">
 
 
-        <TextView
+       <!-- <TextView
             android:id="@+id/tvRutinasPropiasEnListaID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="24sp" />
+            android:textSize="24sp" /> -->
         <TextView
             android:id="@+id/tvRutinasPropiasEnListaNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="24sp" />
+
     </LinearLayout>
 
 </LinearLayout>

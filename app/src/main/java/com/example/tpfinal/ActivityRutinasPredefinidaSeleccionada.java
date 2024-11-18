@@ -19,6 +19,7 @@ public class ActivityRutinasPredefinidaSeleccionada extends AppCompatActivity {
     private ImageButton btnVolverRutinaPredefSelect;
     private ListView ejerciciosLV;
     private TextView rutinaName;
+    private TextView rutinaFrecuancia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,9 @@ public class ActivityRutinasPredefinidaSeleccionada extends AppCompatActivity {
         Intent intentAnterior = getIntent();
         tipo = intentAnterior.getStringExtra("tipo");
         rutinaName = findViewById(R.id.txtNombreRutinaPredefinidaSeleccionada);
+        rutinaFrecuancia = findViewById(R.id.txtFrecuenciaRutinaPredefinidaSeleccionada);
+
+        rutinaFrecuancia.setText("Frecuencia: 3");
 
 
         ejerciciosLV = findViewById(R.id.ejerciciosRutinaPredefinidaSeleccionadaList);

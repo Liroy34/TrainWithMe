@@ -7,6 +7,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.tpfinal.ActivityRegistrarse;
 import com.example.tpfinal.Entidades.Usuario;
 import com.example.tpfinal.MainActivity;
 
@@ -143,14 +144,70 @@ public class ConexionUsuario {
         });
     }
 
+    public void insertUsuario(Usuario usuario) {
+        usuarioExiste(usuario.getNombreUsuario(), existeUsuario -> {
+            if (existeUsuario) {
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    Toast.makeText(context, "Nombre de usuario en uso", Toast.LENGTH_SHORT).show();
+                });
+            } else {
+                mailExiste(usuario.getMail(), existeCorreo -> {
+                    if (existeCorreo) {
+                        new Handler(Looper.getMainLooper()).post(() -> {
+                            Toast.makeText(context, "Email en uso", Toast.LENGTH_SHORT).show();
+                        });
+                    } else {
+                        ExecutorService executor = Executors.newSingleThreadExecutor();
+                        executor.execute(() -> {
+                            try {
+                                Class.forName(DataBD.driver);
+                                Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
 
+                                String sql = "INSERT INTO Usuarios (Nombre, Apellido, Genero, Email, Celular, NombreUsuario, Contrasena) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                                PreparedStatement preparedStatement = con.prepareStatement(sql);
+                                preparedStatement.setString(1, usuario.getNombre());
+                                preparedStatement.setString(2, usuario.getApellido());
+                                preparedStatement.setString(3, usuario.getGenero());
+                                preparedStatement.setString(4, usuario.getMail());
+                                preparedStatement.setString(5, usuario.getCel());
+                                preparedStatement.setString(6, usuario.getNombreUsuario());
+                                preparedStatement.setString(7, usuario.getPassword());
+
+                                int rowsAffected = preparedStatement.executeUpdate();
+
+                                preparedStatement.close();
+                                con.close();
+
+                                new Handler(Looper.getMainLooper()).post(() -> {
+                                    if (rowsAffected > 0) {
+                                        Toast.makeText(context, "Usuario creado correctamente", Toast.LENGTH_SHORT).show();
+                                        ((ActivityRegistrarse) context).finish();
+                                    } else {
+                                        Toast.makeText(context, "Error al crear el usuario", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+                            } catch (Exception e) {
+                                Log.e("ActivityRegistrarse", "Error al insertar usuario", e);
+                                e.printStackTrace();
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    /*
     public void insertUsuario(Usuario usuario) {
         usuarioExiste(usuario.getNombreUsuario(), existe -> {
             if (existe) {
                 new Handler(Looper.getMainLooper()).post(() -> {
                     Toast.makeText(context, "Nombre de usuario en uso", Toast.LENGTH_SHORT).show();
                 });
-            } else {
+            }
+            else {
+
                 ExecutorService executor = Executors.newSingleThreadExecutor();
                 executor.execute(() -> {
                     try {
@@ -189,7 +246,7 @@ public class ConexionUsuario {
             }
         });
     }
-
+*/
     public void fetchRecuperarPass(String mail, UsuarioCallback callback) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
@@ -237,6 +294,35 @@ public class ConexionUsuario {
                 String sql = ("SELECT * FROM Usuarios WHERE NombreUsuario = ?");
                 PreparedStatement preparedStatement = con.prepareStatement(sql);
                 preparedStatement.setString(1, nombreUsuario);
+                ResultSet rs = preparedStatement.executeQuery();
+
+                existe = rs.next();
+
+                rs.close();
+                preparedStatement.close();
+                con.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            boolean finalExiste = existe;
+            new Handler(Looper.getMainLooper()).post(() -> {
+                callback.onUsuarioExistente(finalExiste);
+            });
+        });
+    }
+
+    private void mailExiste(String mailUsuario, UsuarioExistenteCallback callback) {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
+            boolean existe = false;
+
+            try {
+                Class.forName(DataBD.driver);
+                Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
+                String sql = ("SELECT * FROM Usuarios WHERE Email = ?");
+                PreparedStatement preparedStatement = con.prepareStatement(sql);
+                preparedStatement.setString(1, mailUsuario);
                 ResultSet rs = preparedStatement.executeQuery();
 
                 existe = rs.next();

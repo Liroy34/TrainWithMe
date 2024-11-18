@@ -8,16 +8,18 @@ public class Rutina {
     private String nombre;
     private String descripcion;
     private String tipo;
+    private int frecuencia;
 
     public Rutina(){
 
     }
 
-    public Rutina(int id, String nombre, String descripcion, String tipo) {
+    public Rutina(int id, String nombre, String descripcion, String tipo, int frecuencia) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.tipo = tipo;
+        this.frecuencia = frecuencia;
     }
 
     public int getId() {
@@ -52,13 +54,22 @@ public class Rutina {
         this.tipo = tipo;
     }
 
+    public int getFrecuencia() {
+        return frecuencia;
+    }
+
+    public void setFrecuencia(int frecuencia) {
+        this.frecuencia = frecuencia;
+    }
+
     @Override
     public String toString() {
         return "Rutina{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", tipo='" + tipo + '\'' +
+                ", frecuencia='" + frecuencia + '\'' +
                 '}';
     }
 
@@ -67,11 +78,11 @@ public class Rutina {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Rutina rutina = (Rutina) o;
-        return Objects.equals(id, rutina.id) && Objects.equals(nombre, rutina.nombre) && Objects.equals(descripcion, rutina.descripcion) && Objects.equals(tipo, rutina.tipo);
+        return id == rutina.id && Objects.equals(nombre, rutina.nombre) && Objects.equals(descripcion, rutina.descripcion) && Objects.equals(tipo, rutina.tipo) && Objects.equals(frecuencia, rutina.frecuencia);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nombre, descripcion, tipo);
+        return Objects.hash(id, nombre, descripcion, tipo, frecuencia);
     }
 }

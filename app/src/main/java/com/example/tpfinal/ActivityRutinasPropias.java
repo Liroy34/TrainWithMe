@@ -52,6 +52,7 @@ public class ActivityRutinasPropias extends AppCompatActivity {
                 Intent intent = new Intent(ActivityRutinasPropias.this, ActivityRutinaSeleccionada.class);
                 intent.putExtra("idRutina", selectedRutina.getId());
                 intent.putExtra("idUsuario", id);
+                intent.putExtra("rutinaFrecuencia", selectedRutina.getFrecuencia());
                 startActivity(intent);
             }
         });

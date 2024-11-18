@@ -33,8 +33,8 @@ public class ConfiguracionEjercicioAdapter extends ArrayAdapter<ConfiguracionEje
 
         if (configuracionEjercicio != null) {
             nombreEjercicio.setText(configuracionEjercicio.getEjercicio());
-            series.setText("Ser: " + configuracionEjercicio.getSeries());
-            repes.setText("Reps: " + configuracionEjercicio.getRepeticiones());
+            series.setText(String.valueOf(configuracionEjercicio.getSeries()));
+            repes.setText(String.valueOf(configuracionEjercicio.getRepeticiones()));
 
         }
 

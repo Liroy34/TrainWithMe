@@ -31,10 +31,10 @@ public class RutinasAdapter extends ArrayAdapter<Rutina> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.rutinas_propias_list, parent, false);
         }
 
-        TextView txtId = convertView.findViewById(R.id.tvRutinasPropiasEnListaID);
+        //TextView txtId = convertView.findViewById(R.id.tvRutinasPropiasEnListaID);
         TextView txtNombre = convertView.findViewById(R.id.tvRutinasPropiasEnListaNombre);
 
-        txtId.setText(String.valueOf(getItem(position).getId()));
+        //txtId.setText(String.valueOf(getItem(position).getId()));
         txtNombre.setText(getItem(position).getNombre());
 
         return convertView;
