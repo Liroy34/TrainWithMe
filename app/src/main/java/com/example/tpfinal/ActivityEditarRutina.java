@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tpfinal.Conexion.ConexionRutinas;
 import com.example.tpfinal.Entidades.ConfiguracionEjercicio;
 import com.example.tpfinal.Entidades.RutinaCargaDatos;
 
@@ -20,18 +22,47 @@ public class ActivityEditarRutina extends AppCompatActivity {
     private List<EditText> etEjerciciosEdit, etSeriesEdit, etRepeticionesEdit;
     private Button btnEditar;
     private ImageButton btnVolver;
-    
+    int idRutina;
+    int frecuenciaRutina;
+    String nombreRutina;
+    String descripcionRutina;
+    List<ConfiguracionEjercicio> configEjerciciosList = new ArrayList<>();
+    private ConexionRutinas conRutinas;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_rutina);
 
-        int idRutina = getIntent().getIntExtra("idRutina", -1);
+        idRutina = getIntent().getIntExtra("idRutina", -1);
+        frecuenciaRutina = getIntent().getIntExtra("rutinaFrecuencia", -1);
+        nombreRutina = getIntent().getStringExtra("nombreRutina");
+        descripcionRutina = getIntent().getStringExtra("descripcionRutina");
+
+        configEjerciciosList = getIntent().getParcelableArrayListExtra("listaConfig");
+
+        conRutinas = new ConexionRutinas(ActivityEditarRutina.this);
 
         btnVolver = findViewById(R.id.btnVolverEditarRutina);
         btnEditar = findViewById(R.id.btnFinEditarRutina);
 
-        setElementos();
+        setElementos(); //modificar para que se carguen con los datos de la lista
+
+        loadElementos();
+
+        btnEditar.setOnClickListener(v -> {
+
+            if (!checkValues()) {
+                Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
+            } else {
+
+                RutinaCargaDatos rutina = crearRutina();
+                conRutinas.updateRutina(idRutina, rutina);
+                finish();
+
+            }
+        });
+
 
         btnVolver.setOnClickListener(v -> {
 
@@ -41,6 +72,21 @@ public class ActivityEditarRutina extends AppCompatActivity {
 
     }
 
+    private void loadElementos(){
+
+        etNombre.setText(nombreRutina);
+        etDescripcion.setText(descripcionRutina);
+        etFrecuencia.setText(String.valueOf(frecuenciaRutina));
+
+        for (int i = 0; i < configEjerciciosList.size(); i++) {
+            ConfiguracionEjercicio config = configEjerciciosList.get(i);
+
+            etEjerciciosEdit.get(i).setText(config.getEjercicio());
+            etSeriesEdit.get(i).setText(String.valueOf(config.getSeries()));
+            etRepeticionesEdit.get(i).setText(String.valueOf(config.getRepeticiones()));
+        }
+
+    }
 
     private void setElementos() {
 
@@ -48,7 +94,7 @@ public class ActivityEditarRutina extends AppCompatActivity {
         etDescripcion = findViewById(R.id.etDescripcionRutinaEditar);
         etFrecuencia = findViewById(R.id.etFrecuenciaEditar);
 
-        int[] ejerciciosIds = {R.id.txtEj1Editar, R.id.txtEj2Editar, R.id.txtEj3Editar, R.id.txtEj4, R.id.txtEj5Editar, R.id.txtEj6Editar, R.id.txtEj7Editar, R.id.txtEj8Editar};
+        int[] ejerciciosIds = {R.id.txtEj1Editar, R.id.txtEj2Editar, R.id.txtEj3Editar, R.id.txtEj4Editar, R.id.txtEj5Editar, R.id.txtEj6Editar, R.id.txtEj7Editar, R.id.txtEj8Editar};
         int[] seriesIds = {R.id.txtTS1Editar, R.id.txtTS2Editar, R.id.txtTS3Editar, R.id.txtTS4Editar, R.id.txtTS5Editar, R.id.txtTS6Editar, R.id.txtTS7Editar, R.id.txtTS8Editar};
         int[] repeticionesIds = {R.id.txtTR1Editar, R.id.txtTR2Editar, R.id.txtTR3Editar, R.id.txtTR4Editar, R.id.txtTR5Editar, R.id.txtTR6Editar, R.id.txtTR7Editar, R.id.txtTR8Editar};
 

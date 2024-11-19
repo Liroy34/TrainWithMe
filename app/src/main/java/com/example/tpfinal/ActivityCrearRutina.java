@@ -47,14 +47,11 @@ public class ActivityCrearRutina extends AppCompatActivity {
                 Toast.makeText(this, "Todos los campos son obligatorios", Toast.LENGTH_SHORT).show();
             } else {
 
-                // hacer logica de carga a base de datos
                 RutinaCargaDatos rutina = crearRutina();
                 conRutinas.insertRutina(rutina, idUsuario);
                 finish();
 
             }
-
-
         });
 
         btnVolver.setOnClickListener(v -> {

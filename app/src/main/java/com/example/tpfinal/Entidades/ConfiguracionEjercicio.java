@@ -27,6 +27,7 @@ public class ConfiguracionEjercicio implements Parcelable {
 
     protected ConfiguracionEjercicio(Parcel in) {
         id = in.readInt();
+        ejercicio = in.readString();
         series = in.readInt();
         repeticiones = in.readInt();
 
@@ -109,6 +110,7 @@ public class ConfiguracionEjercicio implements Parcelable {
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeInt(id);
+        dest.writeString(ejercicio);
         dest.writeInt(series);
         dest.writeInt(repeticiones);
 

@@ -38,8 +38,12 @@ public class ActivityRutinaSeleccionada extends AppCompatActivity {
         setContentView(R.layout.activity_rutina_seleccionada);
 
         int idRutina = getIntent().getIntExtra("idRutina", -1);
+
         String rutinaname = getIntent().getStringExtra("nombreRutina");
         int rutinaFrecuencia = getIntent().getIntExtra("rutinaFrecuencia", -1);
+        String descripcionRutina = getIntent().getStringExtra("descripcionRutina");
+
+
         nombreRutina = findViewById(R.id.txtNombreRutinaSeleccionada);
         frecuenciaRutina = findViewById(R.id.txtFrecuenciaRutinaSeleccionada);
 
@@ -64,11 +68,20 @@ public class ActivityRutinaSeleccionada extends AppCompatActivity {
 
         btnEditarRutinaPropiaseleccionada.setOnClickListener(v -> {
 
-//            Intent intent = new Intent(ActivityRutinaSeleccionada.this, ActivityEditarRutina.class);
-//            intent.putExtra("idRutina", getIntent().getIntExtra("idRutina",-1));
-//            ActivityRutinaSeleccionada.this.startActivity(intent);
+            Intent intent = new Intent(ActivityRutinaSeleccionada.this, ActivityEditarRutina.class);
 
-            Toast.makeText(ActivityRutinaSeleccionada.this, "Editar rutina no implementada", Toast.LENGTH_SHORT).show();
+            intent.putExtra("idRutina", getIntent().getIntExtra("idRutina",-1));
+
+            intent.putExtra("rutinaFrecuencia", rutinaFrecuencia);
+            intent.putExtra("descripcionRutina", descripcionRutina);
+            intent.putExtra("nombreRutina", rutinaname);
+
+            intent.putParcelableArrayListExtra("listaConfig", configuracionEjercicioList);
+
+
+            ActivityRutinaSeleccionada.this.startActivity(intent);
+
+            //Toast.makeText(ActivityRutinaSeleccionada.this, "Editar rutina no implementada", Toast.LENGTH_SHORT).show();
 
         });
 

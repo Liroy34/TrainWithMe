@@ -52,6 +52,8 @@
             android:background="@android:color/white"
             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
             android:padding="5dp"
+            android:maxLength="20"
+            android:hint="máx 20 carácteres"
             android:layout_marginBottom="15dp"/>
 
         <!-- Campo Descripción -->
@@ -71,6 +73,8 @@
             android:layout_marginBottom="15dp"
             android:gravity="top"
             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+            android:maxLength="50"
+            android:hint="máx 50 carácteres"
             android:inputType="textMultiLine"/>
 
         <!-- Botón Elegir Ejercicios -->
@@ -102,6 +106,7 @@
                     android:layout_weight="1"
                     android:hint="Ejercicio 1"
                     android:textColor="#888888"
+                    android:maxLength="20"
                     android:textSize="16sp" />
 
                 <EditText
@@ -111,6 +116,7 @@
                     android:hint="series"
                     android:digits="0123456789"
                     android:textColor="#888888"
+                    android:maxLength="2"
                     android:textSize="16sp" />
 
                 <EditText
@@ -120,6 +126,7 @@
                     android:hint="repes"
                     android:digits="0123456789"
                     android:textColor="#888888"
+                    android:maxLength="2"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -142,6 +149,7 @@
                     android:layout_weight="1"
                     android:hint="Ejercicio 2"
                     android:textColor="#888888"
+                    android:maxLength="20"
                     android:textSize="16sp" />
 
                 <EditText
@@ -151,6 +159,7 @@
                     android:hint="series"
                     android:textColor="#888888"
                     android:digits="0123456789"
+                    android:maxLength="2"
                     android:textSize="16sp" />
 
                 <EditText
@@ -160,6 +169,7 @@
                     android:hint="repes"
                     android:textColor="#888888"
                     android:digits="0123456789"
+                    android:maxLength="2"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -182,6 +192,7 @@
                     android:layout_weight="1"
                     android:hint="Ejercicio 3"
                     android:textColor="#888888"
+                    android:maxLength="20"
                     android:textSize="16sp" />
 
                 <EditText
@@ -191,6 +202,7 @@
                     android:hint="series"
                     android:textColor="#888888"
                     android:digits="0123456789"
+                    android:maxLength="2"
                     android:textSize="16sp" />
 
                 <EditText
@@ -200,6 +212,7 @@
                     android:hint="repes"
                     android:textColor="#888888"
                     android:digits="0123456789"
+                    android:maxLength="2"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -222,6 +235,7 @@
                     android:layout_weight="1"
                     android:hint="Ejercicio 4"
                     android:textColor="#888888"
+                    android:maxLength="20"
                     android:textSize="16sp" />
 
                 <EditText
@@ -231,6 +245,7 @@
                     android:hint="series"
                     android:textColor="#888888"
                     android:digits="0123456789"
+                    android:maxLength="2"
                     android:textSize="16sp" />
 
                 <EditText
@@ -240,6 +255,7 @@
                     android:hint="repes"
                     android:textColor="#888888"
                     android:digits="0123456789"
+                    android:maxLength="2"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -262,6 +278,7 @@
                     android:layout_weight="1"
                     android:hint="Ejercicio 5"
                     android:textColor="#888888"
+                    android:maxLength="20"
                     android:textSize="16sp" />
 
                 <EditText
@@ -271,6 +288,7 @@
                     android:hint="series"
                     android:textColor="#888888"
                     android:digits="0123456789"
+                    android:maxLength="2"
                     android:textSize="16sp" />
 
                 <EditText
@@ -280,6 +298,7 @@
                     android:hint="repes"
                     android:textColor="#888888"
                     android:digits="0123456789"
+                    android:maxLength="2"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -302,6 +321,7 @@
                     android:layout_weight="1"
                     android:hint="Ejercicio 6"
                     android:textColor="#888888"
+                    android:maxLength="20"
                     android:textSize="16sp" />
 
                 <EditText
@@ -311,6 +331,7 @@
                     android:hint="series"
                     android:textColor="#888888"
                     android:digits="0123456789"
+                    android:maxLength="2"
                     android:textSize="16sp" />
 
                 <EditText
@@ -320,6 +341,7 @@
                     android:hint="repes"
                     android:textColor="#888888"
                     android:digits="0123456789"
+                    android:maxLength="2"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -343,6 +365,7 @@
                     android:layout_weight="1"
                     android:hint="Ejercicio 7"
                     android:textColor="#888888"
+                    android:maxLength="20"
                     android:textSize="16sp" />
 
                 <EditText
@@ -352,6 +375,7 @@
                     android:hint="series"
                     android:textColor="#888888"
                     android:digits="0123456789"
+                    android:maxLength="2"
                     android:textSize="16sp" />
 
                 <EditText
@@ -361,6 +385,7 @@
                     android:hint="repes"
                     android:textColor="#888888"
                     android:digits="0123456789"
+                    android:maxLength="2"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -383,6 +408,7 @@
                     android:layout_weight="1"
                     android:hint="Ejercicio 8"
                     android:textColor="#888888"
+                    android:maxLength="20"
                     android:textSize="16sp" />
 
                 <EditText
@@ -392,6 +418,7 @@
                     android:hint="series"
                     android:textColor="#888888"
                     android:digits="0123456789"
+                    android:maxLength="2"
                     android:textSize="16sp" />
 
                 <EditText
@@ -401,6 +428,7 @@
                     android:hint="repes"
                     android:textColor="#888888"
                     android:digits="0123456789"
+                    android:maxLength="2"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -426,6 +454,8 @@
             android:background="@android:color/white"
             android:padding="5dp"
             android:digits="0123456789"
+            android:maxLength="2"
+            android:hint="máx 2 carácteres"
             android:layout_marginBottom="10dp"/>
 
         <!-- Botón Crear Rutina -->
