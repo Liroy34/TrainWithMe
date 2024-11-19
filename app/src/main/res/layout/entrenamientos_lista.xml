@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!-- Botón de registrar nuevo entrenamiento -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,16 +12,24 @@
         android:padding="20dp"
         android:gravity="center_horizontal">
 
-        <Button
-            android:id="@+id/btnMostrarEntrenamientoLista"
+        <TextView
+            android:id="@+id/tvEntrenamientosEnListaNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="#333333"
-            android:padding="15dp"
-            android:text=""
-            android:textColor="#FFFFFF"
-            android:textSize="16sp" />
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvEntrenamientosEnListaFecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvEntrenamientosEnListaDuracion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp" />
+
     </LinearLayout>
 
 </LinearLayout>

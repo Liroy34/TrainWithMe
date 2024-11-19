@@ -43,7 +43,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Seleccione Entrenamiento"
+                android:text="Mis entrenamientos"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="#000000"
@@ -62,9 +62,21 @@
             <ListView
                 android:id="@+id/entrenamientosList"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/custom_edittext"/>
+                android:layout_height="350dp"
+                android:background="@drawable/custom_edittext" />
+
         </LinearLayout>
+
+        <Button
+            android:id="@+id/btnRegistrarEntrenamiento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#333333"
+            android:padding="15dp"
+            android:text="Registrar nuevo entrenamiento"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
 
     </LinearLayout>
 </ScrollView>

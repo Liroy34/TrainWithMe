@@ -4,49 +4,37 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.example.tpfinal.Entidades.Entrenamiento;
+import com.example.tpfinal.Entidades.Rutina;
 import com.example.tpfinal.R;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
-public class EntrenamientoAdapter extends BaseAdapter {
-    private Context context;
-    private List<Entrenamiento> entrenamientos;
+public class EntrenamientoAdapter extends ArrayAdapter<Entrenamiento> {
 
-    public EntrenamientoAdapter(Context context, List<Entrenamiento> entrenamientos) {
-        this.context = context;
-        this.entrenamientos = entrenamientos;
-    }
-
-    @Override
-    public int getCount() {
-        return entrenamientos.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return entrenamientos.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
+    public EntrenamientoAdapter(Context context, List<Entrenamiento> objects) {
+        super(context, R.layout.entrenamientos_lista, objects);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.item_entrenamiento, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.entrenamientos_lista, parent, false);
         }
 
-        TextView fechaTextView = convertView.findViewById(R.id.txtFechaEntrenamiento);
-        TextView duracionTextView = convertView.findViewById(R.id.txtDuracionEntrenamiento);
+        TextView txtNombre = convertView.findViewById(R.id.tvEntrenamientosEnListaNombre);
+        TextView txtFecha = convertView.findViewById(R.id.tvEntrenamientosEnListaFecha);
+        TextView txtDuracion= convertView.findViewById(R.id.tvEntrenamientosEnListaDuracion);
 
-        Entrenamiento entrenamiento = entrenamientos.get(position);
-        fechaTextView.setText("Fecha: " + entrenamiento.getFecha());
-        duracionTextView.setText("Duración: " + entrenamiento.getDuracion());
+        txtNombre.setText(getItem(position).getNombre());
+        txtFecha.setText(getItem(position).getFecha());
+        txtDuracion.setText(getItem(position).getDuracion());
 
         return convertView;
     }

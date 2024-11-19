@@ -1,4 +1,6 @@
 package com.example.tpfinal;
 
-public class VerEntrenamientosActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class VerEntrenamientosActivity extends AppCompatActivity {
 }

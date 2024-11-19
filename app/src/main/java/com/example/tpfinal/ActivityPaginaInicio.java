@@ -52,13 +52,13 @@ public class ActivityPaginaInicio extends AppCompatActivity {
 
         });
 
-//        btnEntrenamientos.setOnClickListener(v -> { //agregar logica para cargar los datos en ver perfil
-//
-//            Intent intent = new Intent(ActivityPaginaInicio.this, ActivityEntrenamientos.class);
-//            intent.putExtra("idUsuario", idUsuario);
-//            startActivity(intent);
-//
-//        });
+        btnEntrenamientos.setOnClickListener(v -> {
+
+            Intent intent = new Intent(ActivityPaginaInicio.this, ActivityEntrenamientos.class);
+            intent.putExtra("idUsuario", idUsuario);
+            startActivity(intent);
+
+        });
 
         btnCerrarSesion.setOnClickListener(v -> {
 

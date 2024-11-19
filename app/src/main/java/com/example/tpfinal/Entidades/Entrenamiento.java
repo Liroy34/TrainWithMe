@@ -6,20 +6,32 @@ import java.util.Objects;
 public class Entrenamiento {
 
     private int id;
-    private String idUsuario;
+    private int idUsuario;
     private String duracion;
     private String fecha;
+    private String nombre;
     private List<ConfiguracionEjercicio> configuracionesEjercicio; // Lista de configuraciones de ejercicios
 
-    public Entrenamiento(int id, String idUsuario, String duracion, String fecha, List<ConfiguracionEjercicio> configuracionesEjercicio) {
+    public Entrenamiento() {
+    }
+
+    public Entrenamiento(int id, int idUsuario, String duracion, String fecha, String nombre, List<ConfiguracionEjercicio> configuracionesEjercicio) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.duracion = duracion;
         this.fecha = fecha;
+        this.nombre = nombre;
         this.configuracionesEjercicio = configuracionesEjercicio;
     }
 
-    // Getters y setters
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     public int getId() {
         return id;
     }
@@ -28,11 +40,11 @@ public class Entrenamiento {
         this.id = id;
     }
 
-    public String getIdUsuario() {
+    public int getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(String idUsuario) {
+    public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
     }
 

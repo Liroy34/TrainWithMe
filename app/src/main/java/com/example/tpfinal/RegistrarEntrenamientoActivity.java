@@ -1,4 +1,6 @@
 package com.example.tpfinal;
 
-public class RegistrarEntrenamientoActivity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class RegistrarEntrenamientoActivity extends AppCompatActivity {
 }
