@@ -56,7 +56,7 @@ public class ConexionRutinas {
                 Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
 
                 // Actualizar la información básica de la rutina en la tabla Rutinas
-                String sqlUpdateRutina = "UPDATE Rutinas SET Nombre = ?, Descripcion = ?, Tipo = ? WHERE ID = ?";
+                String sqlUpdateRutina = "UPDATE Rutinas SET Nombre = ?, Descripcion = ?, Frecuencia = ? WHERE ID = ?";
                 PreparedStatement psUpdateRutina = con.prepareStatement(sqlUpdateRutina);
                 psUpdateRutina.setString(1, rutina.getNombre());
                 psUpdateRutina.setString(2, rutina.getDescripcion());

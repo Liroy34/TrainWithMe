@@ -31,13 +31,14 @@ public class ActivityRutinaSeleccionada extends AppCompatActivity {
     private ConexionRutinas conRutinas;
     private TextView nombreRutina;
     private TextView frecuenciaRutina;
+    int idRutina;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rutina_seleccionada);
 
-        int idRutina = getIntent().getIntExtra("idRutina", -1);
+       idRutina = getIntent().getIntExtra("idRutina", -1);
 
         String rutinaname = getIntent().getStringExtra("nombreRutina");
         int rutinaFrecuencia = getIntent().getIntExtra("rutinaFrecuencia", -1);
@@ -108,4 +109,5 @@ public class ActivityRutinaSeleccionada extends AppCompatActivity {
 
         });
     }
+
 }
