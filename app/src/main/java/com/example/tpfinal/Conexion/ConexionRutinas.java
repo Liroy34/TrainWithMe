@@ -125,88 +125,6 @@ public class ConexionRutinas {
         });
     }
 
-//    public void insertRutina(RutinaCargaDatos rutina, int userId) {
-//        ExecutorService executor = Executors.newSingleThreadExecutor();
-//        executor.execute(() -> {
-//            try {
-//                Class.forName(DataBD.driver);
-//                Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
-//
-//                // Insertar la rutina en la tabla Rutinas
-//                String sqlRutina = "INSERT INTO Rutinas (Nombre, Descripcion, Tipo) VALUES (?, ?, ?)";
-//                PreparedStatement psRutina = con.prepareStatement(sqlRutina, Statement.RETURN_GENERATED_KEYS);
-//                psRutina.setString(1, rutina.getNombre());
-//                psRutina.setString(2, rutina.getDescripcion());
-//                psRutina.setString(3, "Propia");
-//
-//                int rowsAffectedRutina = psRutina.executeUpdate();
-//
-//                if (rowsAffectedRutina > 0) {
-//                    // Obtener el ID autogenerado de la rutina insertada
-//                    ResultSet generatedKeys = psRutina.getGeneratedKeys();
-//                    if (generatedKeys.next()) {
-//                        int rutinaId = generatedKeys.getInt("ID");
-//
-//                        // Guardar la relación entre el usuario y la rutina en RutinaXUsuario
-//                        String sqlRutinaXUsuario = "INSERT INTO RutinaXUsuario (ID_Usuario, ID_Rutina) VALUES (?, ?)";
-//                        PreparedStatement psRutinaXUsuario = con.prepareStatement(sqlRutinaXUsuario);
-//                        psRutinaXUsuario.setInt(1, userId);
-//                        psRutinaXUsuario.setInt(2, rutinaId);
-//                        psRutinaXUsuario.executeUpdate();
-//                        psRutinaXUsuario.close();
-//
-//                        // Insertar cada ConfiguracionEjercicio en ConfiguracionEjercicio y RutinaXEjercicio
-//                        for (ConfiguracionEjercicio ejercicio : rutina.getEjercicios()) {
-//                            // Insertar configuración de ejercicio en ConfiguracionEjercicio
-//                            String sqlConfigEjercicio = "INSERT INTO ConfiguracionEjercicio (NombreEjercicio, Series, Repeticiones, Tiempo) VALUES (?, ?, ?, ?)";
-//                            PreparedStatement psConfigEjercicio = con.prepareStatement(sqlConfigEjercicio, Statement.RETURN_GENERATED_KEYS);
-//                            psConfigEjercicio.setString(1, ejercicio.getEjercicio());
-//                            psConfigEjercicio.setInt(2, ejercicio.getSeries());
-//                            psConfigEjercicio.setInt(3, ejercicio.getRepeticiones());
-//                            psConfigEjercicio.setString(4, "0");
-//
-//                            int rowsAffectedConfigEjercicio = psConfigEjercicio.executeUpdate();
-//
-//                            if (rowsAffectedConfigEjercicio > 0) {
-//                                ResultSet generatedKeysConfig = psConfigEjercicio.getGeneratedKeys();
-//                                if (generatedKeysConfig.next()) {
-//                                    int configEjercicioId = generatedKeysConfig.getInt("ID");
-//
-//                                    // Insertar la relación entre la rutina y la configuración de ejercicio en RutinaXEjercicio
-//                                    String sqlRutinaXEjercicio = "INSERT INTO RutinaXEjercicio (ID_Rutina, ID_ConfigEjercicio) VALUES (?, ?)";
-//                                    PreparedStatement psRutinaXEjercicio = con.prepareStatement(sqlRutinaXEjercicio);
-//                                    psRutinaXEjercicio.setInt(1, rutinaId);
-//                                    psRutinaXEjercicio.setInt(2, configEjercicioId);
-//                                    psRutinaXEjercicio.executeUpdate();
-//                                    psRutinaXEjercicio.close();
-//                                }
-//                                generatedKeysConfig.close();
-//                            }
-//                            psConfigEjercicio.close();
-//                        }
-//                    }
-//                    generatedKeys.close();
-//                }
-//
-//                psRutina.close();
-//                con.close();
-//
-//                new Handler(Looper.getMainLooper()).post(() -> {
-//                    if (rowsAffectedRutina > 0) {
-//                        Toast.makeText(context, "Rutina creada correctamente", Toast.LENGTH_SHORT).show();
-//                    } else {
-//                        Toast.makeText(context, "Error al crear la rutina", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        });
-//    }
-
-
-
     public void insertRutina(RutinaCargaDatos rutina, int userId) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
@@ -289,10 +207,6 @@ public class ConexionRutinas {
         });
     }
 
-
-
-
-    // ESTE ES PARA CARGAR LA LISTA DE RUTINAS, UNICAMENTE CON NOMBRE DE LA RUTINA
     public void getRutinasPropias(int idUsuario) {
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -326,12 +240,10 @@ public class ConexionRutinas {
                 e.printStackTrace();
             }
 
-            // CREAR ADAPTER DE RUTINAS
             new android.os.Handler(android.os.Looper.getMainLooper()).post(() -> {
-                ((ActivityRutinasPropias) context).rutinasList.clear(); // Limpiar lista existente
-                ((ActivityRutinasPropias) context).rutinasList.addAll(rutinaList); // Actualizar lista global
+                ((ActivityRutinasPropias) context).rutinasList.clear();
+                ((ActivityRutinasPropias) context).rutinasList.addAll(rutinaList);
 
-                // Crear y configurar el adaptador
                 RutinasAdapter adapter = new RutinasAdapter(context, rutinaList);
                 ((ActivityRutinasPropias) context).lvRutinas.setAdapter(adapter);
             });
@@ -392,9 +304,6 @@ public class ConexionRutinas {
         });
     }
 
-    public interface RutinaCallback<T> {
-        void onComplete(T result);
-    }
 
     public void getEjerciciosConfiguracionPredefinidos(String tipo) {
 

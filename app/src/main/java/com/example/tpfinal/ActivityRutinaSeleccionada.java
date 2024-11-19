@@ -110,4 +110,15 @@ public class ActivityRutinaSeleccionada extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        new android.os.Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                conRutinas.getEjerciciosConfiguracionPropios(idRutina);
+            }
+        }, 1500);
+    }
 }

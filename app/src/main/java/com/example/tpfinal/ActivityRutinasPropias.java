@@ -1,6 +1,5 @@
 package com.example.tpfinal;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +10,7 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tpfinal.Adapters.RutinasAdapter;
 import com.example.tpfinal.Conexion.ConexionRutinas;
 import com.example.tpfinal.Entidades.Rutina;
 
@@ -24,7 +24,7 @@ public class ActivityRutinasPropias extends AppCompatActivity {
     private ConexionRutinas conRutinas;
     public ListView lvRutinas;
     public List<Rutina> rutinasList = new ArrayList<>();
-
+    int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class ActivityRutinasPropias extends AppCompatActivity {
         btnVolverRutinaPropia = findViewById(R.id.btnVolverRutinaPropia);
 
         Intent intentAnterior = getIntent();
-        int id = intentAnterior.getIntExtra("idUsuario",-1);
+        id = intentAnterior.getIntExtra("idUsuario",-1);
 
         lvRutinas = findViewById(R.id.rutinasList);
 
@@ -60,7 +60,6 @@ public class ActivityRutinasPropias extends AppCompatActivity {
         });
 
 
-
         btnCrearRutinaPropia.setOnClickListener(v -> {
 
             Intent intent = new Intent(ActivityRutinasPropias.this, ActivityCrearRutina.class);
@@ -80,9 +79,13 @@ public class ActivityRutinasPropias extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Intent intentAnterior = getIntent();
-        int id = intentAnterior.getIntExtra("idUsuario",-1);
-        conRutinas.getRutinasPropias(id);
+        new android.os.Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                conRutinas.getRutinasPropias(id);
+            }
+        }, 1500);
 
     }
 }
