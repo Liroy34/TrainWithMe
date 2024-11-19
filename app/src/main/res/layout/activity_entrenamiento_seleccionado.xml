@@ -109,5 +109,16 @@
             android:text="Editar entrenamiento"
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btnBajaEntrenamiento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#333333"
+            android:padding="15dp"
+            android:text="Dar de baja entrenamiento"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
     </LinearLayout>
 </ScrollView>
