@@ -81,7 +81,7 @@ public class VerEntrenamientosActivity extends AppCompatActivity {
             });
 
             builder.setNegativeButton("Cancelar", (dialog, which) -> {
-                dialog.dismiss(); // Cierra el modal sin realizar ninguna acción
+                dialog.dismiss();
             });
 
             AlertDialog dialog = builder.create();

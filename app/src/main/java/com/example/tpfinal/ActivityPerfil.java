@@ -53,13 +53,13 @@ public class ActivityPerfil extends AppCompatActivity {
         if (idUsuario == -1) {
 
             Toast.makeText(this, "Error el idusuario es -1", Toast.LENGTH_SHORT).show();
-            // Manejo de errores si no se recibió el idUsuario
+
             finish();
             return;
         }
 
         btnVolverMiPerfil.setOnClickListener(v -> {
-            Intent intent = new Intent(ActivityPerfil.this, ActivityPaginaInicio.class); // Asegúrate de que PaginaPrincipal es el nombre correcto
+            Intent intent = new Intent(ActivityPerfil.this, ActivityPaginaInicio.class);
             intent.putExtra("idUsuario", idUsuario );
             startActivity(intent);
         });
@@ -96,12 +96,12 @@ public class ActivityPerfil extends AppCompatActivity {
                 return;
             }
         }
-        // Opcional: Añadir un log o alguna acción si el valor no está en el spinner
+
         Log.e("ActivityPerfil", "Valor '" + value + "' no encontrado en el spinner.");
     }
 
     private void editarPerfil() {
-        // Obtén los datos actuales de los campos
+
         String nombre = tvNombre.getText().toString();
         String apellido = tvApellido.getText().toString();
         String email = tvEmail.getText().toString();
@@ -133,7 +133,7 @@ public class ActivityPerfil extends AppCompatActivity {
             });
 
             builder.setNegativeButton("Cancelar", (dialog, which) -> {
-                dialog.dismiss(); // Cierra el modal sin realizar ninguna acción
+                dialog.dismiss();
             });
 
             AlertDialog dialog = builder.create();
@@ -142,11 +142,11 @@ public class ActivityPerfil extends AppCompatActivity {
     }
 
     private void darDeBajaUsuario() {
-        // Implementar la lógica para dar de baja al usuario
-        ConexionUsuario conexionUsuario = new ConexionUsuario(this);
-        conexionUsuario.deleteUsuario(idUsuario); // Asegúrate de tener este método en tu clase de conexión
 
-        Intent intent = new Intent(ActivityPerfil.this, MainActivity.class); // Asegúrate de que PaginaPrincipal es el nombre correcto
+        ConexionUsuario conexionUsuario = new ConexionUsuario(this);
+        conexionUsuario.deleteUsuario(idUsuario);
+
+        Intent intent = new Intent(ActivityPerfil.this, MainActivity.class);
         startActivity(intent);
     }
 }

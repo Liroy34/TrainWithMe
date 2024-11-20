@@ -26,35 +26,31 @@
 
         <activity
             android:name=".ActivityRegistrarse"
-            android:exported="true" />  <!-- Asegúrate de establecer exported según las necesidades de tu app -->
+            android:exported="true" />
 
-        <!-- Declaración de ActivityRecuperarPass -->
         <activity
             android:name=".ActivityRecuperarPass"
-            android:exported="true" />  <!-- Asegúrate de establecer exported según las necesidades de tu app -->
+            android:exported="true" />
 
-        <!-- Declaración de ActivityRecuperarPass -->
         <activity
             android:name=".ActivityPerfil"
-            android:exported="true" />  <!-- Asegúrate de establecer exported según las necesidades de tu app -->
+            android:exported="true" />
 
         <activity
             android:name=".ActivityPaginaInicio"
-            android:exported="true" />  <!-- Asegúrate de establecer exported según las necesidades de tu app -->
+            android:exported="true" />
 
-        <!-- Declaración de ActivityRecuperarPass -->
         <activity
             android:name=".ActivityCrearRutina"
-            android:exported="true" />  <!-- Asegúrate de establecer exported según las necesidades de tu app -->
+            android:exported="true" />
 
         <activity
             android:name=".ActivityEditarRutina"
-            android:exported="true" />  <!-- Asegúrate de establecer exported según las necesidades de tu app -->
+            android:exported="true" />
 
-        <!-- Declaración de ActivityRecuperarPass -->
         <activity
             android:name=".RegistrarEntrenamientoActivity"
-            android:exported="true" />  <!-- Asegúrate de establecer exported según las necesidades de tu app -->
+            android:exported="true" />
 
         <activity
             android:name=".ActivityEditarEntrenamiento"
@@ -62,29 +58,27 @@
 
         <activity
             android:name=".VerEntrenamientosActivity"
-            android:exported="true" />  <!-- Asegúrate de establecer exported según las necesidades de tu app -->
+            android:exported="true" />
 
-        <!-- Declaración de ActivityRecuperarPass -->
         <activity
             android:name=".ActivityEntrenamientos"
-            android:exported="true" />  <!-- Asegúrate de establecer exported según las necesidades de tu app -->
+            android:exported="true" />
+
         <activity
             android:name=".ActivityRutinaSeleccionada"
-            android:exported="true" />  <!-- Asegúrate de establecer exported según las necesidades de tu app -->
+            android:exported="true" />
 
-        <!-- Declaración de ActivityRecuperarPass -->
         <activity
             android:name=".ActivityRutinasPredefinidaSeleccionada"
-            android:exported="true" />  <!-- Asegúrate de establecer exported según las necesidades de tu app -->
+            android:exported="true" />
 
         <activity
             android:name=".ActivityRutinasPredefinida"
-            android:exported="true" />  <!-- Asegúrate de establecer exported según las necesidades de tu app -->
+            android:exported="true" />
 
-        <!-- Declaración de ActivityRecuperarPass -->
         <activity
             android:name=".ActivityRutinasPropias"
-            android:exported="true" />  <!-- Asegúrate de establecer exported según las necesidades de tu app -->
+            android:exported="true" />
 
     </application>
 

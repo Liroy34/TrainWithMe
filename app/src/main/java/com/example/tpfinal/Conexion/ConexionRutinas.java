@@ -304,7 +304,6 @@ public class ConexionRutinas {
         });
     }
 
-
     public void getEjerciciosConfiguracionPredefinidos(String tipo) {
 
         ExecutorService executor = Executors.newSingleThreadExecutor();

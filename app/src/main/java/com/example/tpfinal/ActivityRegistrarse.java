@@ -74,7 +74,6 @@ public class ActivityRegistrarse extends AppCompatActivity{
 
                         conUsuario.insertUsuario(usuario);
 
-                        //finish();
 
                     }
 

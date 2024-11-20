@@ -82,7 +82,7 @@ public class ActivityRutinaSeleccionada extends AppCompatActivity {
 
             ActivityRutinaSeleccionada.this.startActivity(intent);
 
-            //Toast.makeText(ActivityRutinaSeleccionada.this, "Editar rutina no implementada", Toast.LENGTH_SHORT).show();
+
 
         });
 
@@ -100,7 +100,7 @@ public class ActivityRutinaSeleccionada extends AppCompatActivity {
             });
 
             builder.setNegativeButton("Cancelar", (dialog, which) -> {
-                dialog.dismiss(); // Cierra el modal sin realizar ninguna acción
+                dialog.dismiss();
             });
 
             AlertDialog dialog = builder.create();
