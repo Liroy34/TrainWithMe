@@ -85,7 +85,7 @@ public class ActivityRutinasPropias extends AppCompatActivity {
 
                 conRutinas.getRutinasPropias(id);
             }
-        }, 1500);
+        }, 2000);
 
     }
 }

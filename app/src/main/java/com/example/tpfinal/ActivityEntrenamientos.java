@@ -50,11 +50,6 @@ public class ActivityEntrenamientos extends AppCompatActivity {
                 Entrenamiento selectedEntrenamiento = entrenamientosList.get(position);
 
                 Intent intent = new Intent(ActivityEntrenamientos.this, VerEntrenamientosActivity.class);
-//                intent.putExtra("idEntrenamiento", selectedEntrenamiento.getId());
-//                intent.putExtra("idUsuario", selectedEntrenamiento.getIdUsuario());
-//                intent.putExtra("Duracion", selectedEntrenamiento.getDuracion());
-//                intent.putExtra("Fecha", selectedEntrenamiento.getFecha());
-//                intent.putExtra("Nombre", selectedEntrenamiento.getNombre());
 
                 intent.putExtra("entrenamiento", selectedEntrenamiento);
 
@@ -76,5 +71,17 @@ public class ActivityEntrenamientos extends AppCompatActivity {
                 startActivity(intent);
 
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        new android.os.Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                conEntrenamientos.getEntrenamientosPropios(idUsuario);
+            }
+        }, 2000);
     }
 }

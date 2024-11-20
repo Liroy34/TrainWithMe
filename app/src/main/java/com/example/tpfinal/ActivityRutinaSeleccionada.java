@@ -119,6 +119,6 @@ public class ActivityRutinaSeleccionada extends AppCompatActivity {
 
                 conRutinas.getEjerciciosConfiguracionPropios(idRutina);
             }
-        }, 1500);
+        }, 2000);
     }
 }

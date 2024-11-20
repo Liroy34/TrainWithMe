@@ -89,7 +89,16 @@ public class VerEntrenamientosActivity extends AppCompatActivity {
         });
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        new android.os.Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                conEntrenamientos.getEjerciciosConfiguracionPropios(entrenamiento.getId());
+            }
+        }, 2000);
+    }
 
 
 }

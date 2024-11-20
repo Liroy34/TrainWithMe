@@ -150,4 +150,5 @@ public class Entrenamiento implements Parcelable {
         dest.writeTypedList(configuracionesEjercicio);
 
     }
+
 }
