@@ -173,8 +173,8 @@ public class ConexionEntrenamientos {
                                 if (generatedKeysConfig.next()) {
                                     int configEjercicioId = generatedKeysConfig.getInt(1);
 
-                                    String sqlRutinaXEjercicio = "INSERT INTO EntrenamientoXEjercicio (ID_Entrenamiento, ID_ConfigEjercicio) VALUES (?, ?)";
-                                    PreparedStatement psRutinaXEjercicio = con.prepareStatement(sqlRutinaXEjercicio);
+                                    String sqlEntrenamientoXEjercicio = "INSERT INTO EntrenamientoXEjercicio (ID_Entrenamiento, ID_ConfigEjercicio) VALUES (?, ?)";
+                                    PreparedStatement psRutinaXEjercicio = con.prepareStatement(sqlEntrenamientoXEjercicio);
                                     psRutinaXEjercicio.setInt(1, entrenamientoId);
                                     psRutinaXEjercicio.setInt(2, configEjercicioId);
 
@@ -203,6 +203,145 @@ public class ConexionEntrenamientos {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        });
+    }
+
+    public void updateEntrenamiento(Entrenamiento entrenamiento) {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
+            try {
+                Class.forName(DataBD.driver);
+                Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
+
+                String sqlUpdateEntrenamiento = "UPDATE Entrenamientos SET Nombre = ?, Duracion = ?, Fecha = ? WHERE ID = ?";
+                PreparedStatement psUpdateRutina = con.prepareStatement(sqlUpdateEntrenamiento);
+                psUpdateRutina.setString(1, entrenamiento.getNombre());
+                psUpdateRutina.setString(2, entrenamiento.getDuracion());
+                psUpdateRutina.setString(3, entrenamiento.getFecha());
+                psUpdateRutina.setInt(4, entrenamiento.getId());
+
+                int rowsAffectedRutina = psUpdateRutina.executeUpdate();
+
+                String sqlDeleteEntrenamientoXEjercicio = "DELETE FROM EntrenamientoXEjercicio WHERE ID_Entrenamiento = ?";
+                PreparedStatement psDeleteRutinaXEjercicio = con.prepareStatement(sqlDeleteEntrenamientoXEjercicio);
+                psDeleteRutinaXEjercicio.setInt(1, entrenamiento.getId());
+                psDeleteRutinaXEjercicio.executeUpdate();
+                psDeleteRutinaXEjercicio.close();
+
+                String sqlDeleteConfigEjercicio = "DELETE FROM ConfiguracionEjercicio WHERE ID IN (SELECT ID_ConfigEjercicio FROM EntrenamientoXEjercicio WHERE ID_Entrenamiento = ?)";
+                PreparedStatement psDeleteConfigEjercicio = con.prepareStatement(sqlDeleteConfigEjercicio);
+                psDeleteConfigEjercicio.setInt(1, entrenamiento.getId());
+                psDeleteConfigEjercicio.executeUpdate();
+                psDeleteConfigEjercicio.close();
+
+                for (ConfiguracionEjercicio ejercicio : entrenamiento.getConfiguracionesEjercicio()) {
+
+                    String sqlConfigEjercicio = "INSERT INTO ConfiguracionEjercicio (NombreEjercicio, Series, Repeticiones) VALUES (?, ?, ?)";
+                    PreparedStatement psConfigEjercicio = con.prepareStatement(sqlConfigEjercicio, Statement.RETURN_GENERATED_KEYS);
+                    psConfigEjercicio.setString(1, ejercicio.getEjercicio());
+                    psConfigEjercicio.setInt(2, ejercicio.getSeries());
+                    psConfigEjercicio.setInt(3, ejercicio.getRepeticiones());
+
+                    int rowsAffectedConfigEjercicio = psConfigEjercicio.executeUpdate();
+
+                    if (rowsAffectedConfigEjercicio > 0) {
+                        ResultSet generatedKeysConfig = psConfigEjercicio.getGeneratedKeys();
+                        if (generatedKeysConfig.next()) {
+                            int configEjercicioId = generatedKeysConfig.getInt(1);
+
+                            String sqlEntrenamientoXEjercicio = "INSERT INTO EntrenamientoXEjercicio (ID_Entrenamiento, ID_ConfigEjercicio) VALUES (?, ?)";
+                            PreparedStatement psRutinaXEjercicio = con.prepareStatement(sqlEntrenamientoXEjercicio);
+                            psRutinaXEjercicio.setInt(1, entrenamiento.getId());
+                            psRutinaXEjercicio.setInt(2, configEjercicioId);
+
+                            psRutinaXEjercicio.executeUpdate();
+                            psRutinaXEjercicio.close();
+                        }
+                        generatedKeysConfig.close();
+                    }
+                    psConfigEjercicio.close();
+                }
+
+                psUpdateRutina.close();
+                con.close();
+
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    if (rowsAffectedRutina > 0) {
+                        Toast.makeText(context, "Entrenamiento actualizado correctamente", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(context, "Error al actualizar entrenamiento", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public void eliminarEntrenamiento(int idEntrenamiento) {
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
+            boolean eliminado = false;
+
+            try {
+
+                Class.forName(DataBD.driver);
+                Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
+
+                String deleteEntrenamientoXEjercicio = "DELETE FROM EntrenamientoXEjercicio WHERE ID_Entrenamiento = ?";
+                PreparedStatement stmt2 = con.prepareStatement(deleteEntrenamientoXEjercicio);
+                stmt2.setInt(1, idEntrenamiento);
+                int filasEliminadas2 = stmt2.executeUpdate();
+
+
+                String obtenerIDConfigEjercicio = "SELECT DISTINCT ID_ConfigEjercicio FROM EntrenamientoXEjercicio WHERE ID_Entrenamiento = ?";
+                PreparedStatement stmtObtenerConfigEjercicio = con.prepareStatement(obtenerIDConfigEjercicio);
+                stmtObtenerConfigEjercicio.setInt(1, idEntrenamiento);
+                ResultSet rs = stmtObtenerConfigEjercicio.executeQuery();
+
+                List<Integer> idsConfigEjercicio = new ArrayList<>();
+                while (rs.next()) {
+                    idsConfigEjercicio.add(rs.getInt("ID_ConfigEjercicio"));
+                }
+
+                if (!idsConfigEjercicio.isEmpty()) {
+                    String deleteConfiguracionEjercicio = "DELETE FROM ConfiguracionEjercicio WHERE ID_ConfigEjercicio = ?";
+                    PreparedStatement stmt1 = con.prepareStatement(deleteConfiguracionEjercicio);
+                    for (int idConfig : idsConfigEjercicio) {
+                        stmt1.setInt(1, idConfig);
+                        stmt1.addBatch();
+                    }
+                    stmt1.executeBatch();
+                    stmt1.close();
+                }
+
+                String deleteRutina = "DELETE FROM Entrenamientos WHERE ID = ?";
+                PreparedStatement stmt4 = con.prepareStatement(deleteRutina);
+                stmt4.setInt(1, idEntrenamiento);
+                int filasEliminadas4 = stmt4.executeUpdate();
+
+                eliminado = (filasEliminadas2 > 0 ||  filasEliminadas4 > 0);
+
+                // Cerrar las conexiones
+                stmtObtenerConfigEjercicio.close();
+                stmt2.close();
+                stmt4.close();
+                con.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            // Notificar el resultado en el hilo principal
+            boolean finalEliminado = eliminado;
+            new android.os.Handler(android.os.Looper.getMainLooper()).post(() -> {
+                if (finalEliminado) {
+                    Toast.makeText(context, "Entrenamiento eliminado correctamente", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, "Error al eliminar entrenamiento", Toast.LENGTH_SHORT).show();
+                }
+            });
         });
     }
 
