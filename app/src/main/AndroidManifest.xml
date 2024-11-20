@@ -55,6 +55,11 @@
         <activity
             android:name=".RegistrarEntrenamientoActivity"
             android:exported="true" />  <!-- Asegúrate de establecer exported según las necesidades de tu app -->
+
+        <activity
+            android:name=".ActivityEditarEntrenamiento"
+            android:exported="true" />
+
         <activity
             android:name=".VerEntrenamientosActivity"
             android:exported="true" />  <!-- Asegúrate de establecer exported según las necesidades de tu app -->

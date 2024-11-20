@@ -1,9 +1,12 @@
 package com.example.tpfinal;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -24,6 +27,7 @@ public class VerEntrenamientosActivity extends AppCompatActivity {
     private Button btnDarBaja, btnEditarEntrenamiento;
     private Entrenamiento entrenamiento;
     private ConexionEntrenamientos conEntrenamientos;
+    private TextView etNombreEntrenamiento;
 
     public ListView lvEntrenamientoSeleccionado;
     public List<ConfiguracionEjercicio> configEjerciciosList = new ArrayList<>();
@@ -35,6 +39,10 @@ public class VerEntrenamientosActivity extends AppCompatActivity {
 
         entrenamiento = getIntent().getParcelableExtra("entrenamiento");
 
+        etNombreEntrenamiento = findViewById(R.id.txtNombreEntrenamiento);
+
+        etNombreEntrenamiento.setText(entrenamiento.getNombre());
+
         btnVolver = findViewById(R.id.btnVolverEntrenamiento);
         btnDarBaja = findViewById(R.id.btnBajaEntrenamiento);
         btnEditarEntrenamiento = findViewById(R.id.btnEditarEntrenamiento);
@@ -44,9 +52,13 @@ public class VerEntrenamientosActivity extends AppCompatActivity {
         conEntrenamientos = new ConexionEntrenamientos(VerEntrenamientosActivity.this);
         conEntrenamientos.getEjerciciosConfiguracionPropios(entrenamiento.getId());
 
+        entrenamiento.setConfiguracionesEjercicio(configEjerciciosList);
+
         btnEditarEntrenamiento.setOnClickListener(v -> {
 
-
+            Intent intent = new Intent(VerEntrenamientosActivity.this, ActivityEditarEntrenamiento.class);
+            intent.putExtra("entrenamiento", entrenamiento);
+            startActivity(intent);
 
         });
 
@@ -57,24 +69,24 @@ public class VerEntrenamientosActivity extends AppCompatActivity {
 
         // HACER LOGICA DE ELEMINAR
 
-//        btnDarBaja.setOnClickListener(v -> {
-//
-//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//            builder.setTitle("Confirmar acción");
-//            builder.setMessage("¿Estás seguro de que deseas dar de baja este entrenamiento? Esta acción no se puede deshacer.");
-//
-//            builder.setPositiveButton("Sí, dar de baja", (dialog, which) -> {
-//                conEntrenamientos.eliminarRutina(getIntent().getIntExtra("idRutina" , -1));
-//                finish();
-//            });
-//
-//            builder.setNegativeButton("Cancelar", (dialog, which) -> {
-//                dialog.dismiss(); // Cierra el modal sin realizar ninguna acción
-//            });
-//
-//            AlertDialog dialog = builder.create();
-//            dialog.show();
-//        });
+        btnDarBaja.setOnClickListener(v -> {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Confirmar acción");
+            builder.setMessage("¿Estás seguro de que deseas dar de baja este entrenamiento? Esta acción no se puede deshacer.");
+
+            builder.setPositiveButton("Sí, dar de baja", (dialog, which) -> {
+                conEntrenamientos.eliminarEntrenamiento(entrenamiento.getId());
+                finish();
+            });
+
+            builder.setNegativeButton("Cancelar", (dialog, which) -> {
+                dialog.dismiss(); // Cierra el modal sin realizar ninguna acción
+            });
+
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        });
     }
 
 

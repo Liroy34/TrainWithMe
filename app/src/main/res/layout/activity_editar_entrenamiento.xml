@@ -46,7 +46,7 @@
             android:paddingBottom="5dp"/>
 
         <EditText
-            android:id="@+id/etNombreEntrenamientoEditarCrear"
+            android:id="@+id/etNombreEntrenamientoEditar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
@@ -64,7 +64,7 @@
             android:paddingBottom="5dp"/>
 
         <EditText
-            android:id="@+id/etFechaEntrenamientoEditarCrear"
+            android:id="@+id/etFechaEntrenamientoEditar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
@@ -82,7 +82,7 @@
             android:paddingBottom="5dp"/>
 
         <EditText
-            android:id="@+id/etDuracionEntrenamientoEditarCrear"
+            android:id="@+id/etDuracionEntrenamientoEditar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
@@ -457,7 +457,7 @@
 
         <!-- Botón Crear Rutina -->
         <Button
-            android:id="@+id/btnEditarEntrenamiento"
+            android:id="@+id/btnEditarEditarEntrenamiento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Editar Entrenamiento"
