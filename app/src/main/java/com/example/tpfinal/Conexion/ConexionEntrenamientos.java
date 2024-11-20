@@ -60,7 +60,7 @@ public class ConexionEntrenamientos {
                 while (rs.next()) {
                     Entrenamiento entrenamiento = new Entrenamiento();
 
-                    entrenamiento.setDuracion(rs.getString("Duracion"));
+                    entrenamiento.setDuracion(rs.getInt("Duracion"));
                     entrenamiento.setFecha(rs.getString("Fecha"));
                     entrenamiento.setNombre(rs.getString("Nombre"));
                     entrenamiento.setId(rs.getInt("ID"));
@@ -147,7 +147,7 @@ public class ConexionEntrenamientos {
                 String sqlEntrenamiento = "INSERT INTO Entrenamientos (ID_Usuario, Duracion, Fecha, Nombre) VALUES (?, ?, ?, ?)";
                 PreparedStatement psEntrenamiento = con.prepareStatement(sqlEntrenamiento, Statement.RETURN_GENERATED_KEYS);
                 psEntrenamiento.setInt(1, entrenamiento.getIdUsuario());
-                psEntrenamiento.setString(2, entrenamiento.getDuracion());
+                psEntrenamiento.setInt(2, entrenamiento.getDuracion());
                 psEntrenamiento.setString(3, entrenamiento.getFecha());
                 psEntrenamiento.setString(4, entrenamiento.getNombre());
 
@@ -217,7 +217,7 @@ public class ConexionEntrenamientos {
                 String sqlUpdateEntrenamiento = "UPDATE Entrenamientos SET Nombre = ?, Duracion = ?, Fecha = ? WHERE ID = ?";
                 PreparedStatement psUpdateRutina = con.prepareStatement(sqlUpdateEntrenamiento);
                 psUpdateRutina.setString(1, entrenamiento.getNombre());
-                psUpdateRutina.setString(2, entrenamiento.getDuracion());
+                psUpdateRutina.setInt(2, entrenamiento.getDuracion());
                 psUpdateRutina.setString(3, entrenamiento.getFecha());
                 psUpdateRutina.setInt(4, entrenamiento.getId());
 

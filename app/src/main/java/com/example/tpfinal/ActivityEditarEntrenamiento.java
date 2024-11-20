@@ -67,7 +67,7 @@ public class ActivityEditarEntrenamiento extends AppCompatActivity {
     private void loadElementos(){
 
         etNombre.setText(entrenamiento.getNombre());
-        etDuracion.setText(entrenamiento.getDuracion());
+        etDuracion.setText(String.valueOf(entrenamiento.getDuracion()));
         etFecha.setText(String.valueOf(entrenamiento.getFecha()));
 
         for (int i = 0; i < entrenamiento.getConfiguracionesEjercicio().size(); i++) {
@@ -129,7 +129,7 @@ public class ActivityEditarEntrenamiento extends AppCompatActivity {
     private Entrenamiento crearEntrenamiento() {
 
         String nombre = etNombre.getText().toString().trim();
-        String duracion = etDuracion.getText().toString().trim();
+        int duracion = Integer.parseInt(etDuracion.getText().toString().trim());
         String fecha = etFecha.getText().toString().trim();
 
         List<ConfiguracionEjercicio> ejercicios = new ArrayList<>();

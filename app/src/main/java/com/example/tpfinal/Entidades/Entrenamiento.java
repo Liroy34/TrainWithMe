@@ -12,7 +12,7 @@ public class Entrenamiento implements Parcelable {
 
     private int id;
     private int idUsuario;
-    private String duracion;
+    private int duracion;
     private String fecha;
     private String nombre;
     private List<ConfiguracionEjercicio> configuracionesEjercicio; // Lista de configuraciones de ejercicios
@@ -20,7 +20,7 @@ public class Entrenamiento implements Parcelable {
     public Entrenamiento() {
     }
 
-    public Entrenamiento(int idUsuario, String duracion, String fecha, String nombre, List<ConfiguracionEjercicio> configuracionesEjercicio) {
+    public Entrenamiento(int idUsuario, int duracion, String fecha, String nombre, List<ConfiguracionEjercicio> configuracionesEjercicio) {
         this.idUsuario = idUsuario;
         this.duracion = duracion;
         this.fecha = fecha;
@@ -28,7 +28,7 @@ public class Entrenamiento implements Parcelable {
         this.configuracionesEjercicio = configuracionesEjercicio;
     }
 
-    public Entrenamiento(int id, int idUsuario, String duracion, String fecha, String nombre, List<ConfiguracionEjercicio> configuracionesEjercicio) {
+    public Entrenamiento(int id, int idUsuario, int duracion, String fecha, String nombre, List<ConfiguracionEjercicio> configuracionesEjercicio) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.duracion = duracion;
@@ -40,7 +40,7 @@ public class Entrenamiento implements Parcelable {
     protected Entrenamiento(Parcel in) {
         id = in.readInt();
         idUsuario = in.readInt();
-        duracion = in.readString();
+        duracion = in.readInt();
         fecha = in.readString();
         nombre = in.readString();
         configuracionesEjercicio = in.createTypedArrayList(ConfiguracionEjercicio.CREATOR);
@@ -83,11 +83,11 @@ public class Entrenamiento implements Parcelable {
         this.idUsuario = idUsuario;
     }
 
-    public String getDuracion() {
+    public int getDuracion() {
         return duracion;
     }
 
-    public void setDuracion(String duracion) {
+    public void setDuracion(int duracion) {
         this.duracion = duracion;
     }
 
@@ -144,7 +144,7 @@ public class Entrenamiento implements Parcelable {
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeInt(id);
         dest.writeInt(idUsuario);
-        dest.writeString(duracion);
+        dest.writeInt(duracion);
         dest.writeString(fecha);
         dest.writeString(nombre);
         dest.writeTypedList(configuracionesEjercicio);

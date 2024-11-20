@@ -112,7 +112,7 @@ public class RegistrarEntrenamientoActivity extends AppCompatActivity {
     private Entrenamiento crearEntrenamiento() {
 
         String nombre = etNombre.getText().toString().trim();
-        String duracion = etDuracion.getText().toString().trim();
+        int duracion = Integer.parseInt(etDuracion.getText().toString().trim());
         String fecha = etFecha.getText().toString().trim();
 
         List<ConfiguracionEjercicio> ejercicios = new ArrayList<>();

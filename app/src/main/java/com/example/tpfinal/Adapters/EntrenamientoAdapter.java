@@ -34,7 +34,7 @@ public class EntrenamientoAdapter extends ArrayAdapter<Entrenamiento> {
 
         txtNombre.setText(getItem(position).getNombre());
         txtFecha.setText(getItem(position).getFecha());
-        txtDuracion.setText(getItem(position).getDuracion());
+        txtDuracion.setText(getItem(position).getDuracion() + " minutos");
 
         return convertView;
     }
