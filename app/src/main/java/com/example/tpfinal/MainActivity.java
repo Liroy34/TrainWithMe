@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnLogin;
     private Button btnRegistrar;
     private Button btnRecuperar;
+    private Button btnVerEstadisticas;
     private ConexionUsuario conUsuario;
 
     @Override
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.loginButton);
         btnRegistrar = findViewById(R.id.btnRegistrarseRegistrarse);
         btnRecuperar = findViewById(R.id.btnForgotPass);
+        btnVerEstadisticas = findViewById(R.id.btnVerEstadisticasApp);
 
         btnLogin.setOnClickListener(v -> {
 
@@ -58,6 +60,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
             }
+
+        });
+
+        btnVerEstadisticas.setOnClickListener(v -> {
+
+            Intent intent = new Intent(MainActivity.this, ActivityVerEstadisticas.class);
+            startActivity(intent);
 
         });
 

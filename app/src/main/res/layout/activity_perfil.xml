@@ -36,7 +36,7 @@
                 android:textColor="#000000" />
         </LinearLayout>
 
-        <!-- Nombre -->
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -56,7 +56,7 @@
             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             />
 
-        <!-- Apellido -->
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             />
 
-        <!-- Email -->
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
             android:padding="10dp"
             android:layout_marginBottom="20dp" />
 
-        <!-- Género -->
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
             android:layout_marginTop="5dp"
             android:padding="10dp" />
 
-        <!-- Botón Editar Perfil -->
+
         <Button
             android:id="@+id/btnEditarPerfil"
             android:layout_width="match_parent"
@@ -121,7 +121,7 @@
             android:textColor="#FFFFFF"
             android:layout_marginBottom="15dp" />
 
-        <!-- Botón Dar de Baja Perfil -->
+
         <Button
             android:id="@+id/btnDarDeBaja"
             android:layout_width="match_parent"

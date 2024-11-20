@@ -12,14 +12,14 @@
         android:padding="20dp"
         android:gravity="center_horizontal">
 
-        <!-- Sección de encabezado con botón de volver y título -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="start">
 
-            <!-- Botón Volver -->
+
             <LinearLayout
                 android:id="@+id/btnVolver"
                 android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
 
             </LinearLayout>
 
-            <!-- Título de la aplicación -->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                 android:paddingLeft="15dp"/>
         </LinearLayout>
 
-        <!-- Botón de ver entrenamientos -->
+
         <Button
             android:id="@+id/btnVerMisEntrenamientos"
             android:layout_width="match_parent"
@@ -64,7 +64,7 @@
             android:textSize="16sp"
             android:layout_marginTop="20dp"/>
 
-        <!-- Botón de registrar nuevo entrenamiento -->
+
         <Button
             android:id="@+id/btnMostrarEntrenamientoLista"
             android:layout_width="match_parent"

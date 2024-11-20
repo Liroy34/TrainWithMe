@@ -11,7 +11,6 @@
         android:orientation="vertical"
         android:gravity="center_horizontal">
 
-        <!-- Encabezado con botón de volver y título -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,14 +36,13 @@
                 android:textColor="#000000" />
         </LinearLayout>
 
-        <!-- Campo Contraseña -->
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Contraseña"
             android:textSize="16sp"
             android:textColor="#000000" />
-
         <EditText
             android:id="@+id/etContrasenaBaja"
             android:layout_width="match_parent"
@@ -54,14 +52,12 @@
             android:padding="10dp"
             android:layout_marginBottom="20dp" />
 
-        <!-- Campo Repetir Contraseña -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Repetir Contraseña"
             android:textSize="16sp"
             android:textColor="#000000" />
-
         <EditText
             android:id="@+id/etRepetirContrasenaBaja"
             android:layout_width="match_parent"
@@ -71,7 +67,6 @@
             android:padding="10dp"
             android:layout_marginBottom="30dp" />
 
-        <!-- Botón Dar de Baja -->
         <Button
             android:id="@+id/btnDarDeBajaConfirm"
             android:layout_width="match_parent"

@@ -12,7 +12,6 @@
         android:padding="20dp"
         android:gravity="center">
 
-        <!-- Logo circular -->
         <ImageView
             android:id="@+id/logoImageView"
             android:layout_width="150dp"
@@ -21,12 +20,10 @@
             android:background="@drawable/circle_background"
             android:contentDescription="@string/logo_desc" />
 
-        <!-- Espacio -->
         <Space
             android:layout_width="wrap_content"
             android:layout_height="20dp"/>
 
-        <!-- Campo Nombre de usuario -->
         <EditText
             android:id="@+id/etUsuarioMain"
             android:layout_width="match_parent"
@@ -40,7 +37,7 @@
         <Space
             android:layout_width="wrap_content"
             android:layout_height="20dp"/>
-        <!-- Campo Contraseña -->
+
         <EditText
             android:id="@+id/etPasswordMain"
             android:layout_width="match_parent"
@@ -54,7 +51,7 @@
         <Space
             android:layout_width="wrap_content"
             android:layout_height="20dp"/>
-        <!-- Botón Continuar -->
+
         <Button
             android:id="@+id/loginButton"
             android:layout_width="wrap_content"
@@ -65,7 +62,7 @@
             android:layout_gravity="center"
             android:padding="10dp"/>
 
-        <!-- Enlaces para Registrarse y Recuperar Contraseña -->
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -95,6 +92,19 @@
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="Recuperar contraseña"
+                android:textColor="#0077CC"
+                android:textSize="12sp" />
+
+            <Button
+                android:layout_marginTop="150dp"
+                android:id="@+id/btnVerEstadisticasApp"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FFFFFF"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Ver estadisticas de la app"
                 android:textColor="#0077CC"
                 android:textSize="12sp" />
         </LinearLayout>

@@ -36,7 +36,7 @@
                 android:textColor="#000000" />
         </LinearLayout>
 
-        <!-- Campo Nombre -->
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:padding="10dp" />
 
-        <!-- Campo Apellido -->
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:padding="10dp" />
 
-        <!-- Campo Género con Spinner -->
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
             android:layout_marginTop="5dp"
             android:padding="10dp" />
 
-        <!-- Campo Email -->
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
             android:inputType="textEmailAddress"
             android:padding="10dp" />
 
-        <!-- Campo Celular -->
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -130,7 +130,7 @@
             android:digits="0123456789"
             android:padding="10dp" />
 
-        <!-- Campo Usuario -->
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -149,7 +149,7 @@
             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:padding="10dp" />
 
-        <!-- Campo Contraseña -->
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -186,7 +186,7 @@
             android:inputType="textPassword"
             android:padding="10dp" />
 
-        <!-- Botón Registrarse -->
+
         <Button
             android:id="@+id/btnRegistrarseRegistrarse"
             android:layout_width="150dp"

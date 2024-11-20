@@ -80,6 +80,10 @@
             android:name=".ActivityRutinasPropias"
             android:exported="true" />
 
+        <activity
+            android:name=".ActivityVerEstadisticas"
+            android:exported="true" />
+
     </application>
 
 </manifest>

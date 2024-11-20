@@ -12,7 +12,7 @@
         android:padding="20dp"
         android:gravity="center_horizontal">
 
-        <!-- Encabezado con botón de volver y título -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,14 +38,14 @@
                 android:textColor="#000000" />
         </LinearLayout>
 
-        <!-- Lista de Ejercicios -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginBottom="20dp">
 
-            <!-- Ejercicio individual -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#888888" />
-            <!-- Ejercicio individual -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -105,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#888888" />
-            <!-- Ejercicio individual -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -135,7 +135,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#888888" />
-            <!-- Ejercicio individual -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -165,7 +165,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#888888" />
-            <!-- Ejercicio individual -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -195,7 +195,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#888888" />
-            <!-- Ejercicio individual -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -226,7 +226,7 @@
                 android:layout_height="1dp"
                 android:background="#888888" />
 
-            <!-- Ejercicio individual -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -289,7 +289,7 @@
 
         </LinearLayout>
 
-        <!-- Botón Finalizar Elección -->
+
         <Button
             android:id="@+id/btnFinEditarEjercicios"
             android:layout_width="match_parent"
