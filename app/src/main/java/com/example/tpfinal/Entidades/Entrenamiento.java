@@ -20,6 +20,14 @@ public class Entrenamiento implements Parcelable {
     public Entrenamiento() {
     }
 
+    public Entrenamiento(int idUsuario, String duracion, String fecha, String nombre, List<ConfiguracionEjercicio> configuracionesEjercicio) {
+        this.idUsuario = idUsuario;
+        this.duracion = duracion;
+        this.fecha = fecha;
+        this.nombre = nombre;
+        this.configuracionesEjercicio = configuracionesEjercicio;
+    }
+
     public Entrenamiento(int id, int idUsuario, String duracion, String fecha, String nombre, List<ConfiguracionEjercicio> configuracionesEjercicio) {
         this.id = id;
         this.idUsuario = idUsuario;
@@ -35,6 +43,7 @@ public class Entrenamiento implements Parcelable {
         duracion = in.readString();
         fecha = in.readString();
         nombre = in.readString();
+        configuracionesEjercicio = in.createTypedArrayList(ConfiguracionEjercicio.CREATOR);
 
     }
 
@@ -138,6 +147,7 @@ public class Entrenamiento implements Parcelable {
         dest.writeString(duracion);
         dest.writeString(fecha);
         dest.writeString(nombre);
+        dest.writeTypedList(configuracionesEjercicio);
 
     }
 }

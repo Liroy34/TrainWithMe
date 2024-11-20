@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import com.example.tpfinal.Conexion.ConexionEntrenamientos;
 import com.example.tpfinal.Conexion.ConexionRutinas;
 import com.example.tpfinal.Entidades.ConfiguracionEjercicio;
 import com.example.tpfinal.Entidades.Entrenamiento;
+import com.example.tpfinal.Entidades.RutinaCargaDatos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,11 +39,16 @@ public class VerEntrenamientosActivity extends AppCompatActivity {
         btnDarBaja = findViewById(R.id.btnBajaEntrenamiento);
         btnEditarEntrenamiento = findViewById(R.id.btnEditarEntrenamiento);
 
-        lvEntrenamientoSeleccionado.findViewById(R.id.ejerciciosEntrenamiento);
+        lvEntrenamientoSeleccionado = findViewById(R.id.ejerciciosEntrenamiento);
 
         conEntrenamientos = new ConexionEntrenamientos(VerEntrenamientosActivity.this);
         conEntrenamientos.getEjerciciosConfiguracionPropios(entrenamiento.getId());
 
+        btnEditarEntrenamiento.setOnClickListener(v -> {
+
+
+
+        });
 
 
         btnVolver.setOnClickListener(v-> {

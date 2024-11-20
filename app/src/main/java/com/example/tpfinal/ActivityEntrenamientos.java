@@ -39,7 +39,7 @@ public class ActivityEntrenamientos extends AppCompatActivity {
         btnRegistrarEntrenamiento = findViewById(R.id.btnRegistrarEntrenamiento);
 
     // aca va la logica de cada uno de los items del listView
-        lvEntrenamientos.findViewById(R.id.entrenamientosList);
+        lvEntrenamientos = findViewById(R.id.entrenamientosList);
         conEntrenamientos = new ConexionEntrenamientos(ActivityEntrenamientos.this, lvEntrenamientos);
         conEntrenamientos.getEntrenamientosPropios(idUsuario);
 
