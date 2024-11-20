@@ -37,7 +37,7 @@ public class ConexionUsuario {
                 Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
 
 
-                String sql = ("SELECT * FROM Usuarios WHERE NombreUsuario = ? AND Contrasena = ?");
+                String sql = ("SELECT * FROM Usuarios WHERE NombreUsuario = ? AND Contrasena = ? AND Activo = 0");
                 PreparedStatement preparedStatement = con.prepareStatement(sql);
                 preparedStatement.setString(1, nombreUsuario);
                 preparedStatement.setString(2, password);
@@ -78,7 +78,7 @@ public class ConexionUsuario {
                 Class.forName(DataBD.driver);
                 Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
 
-                String sql = "DELETE FROM Usuarios WHERE ID = ?";
+                String sql = "UPDATE Usuarios SET Activo = 1 WHERE ID = ?";
                 PreparedStatement preparedStatement = con.prepareStatement(sql);
                 preparedStatement.setInt(1, idUsuario);
 
@@ -103,7 +103,6 @@ public class ConexionUsuario {
             }
         });
     }
-
 
     public void updateUsuario(Usuario usuario) {
         usuarioExiste(usuario.getNombreUsuario(), existe -> {
