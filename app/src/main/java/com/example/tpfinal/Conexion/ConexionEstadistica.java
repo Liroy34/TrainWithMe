@@ -33,7 +33,7 @@ public class ConexionEstadistica {
                 Class.forName(DataBD.driver);
                 Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
 
-                String sqlUsuarios = "SELECT COUNT(*) AS cantidad_usuarios FROM Usuarios";
+                String sqlUsuarios = "SELECT COUNT(*) AS cantidad_usuarios FROM Usuarios WHERE Activo = 0";
                 PreparedStatement psUsuarios = con.prepareStatement(sqlUsuarios);
                 ResultSet rsUsuarios = psUsuarios.executeQuery();
                 if (rsUsuarios.next()) {
