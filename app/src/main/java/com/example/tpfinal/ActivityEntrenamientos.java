@@ -38,7 +38,7 @@ public class ActivityEntrenamientos extends AppCompatActivity {
         btnVolver = findViewById(R.id.btnVolverListaEntrenamientos);
         btnRegistrarEntrenamiento = findViewById(R.id.btnRegistrarEntrenamiento);
 
-    // aca va la logica de cada uno de los items del listView
+
         lvEntrenamientos = findViewById(R.id.entrenamientosList);
         conEntrenamientos = new ConexionEntrenamientos(ActivityEntrenamientos.this, lvEntrenamientos);
         conEntrenamientos.getEntrenamientosPropios(idUsuario);
@@ -51,7 +51,7 @@ public class ActivityEntrenamientos extends AppCompatActivity {
 
                 Intent intent = new Intent(ActivityEntrenamientos.this, VerEntrenamientosActivity.class);
 
-                intent.putExtra("entrenamiento", selectedEntrenamiento);
+                intent.putExtra("entrenamientoId", selectedEntrenamiento.getId());
 
                 startActivity(intent);
             }

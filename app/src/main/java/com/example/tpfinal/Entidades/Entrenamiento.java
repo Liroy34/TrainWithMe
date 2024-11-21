@@ -15,7 +15,7 @@ public class Entrenamiento implements Parcelable {
     private int duracion;
     private String fecha;
     private String nombre;
-    private List<ConfiguracionEjercicio> configuracionesEjercicio; // Lista de configuraciones de ejercicios
+    private List<ConfiguracionEjercicio> configuracionesEjercicio;
 
     public Entrenamiento() {
     }

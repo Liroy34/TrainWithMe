@@ -44,7 +44,7 @@ public class ActivityPaginaInicio extends AppCompatActivity {
 
         });
 
-        btnVerPerfil.setOnClickListener(v -> { //agregar logica para cargar los datos en ver perfil
+        btnVerPerfil.setOnClickListener(v -> {
 
             Intent intent = new Intent(ActivityPaginaInicio.this, ActivityPerfil.class);
             intent.putExtra("idUsuario", idUsuario);

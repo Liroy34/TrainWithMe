@@ -87,15 +87,28 @@ public class ConexionEntrenamientos {
 
     }
 
-    public void getEjerciciosConfiguracionPropios(int idEntrenamiento) {
+    public void getEjerciciosConfiguracionPropios(int idEntrenamiento, EntrenamientoCallBack entrenamientoCallBack) {
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
+            Entrenamiento entrenamiento = new Entrenamiento();
             List<ConfiguracionEjercicio> configuracionEjercicioList = new ArrayList<>();
 
             try {
                 Class.forName(DataBD.driver);
                 Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
+
+                String sqlEntrenamiento = "SELECT * FROM Entrenamientos WHERE ID = ?";
+                PreparedStatement preparedStatementEntrenamiento = con.prepareStatement(sqlEntrenamiento);
+                preparedStatementEntrenamiento.setInt(1, idEntrenamiento);
+                ResultSet rsEntrenamiento = preparedStatementEntrenamiento.executeQuery();
+
+                if(rsEntrenamiento.next()){
+                    entrenamiento.setIdUsuario(rsEntrenamiento.getInt("ID_Usuario"));
+                    entrenamiento.setDuracion(rsEntrenamiento.getInt("Duracion"));
+                    entrenamiento.setFecha(rsEntrenamiento.getString("Fecha"));
+                    entrenamiento.setNombre(rsEntrenamiento.getString("Nombre"));
+                }
 
                 String sql = "SELECT c.ID, c.NombreEjercicio, c.Series, c.Repeticiones " +
                                 "FROM ConfiguracionEjercicio c " +
@@ -117,6 +130,11 @@ public class ConexionEntrenamientos {
                     configuracionEjercicioList.add(configuracionEjercicio);
                 }
 
+                entrenamiento.setConfiguracionesEjercicio(configuracionEjercicioList);
+
+                rsEntrenamiento.close();
+                preparedStatementEntrenamiento.close();
+
                 rs.close();
                 preparedStatement.close();
                 con.close();
@@ -124,12 +142,10 @@ public class ConexionEntrenamientos {
                 e.printStackTrace();
             }
 
-            new android.os.Handler(android.os.Looper.getMainLooper()).post(() -> {
-                ((VerEntrenamientosActivity) context).configEjerciciosList.clear(); // Limpiar lista existente
-                ((VerEntrenamientosActivity) context).configEjerciciosList.addAll(configuracionEjercicioList); // Actualizar lista global
+            Entrenamiento entrenamientoFinal = entrenamiento;
 
-                ConfiguracionEjercicioAdapter adapter = new ConfiguracionEjercicioAdapter(context, configuracionEjercicioList);
-                ((VerEntrenamientosActivity) context).lvEntrenamientoSeleccionado.setAdapter(adapter);
+            new android.os.Handler(android.os.Looper.getMainLooper()).post(() -> {
+                entrenamientoCallBack.onEntrenamientoRecived(entrenamientoFinal);
             });
 
 
@@ -334,7 +350,6 @@ public class ConexionEntrenamientos {
                 e.printStackTrace();
             }
 
-            // Notificar el resultado en el hilo principal
             boolean finalEliminado = eliminado;
             new android.os.Handler(android.os.Looper.getMainLooper()).post(() -> {
                 if (finalEliminado) {
@@ -346,5 +361,8 @@ public class ConexionEntrenamientos {
         });
     }
 
+    public interface EntrenamientoCallBack {
+        void onEntrenamientoRecived(Entrenamiento entrenamiento);
+    }
 
 }

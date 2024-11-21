@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tpfinal.Adapters.ConfiguracionEjercicioAdapter;
+import com.example.tpfinal.Adapters.EntrenamientoAdapter;
 import com.example.tpfinal.Conexion.ConexionEntrenamientos;
 import com.example.tpfinal.Conexion.ConexionRutinas;
 import com.example.tpfinal.Entidades.ConfiguracionEjercicio;
@@ -25,23 +27,21 @@ public class VerEntrenamientosActivity extends AppCompatActivity {
 
     private ImageButton btnVolver;
     private Button btnDarBaja, btnEditarEntrenamiento;
-    private Entrenamiento entrenamiento;
+    private int entrenamientoId;
     private ConexionEntrenamientos conEntrenamientos;
     private TextView etNombreEntrenamiento;
-
-    public ListView lvEntrenamientoSeleccionado;
-    public List<ConfiguracionEjercicio> configEjerciciosList = new ArrayList<>();
+    private Entrenamiento entrenamientoFinal;
+    private ListView lvEntrenamientoSeleccionado;
+    private List<ConfiguracionEjercicio> configEjerciciosList = new ArrayList<>();
+    private ConfiguracionEjercicioAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entrenamiento_seleccionado);
 
-        entrenamiento = getIntent().getParcelableExtra("entrenamiento");
-
+        entrenamientoId = getIntent().getIntExtra("entrenamientoId", -1);
         etNombreEntrenamiento = findViewById(R.id.txtNombreEntrenamiento);
-
-        etNombreEntrenamiento.setText(entrenamiento.getNombre());
 
         btnVolver = findViewById(R.id.btnVolverEntrenamiento);
         btnDarBaja = findViewById(R.id.btnBajaEntrenamiento);
@@ -50,14 +50,16 @@ public class VerEntrenamientosActivity extends AppCompatActivity {
         lvEntrenamientoSeleccionado = findViewById(R.id.ejerciciosEntrenamiento);
 
         conEntrenamientos = new ConexionEntrenamientos(VerEntrenamientosActivity.this);
-        conEntrenamientos.getEjerciciosConfiguracionPropios(entrenamiento.getId());
+        adapter = new ConfiguracionEjercicioAdapter(VerEntrenamientosActivity.this, configEjerciciosList);
+        lvEntrenamientoSeleccionado.setAdapter(adapter);
 
-        entrenamiento.setConfiguracionesEjercicio(configEjerciciosList);
+        cargarDatosEntrenamiento();
+
 
         btnEditarEntrenamiento.setOnClickListener(v -> {
 
             Intent intent = new Intent(VerEntrenamientosActivity.this, ActivityEditarEntrenamiento.class);
-            intent.putExtra("entrenamiento", entrenamiento);
+            intent.putExtra("entrenamiento", entrenamientoFinal);
             startActivity(intent);
 
         });
@@ -67,7 +69,6 @@ public class VerEntrenamientosActivity extends AppCompatActivity {
             finish();
         });
 
-        // HACER LOGICA DE ELEMINAR
 
         btnDarBaja.setOnClickListener(v -> {
 
@@ -76,7 +77,7 @@ public class VerEntrenamientosActivity extends AppCompatActivity {
             builder.setMessage("¿Estás seguro de que deseas dar de baja este entrenamiento? Esta acción no se puede deshacer.");
 
             builder.setPositiveButton("Sí, dar de baja", (dialog, which) -> {
-                conEntrenamientos.eliminarEntrenamiento(entrenamiento.getId());
+                conEntrenamientos.eliminarEntrenamiento(entrenamientoId);
                 finish();
             });
 
@@ -89,13 +90,38 @@ public class VerEntrenamientosActivity extends AppCompatActivity {
         });
     }
 
+    private void cargarDatosEntrenamiento() {
+
+        conEntrenamientos.getEjerciciosConfiguracionPropios(entrenamientoId, new ConexionEntrenamientos.EntrenamientoCallBack() {
+            @Override
+            public void onEntrenamientoRecived(Entrenamiento entrenamiento) {
+                if(entrenamiento!=null){
+                    entrenamientoFinal = entrenamiento;
+                    entrenamientoFinal.setId(entrenamientoId);
+
+                    configEjerciciosList.clear();
+                    configEjerciciosList.addAll(entrenamientoFinal.getConfiguracionesEjercicio());
+                    adapter.notifyDataSetChanged();
+
+                    etNombreEntrenamiento.setText(entrenamientoFinal.getNombre());
+                }
+                else{
+                    Toast.makeText(VerEntrenamientosActivity.this, "No se encontraron datos del entrenamiento.", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
         new android.os.Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                conEntrenamientos.getEjerciciosConfiguracionPropios(entrenamiento.getId());
+
+                cargarDatosEntrenamiento();
             }
         }, 2000);
     }
