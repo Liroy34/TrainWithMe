@@ -23,11 +23,11 @@ public class ActivityEditarRutina extends AppCompatActivity {
     private List<EditText> etEjerciciosEdit, etSeriesEdit, etRepeticionesEdit;
     private Button btnEditar;
     private ImageButton btnVolver;
-    int idRutina;
-    int frecuenciaRutina;
-    String nombreRutina;
-    String descripcionRutina;
-    List<ConfiguracionEjercicio> configEjerciciosList = new ArrayList<>();
+    private int idRutina;
+    private int frecuenciaRutina;
+    private String nombreRutina;
+    private String descripcionRutina;
+    private List<ConfiguracionEjercicio> configEjerciciosList = new ArrayList<>();
     private ConexionRutinas conRutinas;
 
     @Override
@@ -36,7 +36,7 @@ public class ActivityEditarRutina extends AppCompatActivity {
         setContentView(R.layout.activity_editar_rutina);
 
         idRutina = getIntent().getIntExtra("idRutina", -1);
-        frecuenciaRutina = getIntent().getIntExtra("rutinaFrecuencia", -1);
+        frecuenciaRutina = getIntent().getIntExtra("frecu", 0);
         nombreRutina = getIntent().getStringExtra("nombreRutina");
         descripcionRutina = getIntent().getStringExtra("descripcionRutina");
 
@@ -47,7 +47,7 @@ public class ActivityEditarRutina extends AppCompatActivity {
         btnVolver = findViewById(R.id.btnVolverEditarRutina);
         btnEditar = findViewById(R.id.btnFinEditarRutina);
 
-        setElementos(); //modificar para que se carguen con los datos de la lista
+        setElementos();
 
         loadElementos();
 

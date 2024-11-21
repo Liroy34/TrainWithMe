@@ -251,17 +251,21 @@ public class ConexionRutinas {
 
     }
 
-    public void getEjerciciosConfiguracionPropios(int idRutina) {
+    public void getEjerciciosConfiguracionPropios(int idRutina, RutinaCompletaCallback rutinaCompleta) {
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
+            RutinaCargaDatos rutina = new RutinaCargaDatos();
             List<ConfiguracionEjercicio> configuracionEjercicioList = new ArrayList<>();
+            String nombre = null;
+            String descripcion = null;
+            String frecuencia = null;
 
             try {
                 Class.forName(DataBD.driver);
                 Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
 
-                String sql = "SELECT ce.* FROM ConfiguracionEjercicio ce " +
+                String sql = "SELECT ce.*, r.Nombre as NombreR, r.Descripcion as DescripcionR, r.Frecuencia as FrecuenciaR FROM ConfiguracionEjercicio ce " +
                         "JOIN RutinaXEjercicio rxe ON ce.ID = rxe.ID_ConfigEjercicio " +
                         "JOIN Rutinas r ON rxe.ID_Rutina = r.ID " +
                         "WHERE r.ID = ?";
@@ -279,7 +283,17 @@ public class ConexionRutinas {
                     configuracionEjercicio.setEjercicio(rs.getString("NombreEjercicio"));
 
                     configuracionEjercicioList.add(configuracionEjercicio);
+
+                    if(nombre == null){
+                        nombre = rs.getString("NombreR");
+                        descripcion = rs.getString("DescripcionR");
+                        frecuencia = rs.getString("FrecuenciaR");
+                    }
                 }
+                rutina.setDescripcion(descripcion);
+                rutina.setFrecuencia(frecuencia);
+                rutina.setNombre(nombre);
+                rutina.setEjercicios(configuracionEjercicioList);
 
                 rs.close();
                 preparedStatement.close();
@@ -289,14 +303,10 @@ public class ConexionRutinas {
             }
 
 
+            RutinaCargaDatos rutinaFinal = rutina;
 
             new android.os.Handler(android.os.Looper.getMainLooper()).post(() -> {
-                ((ActivityRutinaSeleccionada) context).configuracionEjercicioList.clear(); // Limpiar lista existente
-                ((ActivityRutinaSeleccionada) context).configuracionEjercicioList.addAll(configuracionEjercicioList); // Actualizar lista global
-
-                // Crear y configurar el adaptador
-                ConfiguracionEjercicioAdapter adapter = new ConfiguracionEjercicioAdapter(context, configuracionEjercicioList);
-                ((ActivityRutinaSeleccionada) context).lvEjerciciosRutina.setAdapter(adapter);
+                rutinaCompleta.onRutinaCompletaRecived(rutinaFinal);
             });
 
 
@@ -425,6 +435,10 @@ public class ConexionRutinas {
                 }
             });
         });
+    }
+
+    public interface RutinaCompletaCallback {
+        void onRutinaCompletaRecived(RutinaCargaDatos rutinaCompleta);
     }
 
 }

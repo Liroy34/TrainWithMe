@@ -9,6 +9,10 @@ public class RutinaCargaDatos {
     private String frecuencia;
     private List<ConfiguracionEjercicio> ejercicios;
 
+    public RutinaCargaDatos(){
+
+    }
+
     public RutinaCargaDatos(String nombre, String descripcion, String frecuencia, List<ConfiguracionEjercicio> ejercicios) {
         this.nombre = nombre;
         this.descripcion = descripcion;
