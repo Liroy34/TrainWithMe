@@ -76,6 +76,23 @@
             android:hint="máx 50 carácteres"
             android:inputType="textMultiLine"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Frecuencia"
+            android:textColor="#000000"
+            android:paddingBottom="5dp"/>
+
+        <EditText
+            android:id="@+id/etFrecuenciaCrear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:padding="5dp"
+            android:digits="0123456789"
+            android:maxLength="2"
+            android:hint="máx 2 carácteres"
+            android:layout_marginBottom="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -438,23 +455,7 @@
         </LinearLayout>
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Frecuencia"
-            android:textColor="#000000"
-            android:paddingBottom="5dp"/>
 
-        <EditText
-            android:id="@+id/etFrecuenciaCrear"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:padding="5dp"
-            android:digits="0123456789"
-            android:maxLength="2"
-            android:hint="máx 2 carácteres"
-            android:layout_marginBottom="10dp"/>
 
 
         <Button

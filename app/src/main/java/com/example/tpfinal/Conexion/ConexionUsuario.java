@@ -207,7 +207,7 @@ public class ConexionUsuario {
                 Class.forName(DataBD.driver);
                 Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
 
-                String query = ("Select * FROM Usuarios WHERE Email = ?");
+                String query = ("Select * FROM Usuarios WHERE Email = ? AND Activo = 0");
                 PreparedStatement ps = con.prepareStatement(query);
                 ps.setString(1, mail);
 
@@ -241,7 +241,7 @@ public class ConexionUsuario {
             try {
                 Class.forName(DataBD.driver);
                 Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
-                String sql = ("SELECT * FROM Usuarios WHERE NombreUsuario = ?");
+                String sql = ("SELECT * FROM Usuarios WHERE NombreUsuario = ? AND Activo = 0");
                 PreparedStatement preparedStatement = con.prepareStatement(sql);
                 preparedStatement.setString(1, nombreUsuario);
                 ResultSet rs = preparedStatement.executeQuery();
@@ -270,7 +270,7 @@ public class ConexionUsuario {
             try {
                 Class.forName(DataBD.driver);
                 Connection con = DriverManager.getConnection(DataBD.urlMySQL, DataBD.user, DataBD.pass);
-                String sql = ("SELECT * FROM Usuarios WHERE Email = ?");
+                String sql = ("SELECT * FROM Usuarios WHERE Email = ? AND Activo = 0");
                 PreparedStatement preparedStatement = con.prepareStatement(sql);
                 preparedStatement.setString(1, mailUsuario);
                 ResultSet rs = preparedStatement.executeQuery();
