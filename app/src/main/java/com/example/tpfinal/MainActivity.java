@@ -94,4 +94,11 @@ public class MainActivity extends AppCompatActivity {
 
         return valueString.isEmpty();
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        nombreUsuario.setText("");
+        password.setText("");
+    }
 }
