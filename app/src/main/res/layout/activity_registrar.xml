@@ -52,7 +52,8 @@
             android:background="@drawable/custom_edittext"
             android:hint="Nombre"
             android:textColorHint="#999999"
-            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+            android:maxLength="20"
             android:padding="10dp" />
 
 
@@ -71,7 +72,8 @@
             android:background="@drawable/custom_edittext"
             android:hint="Apellido"
             android:textColorHint="#999999"
-            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+            android:maxLength="20"
             android:padding="10dp" />
 
 
@@ -128,6 +130,7 @@
             android:textColorHint="#999999"
             android:inputType="phone"
             android:digits="0123456789"
+            android:maxLength="20"
             android:padding="10dp" />
 
 
@@ -147,6 +150,7 @@
             android:hint="Usuario"
             android:textColorHint="#999999"
             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            android:maxLength="20"
             android:padding="10dp" />
 
 
@@ -166,6 +170,7 @@
             android:hint="Contraseña"
             android:textColorHint="#999999"
             android:inputType="textPassword"
+            android:maxLength="20"
             android:padding="10dp" />
 
         <TextView
@@ -184,6 +189,7 @@
             android:hint="Contraseña"
             android:textColorHint="#999999"
             android:inputType="textPassword"
+            android:maxLength="20"
             android:padding="10dp" />
 
 

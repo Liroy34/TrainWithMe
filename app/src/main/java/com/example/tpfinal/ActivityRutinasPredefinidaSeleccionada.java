@@ -33,7 +33,7 @@ public class ActivityRutinasPredefinidaSeleccionada extends AppCompatActivity {
         rutinaName = findViewById(R.id.txtNombreRutinaPredefinidaSeleccionada);
         rutinaFrecuancia = findViewById(R.id.txtFrecuenciaRutinaPredefinidaSeleccionada);
 
-        rutinaFrecuancia.setText("Frecuencia: 3");
+        rutinaFrecuancia.setText("Frecuencia: 3 x Semana");
 
 
         ejerciciosLV = findViewById(R.id.ejerciciosRutinaPredefinidaSeleccionadaList);

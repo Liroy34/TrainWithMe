@@ -101,7 +101,7 @@ public class ActivityRutinaSeleccionada extends AppCompatActivity {
                     adapter.notifyDataSetChanged();
 
                     nombreRutina.setText(rutinaFinal.getNombre());
-                    frecuenciaRutina.setText("Frecuencia: " + rutinaFinal.getFrecuencia());
+                    frecuenciaRutina.setText("Frecuencia: " + rutinaFinal.getFrecuencia() + " días x semana");
                 } else {
                     Toast.makeText(ActivityRutinaSeleccionada.this, "No se encontraron datos de la rutina.", Toast.LENGTH_SHORT).show();
                 }

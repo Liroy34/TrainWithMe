@@ -63,7 +63,8 @@
                 android:id="@+id/entrenamientosList"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
-                android:background="@drawable/custom_edittext" />
+                android:background="@drawable/custom_edittext"
+                android:nestedScrollingEnabled="true"/>
 
         </LinearLayout>
 
